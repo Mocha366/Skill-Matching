@@ -1,0 +1,10 @@
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("./assets/image0.jpg")center center no-repeat;
+    background-size: cover;
+}

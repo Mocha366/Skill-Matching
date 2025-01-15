@@ -1,0 +1,30 @@
+.dashboard-container {
+    background-image: url("../../assets/image1.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    position: relative;
+    color: black;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.dashboard-text {
+    position: absolute;
+    top: 50px;
+    left: 1%;
+    margin: 0;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
