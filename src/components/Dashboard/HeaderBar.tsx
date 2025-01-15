@@ -13,7 +13,7 @@ const HeaderBar: React.FC = () => {
             <nav>
                 <a href="#1">サービス</a>
                 <a href="#2">Skill Matchingについて</a>
-                <a href="#3">プロフィール</a>
+                <a href="/profile-edit">プロフィール編集</a>
                 <a href="#4">お知らせ</a>
             </nav>
             <div>
