@@ -8,9 +8,33 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.header-bar img {
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+logo-link:hover {
+    opacity: 0.8;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
     height: 50px;
     margin-right: 10px;
+}
+
+.site-name {
+    font-size: 40px;
+    font-weight: bold;
+    color: #333;
+    font-family: Arial,sans-serif;
+    margin: 0;
 }
 
 .header-bar nav {

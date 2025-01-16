@@ -55,9 +55,9 @@ update-button:disabled {
     background-size: cover;
     background-position: center;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
+    color: black;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
 }

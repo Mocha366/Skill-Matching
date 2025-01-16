@@ -1,0 +1,51 @@
+.explanation-page {
+    background-image: url("../../assets/image1.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    position: relative;
+    color: black;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.explanation-container {
+    max-width: 800px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.explanation-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.explanation-container p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.start-button {
+    background: #fc7575;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.start-button:hover {
+    background: #ff787d;
+}

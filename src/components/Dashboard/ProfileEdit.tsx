@@ -4,6 +4,7 @@ import { db } from "../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import "./ProfileEdit.css";
+import HeaderBar from "./HeaderBar";
 
 const ProfileEdit: React.FC = () => {
     const { user } = useAuth();
@@ -49,6 +50,7 @@ const ProfileEdit: React.FC = () => {
 
     return (
         <div className="profile-edit-page">
+            <HeaderBar/>
             <div className="profile-edit-container">
                 <h1>プロフィールの再設定</h1>
                 <div className="form-group">
@@ -66,7 +68,7 @@ const ProfileEdit: React.FC = () => {
                     <input
                         id="email"
                         type="email"
-                        value="email"
+                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="メールアドレスを入力してください"
                     />
