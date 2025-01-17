@@ -1,6 +1,6 @@
 import React from "react";
 import "./Explanation.css";
-import HeaderBar from "./HeaderBar";
+import HeaderBar from "../../../components/Dashboard/HeaderBar";
 
 const Explanation: React.FC = () => {
     return (

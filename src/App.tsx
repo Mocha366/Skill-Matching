@@ -4,8 +4,8 @@ import EmailPasswordLogin from "./components/Login/EmailPasswordLogin";
 import { useAuth } from "./context/AuthProvider";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfileSetup from "./pages/ProfileSetup";
-import ProfileEdit from "./components/Dashboard/ProfileEdit";
-import Explanation from "./components/Dashboard/Explanation";
+import ProfileEdit from "./pages/Dashboard/HeaderBar/ProfileEdit";
+import Explanation from "./pages/Dashboard/HeaderBar/Explanation";
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../../context/AuthProvider";
-import { db } from "../../firebase";
+import { useAuth } from "../../../context/AuthProvider";
+import { db } from "../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import "./ProfileEdit.css";
-import HeaderBar from "./HeaderBar";
+import HeaderBar from "../../../components/Dashboard/HeaderBar";
 
 const ProfileEdit: React.FC = () => {
     const { user } = useAuth();
