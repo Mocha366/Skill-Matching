@@ -48,3 +48,16 @@ export default tseslint.config({
   },
 })
 ```
+clone後すべきこと
+npm i firebase ファイアベースをインストールする
+npm i react-router-dom 反応ルーターをインストールする
+
+テスト について
+npm start もしくは
+nmp run dev
+
+テスト用アカウント
+＊アカウントの新規作成はしないでください＊
+test@test.com
+パスワード
+123456
