@@ -6,7 +6,7 @@ import { db } from "../../firebase";
 import "./Dashboard.css";
 import "../../components/HeaderBar/HeaderBar";
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
-import Menu from "../../components/menu";
+import Menu from "../../components/Menu";
 
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
