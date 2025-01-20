@@ -4,7 +4,7 @@ import { db } from "../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import "./ProfileEdit.css";
-import HeaderBar from "../../../components/Dashboard/HeaderBar";
+import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 
 const ProfileEdit: React.FC = () => {
     const { user } = useAuth();

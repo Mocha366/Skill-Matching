@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import "./Dashboard.css";
-import "../../components/Dashboard/HeaderBar";
-import HeaderBar from "../../components/Dashboard/HeaderBar";
+import "../../components/HeaderBar/HeaderBar";
+import HeaderBar from "../../components/HeaderBar/HeaderBar";
 
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
