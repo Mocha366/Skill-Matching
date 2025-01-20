@@ -1,3 +1,13 @@
+.header {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .dashboard-container {
     background-image: url("../../assets/image1.jpg");
     background-size: cover;
@@ -10,13 +20,23 @@
     overflow: hidden;
 }
 
+.dashboard-contents{
+    display: flex;
+}
+
 .dashboard-text {
-    position: absolute;
     top: 55px;
     left: 1%;
     margin: 0;
     font-family: sans-serif;
     font-weight: bold;
+}
+
+.dashboard-menu{
+    width: 25%;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-sizing: border-box;
+    border: 8px solid black;
 }
 
 body {

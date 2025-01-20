@@ -39,17 +39,21 @@ const Dashboard: React.FC = () => {
     }
 
     return (
-        <div className="dashboard-container">
-            <div>
-                <HeaderBar/>
+        <>
+            <div className="dashboard-container">
+                <div>
+                    <HeaderBar/>
+                </div>
+                <div className="dashboard-contents">
+                    <div className="dashboard-menu">
+                        <Menu/>
+                    </div>
+                    <div className="dashboard-text">
+                        <p>ようこそ {nickname} さん、SKILL MATCHINGへようこそ！</p>
+                    </div>
+                </div>
             </div>
-            <div className="dashboard-text">
-                <p>ようこそ {nickname} さん、SKILL MATCHINGへようこそ！</p>
-            </div>
-            <div>
-                <Menu/>
-            </div>
-        </div>
+        </>
     );
 };
 
