@@ -6,6 +6,7 @@ import { db } from "../../firebase";
 import "./Dashboard.css";
 import "../../components/Dashboard/HeaderBar";
 import HeaderBar from "../../components/Dashboard/HeaderBar";
+import Menu from "../../components/menu";
 
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
@@ -44,6 +45,9 @@ const Dashboard: React.FC = () => {
             </div>
             <div className="dashboard-text">
                 <p>ようこそ {nickname} さん、SKILL MATCHINGへようこそ！</p>
+            </div>
+            <div>
+                <Menu/>
             </div>
         </div>
     );
