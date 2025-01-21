@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import "./Dashboard.css";
-import "../../components/Dashboard/HeaderBar";
-import HeaderBar from "../../components/Dashboard/HeaderBar";
+import "../../components/HeaderBar/HeaderBar";
+import HeaderBar from "../../components/HeaderBar/HeaderBar";
+import Menu from "../../components/Menu";
 
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
@@ -38,14 +39,21 @@ const Dashboard: React.FC = () => {
     }
 
     return (
-        <div className="dashboard-container">
-            <div>
-                <HeaderBar/>
+        <>
+            <div className="dashboard-container">
+                <div>
+                    <HeaderBar/>
+                </div>
+                <div className="dashboard-contents">
+                    <div className="dashboard-menu">
+                        <Menu/>
+                    </div>
+                    <div className="dashboard-text">
+                        <p>ようこそ {nickname} さん、SKILL MATCHINGへようこそ！</p>
+                    </div>
+                </div>
             </div>
-            <div className="dashboard-text">
-                <p>ようこそ {nickname} さん、SKILL MATCHINGへようこそ！</p>
-            </div>
-        </div>
+        </>
     );
 };
 
