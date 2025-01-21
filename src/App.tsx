@@ -31,9 +31,9 @@ const App: React.FC = () => {
         <Route path="/login" element={<EmailPasswordLogin />} />
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/profile-setup" element={<PrivateRoute><ProfileSetup /></PrivateRoute>} />
-        <Route path="/profile-edit" element={<PrivateRoute><ProfileEdit/></PrivateRoute>} />
-        <Route path="/skill-matching" element={<PrivateRoute><Explanation/></PrivateRoute>} />
-        <Route path="/Activitie" element={<PrivateRoute><Activitie/></PrivateRoute>} />
+        <Route path="/dashboard/profile-edit" element={<PrivateRoute><ProfileEdit/></PrivateRoute>} />
+        <Route path="/dashboard/skill-matching" element={<PrivateRoute><Explanation/></PrivateRoute>} />
+        <Route path="/dashboard/Activitie" element={<PrivateRoute><Activitie/></PrivateRoute>} />
         <Route path="/Service" element={<PrivateRoute><Service/></PrivateRoute>} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>

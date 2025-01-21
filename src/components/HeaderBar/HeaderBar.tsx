@@ -19,9 +19,9 @@ const HeaderBar: React.FC = () => {
             </div>
             <nav>
                 <a href="/Service">サービス</a>
-                <a href="/skill-matching">Skill Matchingについて</a>
-                <a href="/profile-edit">プロフィール編集</a>
-                <a href="/Activitie">お知らせ</a>
+                <a href="/dashboard/skill-matching">Skill Matchingについて</a>
+                <a href="/dashboard/profile-edit">プロフィール編集</a>
+                <a href="/dashboard/Activitie">お知らせ</a>
             </nav>
             <div>
                 <LogoutButton/>

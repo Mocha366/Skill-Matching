@@ -1,8 +1,8 @@
 const links = [
     { name: 'サービス', href: '#1', },
-    { name: 'Skill Matchingについて',href: '/skill-matching', },
-    { name: 'プロフィール編集', href: '/profile-edit', },
-    { name: 'お知らせ', href: '#4', },
+    { name: 'Skill Matchingについて',href: '/dashboard/skill-matching', },
+    { name: 'プロフィール編集', href: '/dashboard/profile-edit', },
+    { name: 'お知らせ', href: '/dashboard/Activitie', },
 ];
 
 export default function Menu() {
