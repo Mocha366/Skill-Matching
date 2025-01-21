@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderBar from "../../../components/Dashboard/HeaderBar";
+import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 
 //import LogoutButton from "../Login/LogoutButton";
 //import Logo from "../../assets/Logo.png";
@@ -9,7 +9,7 @@ import HeaderBar from "../../../components/Dashboard/HeaderBar";
 const Service: React.FC = () => {
     return (
         <div className="explanation-page">
-            <HeaderBar/>
+            <HeaderBar />
             <div className="explanation-container">
                 <h1>さあああああああああああああああああああびす</h1>
                 <p>

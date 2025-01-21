@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HeaderBar from "../../../components/Dashboard/HeaderBar";
+import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 //import LogoutButton from "../Login/LogoutButton";
 //import Logo from "../../assets/Logo.png";
 //import { Link } from "react-router-dom";
