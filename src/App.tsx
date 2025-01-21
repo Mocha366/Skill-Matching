@@ -6,7 +6,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfileSetup from "./pages/ProfileSetup";
 import ProfileEdit from "./pages/Dashboard/Menu/ProfileEdit";
 import Explanation from "./pages/Dashboard/Menu/Explanation";
-import SendMessage from "./components/Message/SendMessage";
+import SendMessage from "./pages/Dashboard/Menu/SendMessage";
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
