@@ -6,6 +6,8 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfileSetup from "./pages/ProfileSetup";
 import ProfileEdit from "./pages/Dashboard/HeaderBar/ProfileEdit";
 import Explanation from "./pages/Dashboard/HeaderBar/Explanation";
+import Activitie from "./pages/Dashboard/HeaderBar/Activitie";
+import Service from "./pages/Dashboard/HeaderBar/Service";
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
@@ -31,6 +33,8 @@ const App: React.FC = () => {
         <Route path="/profile-setup" element={<PrivateRoute><ProfileSetup /></PrivateRoute>} />
         <Route path="/profile-edit" element={<PrivateRoute><ProfileEdit/></PrivateRoute>} />
         <Route path="/skill-matching" element={<PrivateRoute><Explanation/></PrivateRoute>} />
+        <Route path="/Activitie" element={<PrivateRoute><Activitie/></PrivateRoute>} />
+        <Route path="/Service" element={<PrivateRoute><Service/></PrivateRoute>} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
