@@ -4,8 +4,9 @@ import EmailPasswordLogin from "./components/Login/EmailPasswordLogin";
 import { useAuth } from "./context/AuthProvider";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfileSetup from "./pages/ProfileSetup";
-import ProfileEdit from "./pages/Dashboard/HeaderBar/ProfileEdit";
-import Explanation from "./pages/Dashboard/HeaderBar/Explanation";
+import ProfileEdit from "./pages/Dashboard/Menu/ProfileEdit";
+import Explanation from "./pages/Dashboard/Menu/Explanation";
+import SendMessage from "./components/Message/SendMessage";
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
@@ -31,6 +32,7 @@ const App: React.FC = () => {
         <Route path="/profile-setup" element={<PrivateRoute><ProfileSetup /></PrivateRoute>} />
         <Route path="/profile-edit" element={<PrivateRoute><ProfileEdit/></PrivateRoute>} />
         <Route path="/skill-matching" element={<PrivateRoute><Explanation/></PrivateRoute>} />
+        <Route path="/sendmessage" element={<PrivateRoute><SendMessage/></PrivateRoute>} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
