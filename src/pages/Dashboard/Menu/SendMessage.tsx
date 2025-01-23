@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../context/AuthProvider";
 import { db } from "../../../firebase";
-import { collection, addDoc, query, orderBy, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, query, orderBy, onSnapshot, limit, Timestamp } from "firebase/firestore";
 import "./SendMessage.css";
 
 interface Message {
@@ -9,11 +9,11 @@ interface Message {
     sender: string;
     receiver: string;
     text: string;
-    timestamp: any;
+    timestamp: Timestamp;
 }
 
 const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
-    const { user } = useAuth();
+    const { user, } = useAuth();
     const [messages, setMessages] = useState<Message[]>([]);
     const [message, setMessage] = useState<string>("");
 
@@ -22,7 +22,8 @@ const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
 
         const q = query(
             collection(db, "messages"),
-            orderBy("timestamp", "asc")
+            orderBy("timestamp", "asc"),
+            limit(50)
         );
 
         const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -54,7 +55,8 @@ const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
         try {
             await addDoc(collection(db, "messages"),{
                 sender: user.uid,
-                receiver: chatWith,
+                
+                receiver: chatWith = "admin",
                 text: message.trim(),
                 timestamp: new Date(),
             });
