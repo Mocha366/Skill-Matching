@@ -17,7 +17,7 @@ const Dashboard: React.FC = () => {
         const fetchNickname = async () => {
             if (user) {
                 try {
-                    const userDoc = await getDoc(doc(db, "users", user.uid));
+                    const userDoc = await getDoc(doc(db, "profiles", user.uid));
                     if(userDoc.exists()) {
                         setNickname(userDoc.data()?.nickname || "ゲスト");
                     }
