@@ -194,6 +194,7 @@ const ProfileSetup: React.FC = () => {
                                     "Kotlin", "C#", "Go", "Scala", "Swift", "Objective-C", "Dart", "C", "C++",
                                     "Rust", "Assembly", "R", "Julia", "MATLAB", "SQL", "Bash", "PowerShell",
                                     "Perl", "Solidity", "Lua", "Elixir", "Erlang", "Haskell", "F#", "Groovy",
+                                    "React",
                                 ].map((option) => (
                                     <button
                                         key={option}
@@ -286,7 +287,7 @@ const ProfileSetup: React.FC = () => {
                         ＋ 資格を追加
                     </button>
                     <label>
-                        職場
+                        職業
                         <select
                             value={profile.occupation}
                             onChange={(e) => setProfile({ ...profile, occupation: e.target.value })}
