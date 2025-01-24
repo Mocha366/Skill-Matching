@@ -48,9 +48,6 @@ const Dashboard: React.FC = () => {
                     <div className="dashboard-menu">
                         <Menu/>
                     </div>
-                    <div className="dashboard-text">
-                        <p>ようこそ {nickname} さん、SKILL MATCHINGへようこそ！</p>
-                    </div>
                 </div>
             </div>
         </>
