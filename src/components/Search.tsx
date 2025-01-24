@@ -38,6 +38,12 @@ const Search: React.FC = () => {
         }
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if(e.key === "Enter"){
+            handleSearch();
+        }
+    };
+
     return (
         <div>
             <input
@@ -45,6 +51,7 @@ const Search: React.FC = () => {
                 placeholder="@ID または #タグを入力"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
             />
             <button onClick={handleSearch}>検索</button>
             <div>
