@@ -58,6 +58,12 @@ nmp run dev
 
 テスト用アカウント
 ＊アカウントの新規作成はしないでください＊
-test@test.com
+root@admin.com
 パスワード
 123456
+
+// ローカルのブランチを削除する場合
+git branch -d localBranchName
+
+// リモートのブランチを削除する場合
+git push origin --delete remoteBranchName
