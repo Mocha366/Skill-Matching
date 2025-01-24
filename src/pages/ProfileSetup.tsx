@@ -16,7 +16,7 @@ const ProfileSetup: React.FC = () => {
         age: string;
         iconPhoto: File | string | null; // 修正
         location: string;
-        interests: string;
+        interests: string[];
         qualifications: string[];
         occupation: string;
         workplace: string;
@@ -30,8 +30,8 @@ const ProfileSetup: React.FC = () => {
         age: "",
         iconPhoto: null,
         location: "",
-        interests: "",
-        qualifications: [""],
+        interests: [],
+        qualifications: [],
         occupation: "",
         workplace: "",
         socialLinks: "",
@@ -169,24 +169,20 @@ const ProfileSetup: React.FC = () => {
                         興味分野(最大5つ)
                         <div className="tag-selector-container">
                             <div className="selected-tags">
-                                {profile.interests
-                                    .split(",")
-                                    .filter((tag) => tag.trim())
-                                    .map((tag) => (
-                                        <span
-                                            key={tag}
-                                            className="tag selected"
-                                            onClick={() => {
-                                                const updatedTags = profile.interests
-                                                    .split(",")
-                                                    .filter((t) => t !== tag)
-                                                    .join(",");
-                                                setProfile({ ...profile, interests: updatedTags });
-                                            }}
-                                        >
-                                            {tag}
-                                        </span>
-                                    ))}
+                                {profile.interests.map((tag) => (
+                                    <span
+                                        key={tag}
+                                        className="tag selected"
+                                        onClick={() => {
+                                            setProfile({
+                                                ...profile,
+                                                interests: profile.interests.filter((t) => t !== tag),
+                                            });
+                                        }}
+                                    >
+                                        {tag}
+                                    </span>
+                                ))}
                             </div>
                             <div className="options">
                                 {[
@@ -199,20 +195,25 @@ const ProfileSetup: React.FC = () => {
                                     <button
                                         key={option}
                                         type="button"
-                                        className={`option ${profile.interests.split(",").includes(option) ? "selected" : ""}`}
+                                        className={`option ${
+                                            profile.interests.includes(option) ? "selected" : ""
+                                        }`}
                                         onClick={() => {
-                                            const selectedTags = profile.interests
-                                                .split(",")
-                                                .filter((tag) => tag.trim());
+                                            const selectedTags = profile.interests;
                                             if (selectedTags.includes(option)) {
-                                                const updatedTags = selectedTags.filter((tag) => tag !== option).join(",");
-                                                setProfile({ ...profile, interests: updatedTags });
+                                                setProfile({
+                                                    ...profile,
+                                                    interests: selectedTags.filter((tag) => tag !== option),
+                                                });
                                             } else {
                                                 if (selectedTags.length >= 5) {
                                                     alert("最大5つまで選択できます");
                                                     return;
                                                 }
-                                                setProfile({ ...profile, interests: [...selectedTags, option].join(",") });
+                                                setProfile({
+                                                    ...profile,
+                                                    interests: [...selectedTags, option],
+                                                });
                                             }
                                         }}
                                     >
