@@ -7,11 +7,14 @@ import "./Dashboard.css";
 import "../../components/HeaderBar/HeaderBar";
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import Menu from "../../components/Menu";
+import ProfilePreview from "../../components/ProfilePreview/ProfilePreview";
+
 
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
+    const [nickname, setNickname] = useState<string | null>(null);
     const navigate = useNavigate();
-    const [nickname, setNickname] = useState<string>("");
+    
 
     useEffect(() => {
         const fetchNickname = async () => {
@@ -29,6 +32,7 @@ const Dashboard: React.FC = () => {
         fetchNickname();
     }, [user]);
 
+    
     if (loading) {
         return <p>読み込み中...</p>
     }
@@ -39,21 +43,19 @@ const Dashboard: React.FC = () => {
     }
 
     return (
-        <>
-            <div className="dashboard-container">
-                <div>
-                    <HeaderBar/>
-                </div>
-                <div className="dashboard-contents">
-                    <div className="dashboard-menu">
-                        <Menu/>
-                    </div>
-                    <div className="dashboard-text">
-                        <p>ようこそ {nickname} さん、SKILL MATCHINGへようこそ！</p>
-                    </div>
-                </div>
+        <div className="dashboard-container">
+            <div>
+                <HeaderBar/>
             </div>
-        </>
+            <div className="dashboard-contents">
+                <div className="dashboard-menu">
+                    <Menu/>
+                </div>
+                <div>
+                    <ProfilePreview nickname={nickname || ""} interests={["React", "TypeScript"]} URL={["https://reactjs.org/", "https://www.typescriptlang.org/"]}/>
+                </div>
+            </div>:
+        </div>
     );
 };
 
