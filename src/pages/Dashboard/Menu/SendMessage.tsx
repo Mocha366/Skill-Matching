@@ -3,6 +3,7 @@ import { useAuth } from "../../../context/AuthProvider";
 import { db } from "../../../firebase";
 import { collection, addDoc, query, orderBy, onSnapshot, limit, Timestamp } from "firebase/firestore";
 import "./SendMessage.css";
+import Conversation from "../../../components/conversations/conversations";
 
 interface Message {
     id: string;
@@ -55,7 +56,6 @@ const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
         try {
             await addDoc(collection(db, "messages"),{
                 sender: user.uid,
-                
                 receiver: chatWith = "admin",
                 text: message.trim(),
                 timestamp: new Date(),
@@ -68,6 +68,7 @@ const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
 
     return (
         <div className="chat-container">
+            <Conversation/>
             <div className="messages-container">
                 {messages.map((msg) => (
                     <div
