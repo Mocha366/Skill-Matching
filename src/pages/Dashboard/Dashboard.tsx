@@ -7,6 +7,7 @@ import "./Dashboard.css";
 import "../../components/HeaderBar/HeaderBar";
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import Menu from "../../components/Menu";
+import Search from "../../components/Search";
 
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
@@ -48,6 +49,7 @@ const Dashboard: React.FC = () => {
                     <div className="dashboard-menu">
                         <Menu/>
                     </div>
+                    <Search />
                 </div>
             </div>
         </>
