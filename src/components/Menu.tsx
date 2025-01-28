@@ -1,3 +1,5 @@
+import "./Menu.css"
+
 const links = [
     { name: 'サービス', href: '#1', },
     { name: 'Skill Matchingについて',href: '/dashboard/skill-matching', },
@@ -8,7 +10,7 @@ const links = [
 export default function Menu() {
   return (
     <div>
-      <div>
+      <div className="menu-content">
       {links.map((link) => {
           return (
             <a

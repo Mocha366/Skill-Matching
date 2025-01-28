@@ -65,6 +65,20 @@ const ProfileSetup: React.FC = () => {
                 ...profile,
                 createdAt: new Date(),
             })
+
+            const notificationId = `${user.uid}_${new Date().getTime()}`;
+            const notificationData = {
+                id: notificationId,
+                userId: user.uid,
+                message: "ようこそ！初めての方向けの通知です。",
+                time: new Date(),
+                read: false,
+                type: "welcome",
+                senderId: "運営より",
+                deleted: false,
+            };
+
+            await setDoc(doc(db, "notifications", notificationId), notificationData);
             
             alert("プロフィールを保存しました！");
             navigate("/dashboard");
