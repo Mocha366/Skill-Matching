@@ -1,24 +1,24 @@
 .profile-edit-container {
-    max-width: 500px;
-    margin: 50px auto;
-    padding: 40px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    font-family: Arial, sans-serif;
-    z-index: 1;
+    display: flex;
+  align-items: flex-start;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 40px auto;
+  max-width: 800px;
 }
 
-.profile-edit-container h1 {
+.profile-edit-header {
     font-size: 24px;
     margin-bottom: 20px;
 }
 
-.form-group {
-    margin-bottom: 10px;
-    text-align: left;
-}
+
+.profile-info p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
 
 .form-group label {
     display: 0;

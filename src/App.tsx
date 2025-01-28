@@ -8,7 +8,7 @@ import ProfileEdit from "./pages/Dashboard/HeaderBar/ProfileEdit";
 import Explanation from "./pages/Dashboard/HeaderBar/Explanation";
 import Activitie from "./pages/Dashboard/HeaderBar/Activitie";
 import Service from "./pages/Dashboard/HeaderBar/Service";
-import Profilechange from "./components/Profilechange/Profilechange";
+import Profilechange from "./pages/Dashboard/HeaderBar/Profilechange";
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
