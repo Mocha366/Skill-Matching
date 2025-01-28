@@ -98,34 +98,48 @@ const EmailPasswordLogin: React.FC = () => {
     };
     
     return (
-        <div style={{ textAlign: "center", marginTop: "50px" }}>
-            <h1>{isRegister ? "新規登録" : "ログイン"}</h1>
+        <div 
+            className="EmailPasswordLogin-container" 
+            style={{
+                    textAlign: "center",
+                    marginTop: "50px",
+                    marginLeft:"20%",
+                    marginRight:"20%",
+                    paddingTop:"20px",
+                    paddingBottom:"10px",
+                    borderRadius:"45px",
+                    backgroundColor:"white"
+                }}
+        >
+            <h1 style={{marginTop:0}}>{isRegister ? "新規登録" : "ログイン"}</h1>
+            <p style={{margin:"30px 46% 0 0"}}>メールアドレス</p>
             <input
                 type="email"
-                placeholder="メールアドレス"
+                placeholder="example@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                style={{ display: "block", margin: "10px auto", padding: "10px", width: "80%" }}
+                style={{ display: "block", margin:"0 auto 10px", padding: "10px", width: "60%", borderRadius:"13px"}}
             />
+            <p style={{margin:"20px 50% 0 0"}}>パスワード</p>
             <input
                 type="password"
-                placeholder="パスワード"
+                placeholder="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                style={{ display: "block", margin: "10px auto", padding: "10px", width: "80%" }}
+                style={{ display: "block", margin: "0 auto 10px", padding: "10px", width: "60%", borderRadius:"13px"}}
             />
             <div style={{ marginTop: "20px" }}>
                 {isRegister ? (
-                    <button onClick={handleRegister} style={{ padding: "10px 20px", fontSize: "16px" }}>
+                    <button onClick={handleRegister} style={{ padding: "10px 20px", fontSize: "14px" }}>
                         登録
                     </button>
                 ) : (
-                    <button onClick={handleLogin} style={{ padding: "10px 20px", fontSize: "16px" }}>
+                    <button onClick={handleLogin} style={{ padding: "10px 20px", fontSize: "14px" }}>
                         ログイン
                     </button>
                 )}
             </div>
-            <div style={{ textAlign: "center", marginTop: "50px" }}>
+            <div style={{ textAlign: "center", marginTop: "30px" }}>
                 <button
                     onClick={handleGoogleAuth}
                     style={{
