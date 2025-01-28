@@ -3,7 +3,6 @@ import {
     signInWithEmailAndPassword, 
     createUserWithEmailAndPassword, 
     GoogleAuthProvider, 
-    GithubAuthProvider,
     signInWithPopup } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -54,11 +53,6 @@ const EmailPasswordLogin: React.FC = () => {
     const handleGoogleAuth = () => {
         const provider = new GoogleAuthProvider();
         handleAuthProvider(provider, "Google");
-    };
-
-    const handleGithubAuth = () => {
-        const provider = new GithubAuthProvider();
-        handleAuthProvider(provider, "GitHub");
     };
     
     const handleLogin = async () => {
@@ -154,21 +148,6 @@ const EmailPasswordLogin: React.FC = () => {
                 >
                     {loading ? "処理中..." : "Googleでログイン"}
                 </button>   
-                <button
-                    onClick={handleGithubAuth}
-                    style={{
-                        marginLeft: "10",
-                        padding: "10px 20px",
-                        fontSize: "16px",
-                        backgroundColor: "#333",
-                        color: "white",
-                        border: "none",
-                        cursor: "pointer",
-                    }}
-                    disabled={loading}
-                >
-                    {loading ? "処理中..." : "GitHubでログイン"}
-                </button>
             </div>
             <div style={{marginTop: "20px" }}>
                 <button
