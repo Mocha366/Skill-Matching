@@ -1,88 +1,131 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { collection, query, where, onSnapshot, updateDoc, doc } from "firebase/firestore";
+import { useAuth } from "../../../context/AuthProvider"
+import { db } from "../../../firebase";
+import "./Activitie.css" 
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
-//import LogoutButton from "../Login/LogoutButton";
-//import Logo from "../../assets/Logo.png";
-//import { Link } from "react-router-dom";
-const Activities: React.FC = () => {
-    //useStateを使って通知の一覧を管理
-    //useStateの引数にnotificationsの初期値を渡す
-    //setNotificationsはnotificationsの値を更新するための関数
-  const [notifications, setNotifications] = useState<{ id: number; message: string; time: string }[]>([
-    { id: 1, message: "システムアップデートが完了しました", time: "2025-01-17 10:00" },
-    { id: 2, message: "新しいメッセージがあります", time: "2025-01-17 11:00" },
-  ]);
+import Menu from "../../../components/Menu";
 
-  // 新しい通知を追加する関数
-  const addNotification = () => {
-    const newNotification = {
-      id: notifications.length + 1,
-      message: "新しい通知が追加されました!",
-      time: new Date().toLocaleString(),
-    };
-    setNotifications([newNotification, ...notifications]);
+interface Notification {
+  id: string;
+  userId: string;
+  message: string;
+  time: any;
+  read: boolean;
+  type: string;
+  senderId: string;
+  deleted: false;
+}
+
+const Activitie: React.FC = () => {
+  const { user } = useAuth();
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+
+  useEffect(() => {
+    if (!user) return;
+
+    const notificationsRef = collection(db, "notifications");
+    const q = query(notificationsRef, where("userId", "==", user.uid), where("deleted", "==", false));
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const fetchedNotifications = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Notification[];
+      setNotifications(fetchedNotifications);
+    })
+
+    return () => unsubscribe();
+  }, [user]);
+
+  // 通知を既読にする
+  const markAsRead = async (notificationId: string) => {
+    const notificationRef = doc(db, "notifications", notificationId);
+    await updateDoc(notificationRef, { read: true });
   };
 
-  // 通知を削除する関数
-  const deleteNotification = (id: number) => {
-    setNotifications(notifications.filter((notification) => notification.id !== id));
+  // 通知を削除する
+  const markAsDeleted = async (notificationId: string) => {
+    if (window.confirm("この通知削除しますか？")) {
+      const notificationRef = doc(db, "notifications", notificationId);
+      await updateDoc(notificationRef, { deleted: true });
+    }
   };
 
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", margin: "20px" }}>
-      <HeaderBar />
-      <h1>通知一覧</h1>
-      <button
-        onClick={addNotification}
-        style={{
-          padding: "10px 20px",
-          fontSize: "16px",
-          backgroundColor: "#007BFF",
-          color: "#fff",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
-        新しい通知を追加
-      </button>
-      <ul>
-        {notifications.map((notification) => (
-          <li
-            key={notification.id}
-            style={{
-              backgroundColor: "#f9f9f9",
-              padding: "10px",
-              marginBottom: "10px",
-              border: "1px solid #ddd",
-              borderRadius: "5px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <div>
-              <p style={{ margin: 0, fontWeight: "bold" }}>{notification.message}</p>
-              <small style={{ color: "#666" }}>{notification.time}</small>
-            </div>
-            <button
-              onClick={() => deleteNotification(notification.id)}
-              style={{
-                padding: "5px 10px",
-                fontSize: "12px",
-                backgroundColor: "#FF0000",
-                color: "#fff",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-              }}
-            >
-              削除
-            </button>
-          </li>
-        ))}
-      </ul>
+    <div className="activitie-page">
+      <HeaderBar/>
+      <div className="activitie-menu">
+        <Menu/>
+      </div>
+      <div style={{ fontFamily: "Arial, sans-serif", margin: "20px" }}>
+        <h1>お知らせ</h1>
+        <div style={{ padding: "10px", backgroundColor: "#f9f9f9", borderRadius: "5px" }}>
+          {notifications.length === 0 ? (
+            <p>現在お知らせはありません。</p>
+          ) : (
+            <ul>
+              {notifications.map((notification) => (
+                <li
+                  key={notification.id}
+                  style={{
+                    padding: "10px",
+                    marginBottom: "10px",
+                    backgroundColor: notification.read ? "#fff" : "#e6f7ff",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <div>
+                    <p style={{ margin: 0, fontWeight: "bold" }}>{notification.message}</p>
+                    <small style={{ color: "#666" }}>
+                      送信者: {notification.senderId} | {notification.time.toDate().toLocaleString()}
+                    </small>
+                  </div>
+                  <div>
+                    {!notification.read && (
+                      <button
+                        onClick={() => markAsRead(notification.id)}
+                        style={{
+                          padding: "5px 10px",
+                          fontSize: "12px",
+                          backgroundColor: "#007BFF",
+                          color: "#fff",
+                          border: "none",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                          marginRight: "5px",
+                        }}
+                      >
+                        既読にする
+                      </button>
+                    )}
+                    <button
+                      onClick={() => markAsDeleted(notification.id)}
+                      style={{
+                        padding: "5px 10px",
+                        fontSize: "12px",
+                        backgroundColor: "#FF0000",
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      削除
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Activities;
+export default Activitie;
