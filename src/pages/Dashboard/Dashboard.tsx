@@ -52,7 +52,7 @@ const Dashboard: React.FC = () => {
                     <Menu/>
                 </div>
                 <div>
-                    <ProfilePreview nickname={nickname || ""} interests={["React", "TypeScript"]} URL={["https://reactjs.org/", "https://www.typescriptlang.org/"]}/>
+                    <ProfilePreview/>
                 </div>
             </div>:
         </div>
