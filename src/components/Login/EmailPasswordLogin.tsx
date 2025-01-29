@@ -91,6 +91,12 @@ const EmailPasswordLogin: React.FC = () => {
             alert("登録エラー: " + error.message);
         }
     };
+
+    const handleKeyDownLogin = (e: React.KeyboardEvent<HTMLInputElement>) => {
+            if(e.key === "Enter"){
+                handleLogin();
+            }
+        };
     
     return (
         <div 
@@ -122,6 +128,7 @@ const EmailPasswordLogin: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 style={{ display: "block", margin: "0 auto 10px", padding: "10px", width: "60%", borderRadius:"13px"}}
+                onKeyDown={handleKeyDownLogin}
             />
             <div style={{display:"flex", marginTop:"36px"}}>
                 {isRegister ? (
