@@ -3,7 +3,7 @@ const links = [
     { name: 'Skill Matchingについて',href: '/dashboard/skill-matching', },
     { name: 'プロフィール編集', href: '/profile-edit', },
     { name: 'お知らせ', href: '#4', },
-    { name: 'メッセージ', href: '/sendmessage', },
+    { name: 'メッセージ', href: '/dashboard/sendmessage', },
 ];
 
 export default function Menu() {
