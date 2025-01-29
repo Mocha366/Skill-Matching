@@ -7,6 +7,7 @@ import {
 import { auth, db } from "../../firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import GoogleIcon from '@mui/icons-material/Google';
 
 const EmailPasswordLogin: React.FC = () => {
 
@@ -132,22 +133,21 @@ const EmailPasswordLogin: React.FC = () => {
                         ログイン
                     </button>
                 )}
-            </div>
-            <div style={{ textAlign: "center", marginTop: "30px" }}>
                 <button
                     onClick={handleGoogleAuth}
                     style={{
                         padding: "10px 20px",
                         fontSize: "16px",
-                        backgroundColor: "#4285F4",
-                        color: "white",
+                        backgroundColor: "white",
+                        color: "#007bff",
                         border: "none",
                         cursor: "pointer",
+                        paddingTop:"20px"
                     }}
                     disabled={loading}
-                >
-                    {loading ? "処理中..." : "Googleでログイン"}
-                </button>   
+                >   
+                    {loading ? "処理中..." : <GoogleIcon />}
+                </button>
             </div>
             <div style={{marginTop: "20px" }}>
                 <button
