@@ -67,8 +67,10 @@ const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
     };
 
     return (
+        <div>
+        
+        <div><Conversation/></div>
         <div className="chat-container">
-            <Conversation/>
             <div className="messages-container">
                 {messages.map((msg) => (
                     <div
@@ -91,6 +93,9 @@ const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
                 <button onClick={sendMessage}>送信</button>
             </div>
         </div>
+        
+        </div>
+        
     );
 };
 

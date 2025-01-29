@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
-import { collection, getDocs, getDoc, Timestamp } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, Timestamp } from "firebase/firestore";
 import "./conversation.css";
 
 // プロファイルデータの型を定義
@@ -53,13 +53,13 @@ const Conversation: React.FC = () => {
             <div className="conversation-wrapper">
                 {error && <p className="error-message">{error}</p>}
                 {profiles.length === 0 ? (
-                    <p>データがありません。</p>
+                    <p>データがありません</p>
                 ) : (
                     profiles.map((profile) => (
-                        <div key={profile.uid} className="profile">
+                        <button key={profile.uid} className="profile-button">
                             <img src={profile.iconPhoto} alt="icon" className="profile-icon" />
                             <p className="profile-nickname">{profile.nickname}</p>
-                        </div>
+                        </button>
                     ))
                 )}
             </div>
