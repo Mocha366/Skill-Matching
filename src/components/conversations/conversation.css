@@ -1,6 +1,6 @@
 .conversation-wrapper{
     position: fixed;
-    width: 100%;
+    width: 20%;
     height: 100vh; /* ビューポートの高さに合わせる */
     overflow-y: auto; /* 垂直方向にスクロール可能にする */
 }
@@ -9,7 +9,7 @@
 .profile-button {
     display : flex; /* 要素を横並びに */
     margin-bottom: 5px;
-    width: 20%; /* 中央より左に収まるように幅を30%に設定 */
+    width: 100%; /* 中央より左に収まるように幅を30%に設定 */
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
