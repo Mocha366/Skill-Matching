@@ -7,7 +7,8 @@ import ProfileSetup from "./pages/ProfileSetup";
 import ProfileEdit from "./pages/Dashboard/HeaderBar/ProfileEdit";
 import Explanation from "./pages/Dashboard/HeaderBar/Explanation";
 import SendMessage from "./pages/Dashboard/HeaderBar/SendMessage";
-
+import Activitie from "./pages/Dashboard/HeaderBar/Activitie";
+import Service from "./pages/Dashboard/HeaderBar/Service";
 const App: React.FC = () => {
   const { user, loading } = useAuth();
 
@@ -30,9 +31,11 @@ const App: React.FC = () => {
         <Route path="/login" element={<EmailPasswordLogin />} />
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/profile-setup" element={<PrivateRoute><ProfileSetup /></PrivateRoute>} />
-        <Route path="/profile-edit" element={<PrivateRoute><ProfileEdit/></PrivateRoute>} />
-        <Route path="/dashboard/skill-matching" element={<PrivateRoute><Explanation/></PrivateRoute>} />
+        <Route path="/dashboard/profile-edit" element={<PrivateRoute><ProfileEdit /></PrivateRoute>} />
+        <Route path="/dashboard/skill-matching" element={<PrivateRoute><Explanation /></PrivateRoute>} />
         <Route path="/dashboard/sendmessage" element={<PrivateRoute><SendMessage/></PrivateRoute>} />
+        <Route path="/dashboard/Activitie" element={<PrivateRoute><Activitie /></PrivateRoute>} />
+        <Route path="/Service" element={<PrivateRoute><Service/></PrivateRoute>} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
