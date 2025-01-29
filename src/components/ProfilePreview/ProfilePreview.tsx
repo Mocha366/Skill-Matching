@@ -10,6 +10,19 @@ interface Profile {
   location: string;
 }
 
+useEffect(() => {
+  const auth = getAuth();
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // ログインしている場合、メールアドレスを取得
+      setUserEmail(user.email || null);
+    } else {
+      // ログアウト状態
+      setUserEmail(null);
+      setProfile(null);
+    }
+  });
+
 const ProfilePreview: React.FC = () => {
   const [myInterests, setMyInterests] = useState<string | null>(null);
   const [matchingProfiles, setMatchingProfiles] = useState<Profile[]>([]);
@@ -73,35 +86,18 @@ const ProfilePreview: React.FC = () => {
   }, [myInterests]);
 
   return (
-    <div>
-      <h1>Matching Profiles</h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          {myInterests ? (
-            <div>
-              <h2>Your Interests:</h2>
-              <p>{myInterests}</p>
-            </div>
-          ) : (
-            <p>No interests found for your profile.</p>
-          )}
-          <h2>Matching Profiles:</h2>
-          {matchingProfiles.length > 0 ? (
-            <ul>
-              {matchingProfiles.map((profile) => (
-                <li key={profile.id}>
-                  <strong>{profile.realName}</strong> - Interests: {profile.interests}, Location: {profile.location}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No matching profiles found.</p>
-          )}
-        </>
-      )}
-    </div>
+    <div className="ProfilePreview">
+      <div className="text-wrapper">
+        {matchingProfiles.map((profile) => (
+          <ul key={profile.id}>
+            <li>名前: {profile.realName}</li>
+            <li>得意分野</li>
+            <li>興味分野: {profile.interests}</li>
+          </ul>
+        ))}
+      </div>
+      {loading && <p>Loading...</p>}
+  </div>
   );
 };
 

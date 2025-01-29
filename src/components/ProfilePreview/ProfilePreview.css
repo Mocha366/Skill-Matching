@@ -1,0 +1,22 @@
+.ProfilePreview {
+    background-color: #000000;
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 300px;
+    position: relative;
+    width: 300px;
+}
+
+.ProfilePreview .text-wrapper {
+    color: #ffffff;
+    font-family: "Instrument Sans-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    left: 19px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: right;
+    top: 219px;
+    width: 263px;
+}
