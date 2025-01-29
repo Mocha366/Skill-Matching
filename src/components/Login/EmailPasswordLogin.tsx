@@ -7,7 +7,7 @@ import {
 import { auth, db } from "../../firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import GoogleIcon from '@mui/icons-material/Google';
+import Google from "./GoogleIcon";
 
 const EmailPasswordLogin: React.FC = () => {
 
@@ -123,7 +123,7 @@ const EmailPasswordLogin: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 style={{ display: "block", margin: "0 auto 10px", padding: "10px", width: "60%", borderRadius:"13px"}}
             />
-            <div style={{ marginTop: "20px" }}>
+            <div>
                 {isRegister ? (
                     <button onClick={handleRegister} style={{ padding: "10px 20px", fontSize: "14px" }}>
                         登録
@@ -136,17 +136,16 @@ const EmailPasswordLogin: React.FC = () => {
                 <button
                     onClick={handleGoogleAuth}
                     style={{
-                        padding: "10px 20px",
+                        padding: "10px 20px 5px",
                         fontSize: "16px",
                         backgroundColor: "white",
                         color: "#007bff",
-                        border: "none",
+                        border: "solid",
                         cursor: "pointer",
-                        paddingTop:"20px"
                     }}
                     disabled={loading}
                 >   
-                    {loading ? "処理中..." : <GoogleIcon />}
+                    {loading ? "処理中..." : <Google />}
                 </button>
             </div>
             <div style={{marginTop: "20px" }}>
