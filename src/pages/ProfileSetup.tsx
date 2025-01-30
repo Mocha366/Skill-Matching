@@ -369,4 +369,4 @@ const ProfileSetup: React.FC = () => {
     );
 };
 
-export default ProfileSetup;
+export default ProfileSetup; 
