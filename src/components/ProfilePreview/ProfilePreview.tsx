@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "../../firebase";
 import "./ProfilePreview.css";
 
@@ -10,25 +11,28 @@ interface Profile {
   location: string;
 }
 
-useEffect(() => {
-  const auth = getAuth();
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // ログインしている場合、メールアドレスを取得
-      setUserEmail(user.email || null);
-    } else {
-      // ログアウト状態
-      setUserEmail(null);
-      setProfile(null);
-    }
-  });
+
 
 const ProfilePreview: React.FC = () => {
+  const [userEmail, setUser] = useState<string | null>(null);
   const [myInterests, setMyInterests] = useState<string | null>(null);
   const [matchingProfiles, setMatchingProfiles] = useState<Profile[]>([]);
   const [loading, setLoading] = useState(false);
   const myUserId = "8PLnQmXsI2T5XBHExiWdGye1Z2t1"; // 自分の Firestore 上のユーザー ID
 
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // ログインしている場合、メールアドレスを取得
+        setUserEmail(user.email || null);
+      } else {
+        // ログアウト状態
+        setUserEmail(null);
+      }
+    });
+  return () => unsubscribe();
+  }, []);
   // 自分のプロフィールを取得する
   const fetchMyInterests = async () => {
     setLoading(true);
