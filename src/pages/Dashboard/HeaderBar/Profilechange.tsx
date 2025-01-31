@@ -12,16 +12,17 @@ const ProfileChange: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
-      const [age, setAge] = useState<string>("");
-      const [location, setLocation] = useState<string>("");
-      const [interests, setInterests] = useState<string>("");
-      const [socialLinks, setSocialLinks] = useState<string>("");
-      const [realname, setRealname] = useState<string>("");
-      const [id, setId] = useState<string>("");
-      const [comment, setComment] = useState<string>("");
-      const [qualification, setQualification] = useState<string>("");
-      const [occupation, setOccupation] = useState<string>("");
-      const [workplace, setWorkplace] = useState<string>("");
+  const [age, setAge] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [interests, setInterests] = useState<string>("");
+  const [socialLinks, setSocialLinks] = useState<string>("");
+  const [realname, setRealname] = useState<string>("");
+  const [id, setId] = useState<string>("");
+  const [comment, setComment] = useState<string>("");
+  const [qualification, setQualification] = useState<string>("");
+  const [occupation, setOccupation] = useState<string>("");
+  const [workplace, setWorkplace] = useState<string>("");
+  //const [profile, setProfile] = useState<any>({ interests: "" });
   
 
   useEffect(() => {
@@ -116,74 +117,132 @@ const ProfileChange: React.FC = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="nickname">興味分野</label>
+                    <label>
+                      興味分野(最大5つ)
+                      <div className="tag-selector-container">
+                        <div className="selected-tags">
+                          {interests
+                            .split(",")
+                            .filter((tag: string) => tag.trim())
+                            .map((tag: string) => (
+                              <span
+                                key={tag}
+                                className="tag selected"
+                                onClick={() => {
+                                  const updatedTags = interests
+                                    .split(",")
+                                    .filter((t: string) => t !== tag)
+                                    .join(",");
+                                  setInterests(updatedTags);
+                                }}
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                        </div>
+                        <div className="options">
+                          {[
+                            "HTML", "CSS", "JavaScript", "TypeScript", "Python", "Ruby", "PHP", "Java",
+                            "Kotlin", "C#", "Go", "Scala", "Swift", "Objective-C", "Dart", "C", "C++",
+                            "Rust", "Assembly", "R", "Julia", "MATLAB", "SQL", "Bash", "PowerShell",
+                            "Perl", "Solidity", "Lua", "Elixir", "Erlang", "Haskell", "F#", "Groovy",
+                          ].map((option) => (
+                            <button
+                              key={option}
+                              type="button"
+                              className={`option ${interests.split(",").includes(option) ? "selected" : ""}`}
+                              onClick={() => {
+                                const selectedTags = interests
+                                  .split(",")
+                                  .filter((tag: string) => tag.trim());
+                                if (selectedTags.includes(option)) {
+                                  const updatedTags = selectedTags.filter((tag: string) => tag !== option).join(",");
+                                  setInterests(updatedTags);
+                                } else {
+                                  if (selectedTags.length >= 5) {
+                                    alert("最大5つまで選択できます");
+                                    return;
+                                  }
+                                  setInterests([...selectedTags, option].join(","));
+                                }
+                              }}
+                            >
+                              {option}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </label>
+        <div className="form-group">
+          <label htmlFor="location">場所</label>
           <input
-            id="interests"
+            id="location"
             type="text"
-            value={interests}
-            onChange={(e) => setInterests(e.target.value)}
-            placeholder="興味分野を設定してください"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="場所を入力してください"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="nickname">ニックネーム</label>
+          <label htmlFor="realname">本名</label>
           <input
-            id="nickname"
+            id="realname"
             type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder="ニックネームを入力してください"
+            value={realname}
+            onChange={(e) => setRealname(e.target.value)}
+            placeholder="本名を入力してください"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="nickname">ニックネーム</label>
+          <label htmlFor="id">ID</label>
           <input
-            id="nickname"
+            id="id"
             type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder="ニックネームを入力してください"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+            placeholder="IDを入力してください"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="nickname">ニックネーム</label>
+          <label htmlFor="comment">コメント</label>
           <input
-            id="nickname"
+            id="comment"
             type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder="ニックネームを入力してください"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder="コメントを入力してください"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="nickname">ニックネーム</label>
+          <label htmlFor="qualification">資格</label>
           <input
-            id="nickname"
+            id="qualification"
             type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder="ニックネームを入力してください"
+            value={qualification}
+            onChange={(e) => setQualification(e.target.value)}
+            placeholder="資格を入力してください"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="nickname">ニックネーム</label>
+          <label htmlFor="occupation">職業</label>
           <input
-            id="nickname"
+            id="occupation"
             type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder="ニックネームを入力してください"
+            value={occupation}
+            onChange={(e) => setOccupation(e.target.value)}
+            placeholder="職業を入力してください"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="nickname">ニックネーム</label>
+          <label htmlFor="workplace">職場</label>
           <input
-            id="nickname"
+            id="workplace"
             type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder="ニックネームを入力してください"
+            value={workplace}
+            onChange={(e) => setWorkplace(e.target.value)}
+            placeholder="職場を入力してください"
           />
+        </div>
         </div>
         </div>
         <button
