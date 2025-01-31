@@ -22,8 +22,6 @@ const ProfileEdit: React.FC = () => {
     const [occupation, setOccupation] = useState<string>("");
     const [workplace, setWorkplace] = useState<string>("");
 
-    const allowedUrls = ["/profilechange", "/another-allowed-url"];
-
     useEffect(() => {
         const fetchProfile = async () => {
             if (user) {
@@ -55,11 +53,7 @@ const ProfileEdit: React.FC = () => {
     }, [user]);
 
     const onclickButton = (url: string) => {
-        if (allowedUrls.includes(url)) {
-            navigate(url);
-        } else {
-            console.error("不正なリダイレクト先です");
-        }
+        navigate(url);
     };
 
     return (
@@ -70,32 +64,34 @@ const ProfileEdit: React.FC = () => {
                     <h1>プロフィール</h1>
                 </div>
                 <div className="profile-info">
-                    <p><strong>ニックネーム</strong></p>
-                    {nickname}
-                    <p><strong>メールアドレス</strong></p>
-                    {email}
-                    <p><strong>年齢</strong></p>
-                    {age}
-                    <p><strong>興味分野</strong></p>
-                    {interests}
-                    <p><strong>URL</strong></p>
-                    {socialLinks}
-                    <p><strong>職業</strong></p>
-                    {occupation}
-                </div>
-                <div className="profile-info">
-                    <p><strong>名前</strong></p>
-                    {realname}
-                    <p><strong>ID</strong></p>
-                    {id}
-                    <p><strong>一言</strong></p>
-                    {comment}
-                    <p><strong>出身</strong></p>
-                    {location}
-                    <p><strong>資格</strong></p>
-                    {qualification}
-                    <p><strong>職場 / 学校名</strong></p>
-                    {workplace}
+                    <div className="profile-info-left">
+                        <p><strong>ニックネーム</strong></p>
+                        {nickname}
+                        <p><strong>メールアドレス</strong></p>
+                        {email}
+                        <p><strong>年齢</strong></p>
+                        {age}
+                        <p><strong>興味分野</strong></p>
+                        {interests}
+                        <p><strong>URL</strong></p>
+                        {socialLinks}
+                        <p><strong>職業</strong></p>
+                        {occupation}
+                    </div>
+                    <div className="profile-info-right">
+                        <p><strong>名前</strong></p>
+                        {realname}
+                        <p><strong>ID</strong></p>
+                        {id}
+                        <p><strong>一言</strong></p>
+                        {comment}
+                        <p><strong>出身</strong></p>
+                        {location}
+                        <p><strong>資格</strong></p>
+                        {qualification}
+                        <p><strong>職場 / 学校名</strong></p>
+                        {workplace}
+                    </div>
                 </div>
                 <button onClick={() => onclickButton("/profilechange")} className="update-button">
                     更新
