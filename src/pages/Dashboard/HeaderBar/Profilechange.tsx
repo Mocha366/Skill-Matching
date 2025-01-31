@@ -22,7 +22,7 @@ const ProfileChange: React.FC = () => {
   const [qualification, setQualification] = useState<string>("");
   const [occupation, setOccupation] = useState<string>("");
   const [workplace, setWorkplace] = useState<string>("");
-  //const [profile, setProfile] = useState<any>({ interests: "" });
+  const [profile, setProfile] = useState<any>({ interests: "", qualifications: [] });
   
 
   useEffect(() => {
@@ -110,7 +110,7 @@ const ProfileChange: React.FC = () => {
           <label htmlFor="age">年齢</label>
           <input
             id="age"
-            type="text"
+            type="number"
             value={age}
             onChange={(e) => setAge(e.target.value)}
             placeholder="年齢を入力してください"
@@ -174,14 +174,26 @@ const ProfileChange: React.FC = () => {
                       </div>
                     </label>
         <div className="form-group">
-          <label htmlFor="location">場所</label>
-          <input
-            id="location"
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="場所を入力してください"
-          />
+          <label htmlFor="location">出身</label>
+          <select
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                        >
+                            <option value="">選択してください</option>
+                            {[
+                                "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県",
+                                "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県",
+                                "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県",
+                                "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", 
+                                "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", 
+                                "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", 
+                                "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県",
+                            ].map((prefecture) => (
+                                <option key={prefecture} value={prefecture}>
+                                    {prefecture}
+                                </option>
+                            ))}
+                        </select>
         </div>
         <div className="form-group">
           <label htmlFor="realname">本名</label>
@@ -194,46 +206,130 @@ const ProfileChange: React.FC = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="id">ID</label>
+          <label htmlFor="id">検索用ID(最大15文字)</label>
           <input
             id="id"
             type="text"
             value={id}
             onChange={(e) => setId(e.target.value)}
-            placeholder="IDを入力してください"
+            maxLength={15}
+            placeholder="設定する検索用IDを入力してください"
           />
         </div>
         <div className="form-group">
           <label htmlFor="comment">コメント</label>
-          <input
-            id="comment"
-            type="text"
+          <textarea
             value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            placeholder="コメントを入力してください"
-          />
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value.length <= 40) {
+                setComment(value);
+              }
+            }}
+          ></textarea>
+          <p>{comment.length}/40</p>
         </div>
         <div className="form-group">
           <label htmlFor="qualification">資格</label>
-          <input
-            id="qualification"
-            type="text"
-            value={qualification}
-            onChange={(e) => setQualification(e.target.value)}
-            placeholder="資格を入力してください"
-          />
+          {profile.qualifications.map((qualification: string, index: number) => (
+                        <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+                            <input
+                                type="text"
+                                value={qualification}
+                                onChange={(e) => {
+                                    const updatedQualifications = [...profile.qualifications];
+                                    updatedQualifications[index] = e.target.value;
+                                    setProfile({ ...profile, qualifications: updatedQualifications });
+                                }}
+                                placeholder={`資格 ${index + 1}`}
+                                style={{
+                                    flexGrow: 1,
+                                    padding: '8px',
+                                    border: '1px solid #ccc',
+                                    borderRadius: '4px',
+                                }}
+                            />
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    const updatedQualifications = profile.qualifications.filter((_: any, i: number) => i !== index);
+                                    setProfile({ ...profile, qualifications: updatedQualifications });
+                                }}
+                                style={{
+                                    marginLeft: '8px',
+                                    width: '32px',
+                                    height: '32px',
+                                    borderRadius: '50%',
+                                    border: '1px solid #ccc',
+                                    background: '#f5f5f5',
+                                    color: '#333',
+                                    fontWeight: 'bold',
+                                    cursor: 'pointer',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                ×
+                            </button>
+                        </div>
+                    ))}
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setProfile({ ...profile, qualifications: [...profile.qualifications, ''] });
+                        }}
+                        style={{
+                            marginTop: '16px',
+                            padding: '8px 16px',
+                            borderRadius: '4px',
+                            border: 'none',
+                            background: '#1e90ff',
+                            color: 'white',
+                            fontWeight: 'bold',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        ＋ 資格を追加
+                    </button>
         </div>
         <div className="form-group">
           <label htmlFor="occupation">職業</label>
-          <input
-            id="occupation"
-            type="text"
-            value={occupation}
-            onChange={(e) => setOccupation(e.target.value)}
-            placeholder="職業を入力してください"
-          />
+          <select
+                            value={profile.occupation}
+                            onChange={(e) => setProfile({ ...profile, occupation: e.target.value })}
+                        >
+                            <option value="">選択してください</option>
+                            {[
+                                "・学生",
+                                "・フロントエンドエンジニア",
+                                "・バックエンドエンジニア",
+                                "・フルスタックエンジニア",
+                                "・iOSアプリエンジニア",
+                                "・Androidアプリエンジニア",
+                                "・クロスプラットフォームアプリエンジニア",
+                                "・データサイエンティスト",
+                                "・データエンジニア",
+                                "・AI/機械学習エンジニア",
+                                "・インフラ,運用",
+                                "・ネットワークエンジニア",
+                                "・セキュリティエンジニア",
+                                "・リスクアナリスト",
+                                "・UI/UXデザイナー",
+                                "・ゲーム開発エンジニア",
+                                "・プロジェクトマネージャー",
+                                "・ITコンサルタント",
+                                "・IoTエンジニア",
+                                "・ロボティクスエンジニア",
+                                "・その他",
+                            ].map((option) => (
+                                <option key={option} value={option}>
+                                    {option}
+                                </option>
+                            ))}
+                        </select>
         </div>
-        <div className="form-group">
+        <div className="form-group workplace-group">
           <label htmlFor="workplace">職場</label>
           <input
             id="workplace"
@@ -243,8 +339,19 @@ const ProfileChange: React.FC = () => {
             placeholder="職場を入力してください"
           />
         </div>
-        </div>
-        </div>
+        <div className="form-group">
+          <label htmlFor="socialLinks">URL</label>
+          <label>
+                        Twitter, GitHub等のURL
+                        <input
+                            type="text"
+                            value={profile.socialLinks}
+                            onChange={(e) =>
+                                setProfile({ ...profile, socialLinks: e.target.value })
+                            }
+                            placeholder="カンマ区切りで入力"
+                        />
+                    </label>
         <button
           onClick={handleUpdate}
           disabled={loading}
@@ -252,6 +359,9 @@ const ProfileChange: React.FC = () => {
         >
           {loading ? "更新中..." : "更新する"}
         </button>
+        </div>
+        </div>
+        </div>
       </div>
     </div>
   );

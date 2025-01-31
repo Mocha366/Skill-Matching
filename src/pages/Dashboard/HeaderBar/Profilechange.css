@@ -1,14 +1,37 @@
 .profile-edit-container {
+    display: flex;
+    flex-direction: column;
     max-width: 500px;
+    max-height: 80vh;
+    width: 90%;
     margin: 50px auto;
     padding: 40px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.95);
     text-align: center;
     font-family: Arial, sans-serif;
     z-index: 1;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    overflow-y: auto;
+    position: relative; 
+        /* スクロールバーを非表示にする */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+    }
+    
+    /* WebKit系ブラウザ（Chrome, Safari, Edge）でスクロールバーを隠す */
+    .profile-edit-container::-webkit-scrollbar {
+        display: none;
+    }
+
+.workplace-group {
+    position: relative; 
+    display: flex;
+    flex-direction: column;
 }
+
 
 .profile-edit-container h1 {
     font-size: 24px;
@@ -43,9 +66,12 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    position: absolute; /* 職場欄の .workplace-group に対して相対配置 */
+    bottom: 0px; /* 下端に配置 */
+    right: 0px; /* 右端に配置 */
 }
 
-update-button:disabled {
+.update-button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
@@ -60,4 +86,6 @@ update-button:disabled {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
