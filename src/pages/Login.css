@@ -1,4 +1,4 @@
-.dashboard-container {
+.loginPage-container {
     background: var(--background-color, linear-gradient(113deg, #BEC9F8 0%, #D16CFF 20.1%, #FF5151 84.64%, #FF8E72 100%));
     background-size: cover;
     background-position: center;
@@ -8,18 +8,4 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-}
-
-.dashboard-contents{
-    display: flex;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-body::-webkit-scrollbar {
-    display: none;
 }

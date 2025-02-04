@@ -3,11 +3,11 @@ import {
     signInWithEmailAndPassword, 
     createUserWithEmailAndPassword, 
     GoogleAuthProvider, 
-    GithubAuthProvider,
     signInWithPopup } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import Google from "./GoogleIcon";
 
 const EmailPasswordLogin: React.FC = () => {
 
@@ -55,11 +55,6 @@ const EmailPasswordLogin: React.FC = () => {
         const provider = new GoogleAuthProvider();
         handleAuthProvider(provider, "Google");
     };
-
-    const handleGithubAuth = () => {
-        const provider = new GithubAuthProvider();
-        handleAuthProvider(provider, "GitHub");
-    };
     
     const handleLogin = async () => {
         try {
@@ -96,64 +91,68 @@ const EmailPasswordLogin: React.FC = () => {
             alert("登録エラー: " + error.message);
         }
     };
+
+    const handleKeyDownLogin = (e: React.KeyboardEvent<HTMLInputElement>) => {
+            if(e.key === "Enter"){
+                handleLogin();
+            }
+        };
     
     return (
-        <div style={{ textAlign: "center", marginTop: "50px" }}>
-            <h1>{isRegister ? "新規登録" : "ログイン"}</h1>
+        <div 
+            className="EmailPasswordLogin-container" 
+            style={{
+                    textAlign: "center",
+                    marginTop: "50px",
+                    marginLeft:"22%",
+                    marginRight:"22%",
+                    paddingTop:"20px",
+                    paddingBottom:"20px",
+                    borderRadius:"45px",
+                    backgroundColor:"white"
+                }}
+        >
+            <h1 style={{marginTop:0}}>{isRegister ? "新規登録" : "ログイン"}</h1>
+            <p style={{margin:"30px 46% 0 0"}}>メールアドレス</p>
             <input
                 type="email"
-                placeholder="メールアドレス"
+                placeholder="example@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                style={{ display: "block", margin: "10px auto", padding: "10px", width: "80%" }}
+                style={{ display: "block", margin:"0 auto 10px", padding: "10px", width: "60%", borderRadius:"13px"}}
             />
+            <p style={{margin:"20px 50% 0 0"}}>パスワード</p>
             <input
                 type="password"
-                placeholder="パスワード"
+                placeholder="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                style={{ display: "block", margin: "10px auto", padding: "10px", width: "80%" }}
+                style={{ display: "block", margin: "0 auto 10px", padding: "10px", width: "60%", borderRadius:"13px"}}
+                onKeyDown={handleKeyDownLogin}
             />
-            <div style={{ marginTop: "20px" }}>
+            <div style={{display:"flex", marginTop:"36px"}}>
                 {isRegister ? (
-                    <button onClick={handleRegister} style={{ padding: "10px 20px", fontSize: "16px" }}>
+                    <button onClick={handleRegister} style={{ marginLeft:"41%", marginRight:"10px", padding: "10px 20px", fontSize: "14px" }}>
                         登録
                     </button>
                 ) : (
-                    <button onClick={handleLogin} style={{ padding: "10px 20px", fontSize: "16px" }}>
+                    <button onClick={handleLogin} style={{ marginLeft:"39%", marginRight:"16px", padding: "8px 15px", fontSize: "14px" }}>
                         ログイン
                     </button>
                 )}
-            </div>
-            <div style={{ textAlign: "center", marginTop: "50px" }}>
                 <button
                     onClick={handleGoogleAuth}
                     style={{
-                        padding: "10px 20px",
+                        padding: "10px 20px 5px",
                         fontSize: "16px",
-                        backgroundColor: "#4285F4",
-                        color: "white",
-                        border: "none",
+                        backgroundColor: "white",
+                        color: "#007bff",
                         cursor: "pointer",
+                        marginRight:"37%"
                     }}
                     disabled={loading}
-                >
-                    {loading ? "処理中..." : "Googleでログイン"}
-                </button>   
-                <button
-                    onClick={handleGithubAuth}
-                    style={{
-                        marginLeft: "10",
-                        padding: "10px 20px",
-                        fontSize: "16px",
-                        backgroundColor: "#333",
-                        color: "white",
-                        border: "none",
-                        cursor: "pointer",
-                    }}
-                    disabled={loading}
-                >
-                    {loading ? "処理中..." : "GitHubでログイン"}
+                >   
+                    {loading ? "処理中..." : <Google />}
                 </button>
             </div>
             <div style={{marginTop: "20px" }}>
