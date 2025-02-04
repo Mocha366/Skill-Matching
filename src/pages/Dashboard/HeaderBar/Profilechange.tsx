@@ -15,12 +15,12 @@ const ProfileChange: React.FC = () => {
   const [age, setAge] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [interests, setInterests] = useState<string>("");
-  const [socialLinks, setSocialLinks] = useState<string>("");
+  //const [socialLinks, setSocialLinks] = useState<string>("");
   const [realname, setRealname] = useState<string>("");
   const [id, setId] = useState<string>("");
   const [comment, setComment] = useState<string>("");
-  const [qualification, setQualification] = useState<string>("");
-  const [occupation, setOccupation] = useState<string>("");
+  //const [qualification, setQualification] = useState<string>("");
+  //const [occupation, setOccupation] = useState<string>("");
   const [workplace, setWorkplace] = useState<string>("");
   const [profile, setProfile] = useState<any>({ interests: "", qualifications: [] });
   
@@ -37,13 +37,20 @@ const ProfileChange: React.FC = () => {
                           setAge(data?.age || "");
                           setLocation(data?.location || "");
                           setInterests(data?.interests || "");
-                          setSocialLinks(data?.socialLinks || "");
+                          //setSocialLinks(data?.socialLinks || "");
                           setRealname(data?.realname || "");
                           setId(data?.id || "");
                           setComment(data?.comment || "");
-                          setQualification(data?.qualification || "");
-                          setOccupation(data?.occupation || "");
+                          //setQualification(data?.qualification || "");
+                          //setOccupation(data?.occupation || "");
                           setWorkplace(data?.workplace || "");
+
+                          setProfile({   // 修正
+                            qualifications: data?.qualifications || [],
+                            occupation: data?.occupation || "",
+                            socialLinks: data?.socialLinks || "",
+                          });
+                          
           } else {
             console.error("ユーザードキュメントが存在しません");
           }
@@ -65,12 +72,12 @@ const ProfileChange: React.FC = () => {
         age,
         location,
         interests,
-        socialLinks,
+        socialLinks: profile.socialLinks,  // 修正: profile.socialLinks を保存
         realname,
         id,
         comment,
-        qualification,
-        occupation,
+        qualification: profile.qualifications,  // 修正: profile.qualifications を保存
+        occupation: profile.occupation,  // 修正: profile.occupation を保存
         workplace,
       });
       navigate("/profileEdit"); // 遷移先を指定
@@ -237,8 +244,9 @@ const ProfileChange: React.FC = () => {
                                 type="text"
                                 value={qualification}
                                 onChange={(e) => {
-                                    const updatedQualifications = [...profile.qualifications];
-                                    updatedQualifications[index] = e.target.value;
+                                    const updatedQualifications = profile.qualifications.map((q: string, i: number) =>
+                                        i === index ? e.target.value : q
+                                    );
                                     setProfile({ ...profile, qualifications: updatedQualifications });
                                 }}
                                 placeholder={`資格 ${index + 1}`}
