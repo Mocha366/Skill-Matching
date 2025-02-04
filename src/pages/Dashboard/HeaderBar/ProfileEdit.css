@@ -1,23 +1,36 @@
 .profile-edit-container {
-    max-width: 500px;
-    margin: 50px auto;
-    padding: 40px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    font-family: Arial, sans-serif;
-    z-index: 1;
+    display: flex;
+    flex-direction: column; /* 縦並びに変更 */
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 40px auto;
+    max-width: 800px;
+    position: relative;
 }
 
-.profile-edit-container h1 {
+.profile-edit-header {
     font-size: 24px;
     margin-bottom: 20px;
+    width: 100%; /* ヘッダーを全幅に */
+    text-align: center; /* 中央揃え */
 }
 
-.form-group {
-    margin-bottom: 10px;
-    text-align: left;
+.profile-info {
+    display: flex;
+    flex-direction: row; /* 横並びに変更 */
+    justify-content: space-between; /* 左右に配置 */
+}
+
+.profile-info-left, .profile-info-right {
+    flex: 1; /* 左右のコンテナを均等に */
+    margin: 10px; /* 左右の間隔を調整 */
+}
+
+.profile-info p {
+    margin: 5px 0;
+    font-size: 14px;
 }
 
 .form-group label {
@@ -43,9 +56,12 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 }
 
-update-button:disabled {
+.update-button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }

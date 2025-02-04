@@ -7,6 +7,7 @@ import ProfileEdit from "./pages/Dashboard/HeaderBar/ProfileEdit";
 import Explanation from "./pages/Dashboard/HeaderBar/Explanation";
 import Activitie from "./pages/Dashboard/HeaderBar/Activitie";
 import Service from "./pages/Dashboard/HeaderBar/Service";
+import Profilechange from "./pages/Dashboard/HeaderBar/Profilechange";
 import LoginPage from "./pages/Login";
 import SendMessage from "./pages/Dashboard/HeaderBar/SendMessage";
 
@@ -36,6 +37,8 @@ const App: React.FC = () => {
         <Route path="/dashboard/skill-matching" element={<PrivateRoute><Explanation /></PrivateRoute>} />
         <Route path="/dashboard/Activitie" element={<PrivateRoute><Activitie /></PrivateRoute>} />
         <Route path="/Service" element={<PrivateRoute><Service/></PrivateRoute>} />
+        <Route path="/profileEdit" element={<PrivateRoute><ProfileEdit/></PrivateRoute>} />
+        <Route path="/profilechange" element={<PrivateRoute><Profilechange/></PrivateRoute>} />
         <Route path="/dashboard/SendMessage" element={<PrivateRoute><SendMessage/></PrivateRoute>} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>

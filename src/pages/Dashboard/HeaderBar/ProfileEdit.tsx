@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../context/AuthProvider";
 import { db } from "../../../firebase";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import "./ProfileEdit.css";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
@@ -11,74 +11,90 @@ const ProfileEdit: React.FC = () => {
     const navigate = useNavigate();
     const [nickname, setNickname] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [loading, setLoading] = useState<boolean>(false);
+    const [age, setAge] = useState<string>("");
+    const [location, setLocation] = useState<string>("");
+    const [interests, setInterests] = useState<string>("");
+    const [socialLinks, setSocialLinks] = useState<string>("");
+    const [realname, setRealname] = useState<string>("");
+    const [id, setId] = useState<string>("");
+    const [comment, setComment] = useState<string>("");
+    const [qualification, setQualification] = useState<string>("");
+    const [occupation, setOccupation] = useState<string>("");
+    const [workplace, setWorkplace] = useState<string>("");
 
     useEffect(() => {
         const fetchProfile = async () => {
             if (user) {
                 try {
-                    const userDoc = await getDoc(doc(db, "users", user.uid));
+                    const userDoc = await getDoc(doc(db, "profiles", user.uid));
                     if (userDoc.exists()) {
                         const data = userDoc.data();
                         setNickname(data?.nickname || "");
                         setEmail(data?.email || "");
+                        setAge(data?.age || "");
+                        setLocation(data?.location || "");
+                        setInterests(data?.interests || "");
+                        setSocialLinks(data?.socialLinks || "");
+                        setRealname(data?.realname || "");
+                        setId(data?.id || "");
+                        setComment(data?.comment || "");
+                        setQualification(data?.qualification || "");
+                        setOccupation(data?.occupation || "");
+                        setWorkplace(data?.workplace || "");
+                    } else {
+                        console.error("ユーザードキュメントが存在しません");
                     }
                 } catch (error) {
-                    console.error("プロフィールの取得に失敗しました:",error);
+                    console.error("プロフィールの取得に失敗しました:", error);
                 }
             }
         };
         fetchProfile();
     }, [user]);
 
-    const handleUpdate = async () => {
-        if (!user) return;
-        setLoading(true);
-
-        try {
-            const userRef = doc(db, "users", user.uid);
-            await updateDoc(userRef,{ nickname, email });
-            alert("プロフィールを更新しました！");
-            navigate("/dashboard");
-        } catch (error) {
-            console.error("プロフィールの更新に失敗しました:", error);
-            alert("更新に失敗しました。もう一度試してください。");
-        } finally {
-            setLoading(false);
-        }
+    const onclickButton = (url: string) => {
+        navigate(url);
     };
 
     return (
         <div className="profile-edit-page">
-            <HeaderBar/>
+            <HeaderBar />
             <div className="profile-edit-container">
-                <h1>プロフィールの再設定</h1>
-                <div className="form-group">
-                    <label htmlFor="nickname">ニックネーム</label>
-                    <input
-                        id="nickname"
-                        type="text"
-                        value={nickname}
-                        onChange={(e) => setNickname(e.target.value)}
-                        placeholder="ニックネームを入力してください"
-                    />
+                <div className="profile-edit-header">
+                    <h1>プロフィール</h1>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="email">メールアドレス</label>
-                    <input
-                        id="email"
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="メールアドレスを入力してください"
-                    />
+                <div className="profile-info">
+                    <div className="profile-info-left">
+                        <p><strong>ニックネーム</strong></p>
+                        {nickname}
+                        <p><strong>メールアドレス</strong></p>
+                        {email}
+                        <p><strong>年齢</strong></p>
+                        {age}
+                        <p><strong>興味分野</strong></p>
+                        {interests}
+                        <p><strong>URL</strong></p>
+                        {socialLinks}
+                        <p><strong>職業</strong></p>
+                        {occupation}
+                    </div>
+                    <div className="profile-info-right">
+                        <p><strong>名前</strong></p>
+                        {realname}
+                        <p><strong>ID</strong></p>
+                        {id}
+                        <p><strong>一言</strong></p>
+                        {comment}
+                        <p><strong>出身</strong></p>
+                        {location}
+                        <p><strong>資格</strong></p>
+                        {qualification}
+                        <p><strong>職場 / 学校名</strong></p>
+                        {workplace}
+                    </div>
                 </div>
-                <button
-                    onClick={handleUpdate}
-                    disabled={loading}
-                    className="update-button"
-                >
-                    {loading ? "更新中..." : "更新する"}
+                <button onClick={() => onclickButton("/profilechange")} className="update-button">
+                    更新
                 </button>
             </div>
         </div>
