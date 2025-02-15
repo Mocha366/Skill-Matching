@@ -1,4 +1,4 @@
-import HeaderBar from "../components/HeaderBar/HeaderBar";
+import LoginHeaderBar from "../components/Login/LoginHeaderBar";
 import EmailPasswordLogin from "../components/Login/EmailPasswordLogin";
 import "./Login.css"
 
@@ -7,7 +7,7 @@ const LoginPage: React.FC = () => {
         <>
         <div className="loginPage-container">
             <div>
-                <HeaderBar />
+                <LoginHeaderBar />
             </div>
             <div className="loginPage-contents">
                 <EmailPasswordLogin />
