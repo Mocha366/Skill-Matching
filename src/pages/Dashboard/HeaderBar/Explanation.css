@@ -2,12 +2,12 @@
     background-image: url("../../../assets/image1.jpg");
     background-size: cover;
     background-position: center;
-    height: 100vh;
+    min-height: 100vh;
     position: relative;
     color: black;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .explanation-container {

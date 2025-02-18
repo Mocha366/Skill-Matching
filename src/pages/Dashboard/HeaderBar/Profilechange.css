@@ -1,8 +1,8 @@
-.profile-edit-container {
+.profile-change-container {
     display: flex;
     flex-direction: column;
     max-width: 500px;
-    max-height: 80vh;
+    min-height: 80vh;
     width: 90%;
     margin: 50px auto;
     padding: 40px;
@@ -14,17 +14,10 @@
     z-index: 1;
     overflow-wrap: break-word;
     word-break: break-word;
-    overflow-y: auto;
+   
     position: relative; 
-        /* スクロールバーを非表示にする */
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE/Edge */
     }
     
-    /* WebKit系ブラウザ（Chrome, Safari, Edge）でスクロールバーを隠す */
-    .profile-edit-container::-webkit-scrollbar {
-        display: none;
-    }
 
 .workplace-group {
     position: relative; 
@@ -80,12 +73,17 @@
     background-image: url("../../../assets/image1.jpg");
     background-size: cover;
     background-position: center;
-    height: 100vh;
+    min-height: 100vh;
     position: relative;
     color: black;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: auto;
     background-repeat: no-repeat;
     background-attachment: fixed;
+
+     /* スクロールバーを非表示にする */
+     scrollbar-width: none; /* Firefox */
+     -ms-overflow-style: none; /* IE/Edge */
+     
 }

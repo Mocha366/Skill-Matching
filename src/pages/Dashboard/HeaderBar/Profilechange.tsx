@@ -80,7 +80,7 @@ const ProfileChange: React.FC = () => {
         occupation: profile.occupation,  // 修正: profile.occupation を保存
         workplace,
       });
-      navigate("/profileEdit"); // 遷移先を指定
+      navigate("/dashboard/profile-edit"); // 遷移先を指定
       alert("プロフィールを更新しました");
     } catch (error) {
       console.error("プロフィールの更新に失敗しました:", error);

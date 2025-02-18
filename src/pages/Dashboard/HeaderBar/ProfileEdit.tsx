@@ -93,7 +93,7 @@ const ProfileEdit: React.FC = () => {
                         {workplace}
                     </div>
                 </div>
-                <button onClick={() => onclickButton("/profilechange")} className="update-button">
+                <button onClick={() => onclickButton("/dashboard/profilechange")} className="update-button">
                     更新
                 </button>
             </div>
