@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../context/AuthProvider";
 import { db } from "../../../firebase";
-import { collection, addDoc, query, orderBy, onSnapshot, limit, Timestamp } from "firebase/firestore";
+import { collection, addDoc, query, orderBy, onSnapshot, limit, Timestamp} from "firebase/firestore";
 import "./SendMessage.css";
 import Conversation from "../../../components/conversations/conversations";
+
 
 interface Message {
     id: string;
@@ -14,9 +15,14 @@ interface Message {
 }
 
 const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
-    const { user, } = useAuth();
-    const [messages, setMessages] = useState<Message[]>([]);
+    const { user } = useAuth();
+    const [messages, setMessages] = useState<Message[]>([]);;
     const [message, setMessage] = useState<string>("");
+    const chatuser = (uid: string) => {
+        console.log(uid);
+        chatWith = uid;
+        console.log(chatWith);
+    };
 
     useEffect(() => {
         if (!user) return;
@@ -31,6 +37,9 @@ const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
             const msgs: Message[] = [];
             snapshot.forEach((doc) => {
                 const data = doc.data();
+                console.log(data);
+                console.log(user.uid);
+                console.log(chatWith);
                 if (
                     (data.sender === user.uid && data.receiver === chatWith) ||
                     (data.sender === chatWith && data.receiver === user.uid)
@@ -56,7 +65,7 @@ const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
         try {
             await addDoc(collection(db, "messages"),{
                 sender: user.uid,
-                receiver: chatWith = "admin",
+                receiver: chatWith,
                 text: message.trim(),
                 timestamp: new Date(),
             });
@@ -69,31 +78,33 @@ const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
     return (
         <div>
         
-        <div><Conversation/></div>
-        <div className="chat-container">
-            <div className="messages-container">
-                {messages.map((msg) => (
-                    <div
-                        key={msg.id}
-                        className={`message ${
-                            msg.sender === user?.uid ? "sent" : "received"
-                        }`}
-                    >
-                        {msg.text}
-                    </div>
-                ))}
+            <div><Conversation chatuser={chatuser}/></div>
+            <div className="chat-container">
+                <div className="messages-container">
+                    <p>receiver{chatWith}</p>
+                    {messages.map((msg) => (
+                        <div
+                            key={msg.id}
+                            className={`message ${
+                                msg.sender === user?.uid ? "sent" : "received"
+                            }`}
+                        >
+                            {msg.text}
+                            {msg.timestamp.toDate().toLocaleString()}
+                        </div>
+                    ))}
+                </div>
+                <div className="input-container">
+                    <input
+                        type="text"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        placeholder="メッセージを入力..."
+                    />
+                    <button onClick={sendMessage}>送信</button>
+                </div>
             </div>
-            <div className="input-container">
-                <input
-                    type="text"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="メッセージを入力..."
-                />
-                <button onClick={sendMessage}>送信</button>
-            </div>
-        </div>
-        
+
         </div>
         
     );

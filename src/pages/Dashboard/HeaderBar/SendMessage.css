@@ -67,3 +67,13 @@
   background: #0056b3;
 }
 
+.testmsg {
+  width: 60%; /* 固定幅を設定 */
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  word-wrap: break-word;
+  background: #007bff;
+  color: white;
+  align-self: flex-end;
+}
