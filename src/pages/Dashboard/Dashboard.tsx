@@ -22,14 +22,16 @@ const Dashboard: React.FC = () => {
     return (
         <>
             <div className="dashboard-container">
-                <div>
+                <header className="dashboard-headerbar">
                     <HeaderBar/>
-                </div>
+                </header>
                 <div className="dashboard-contents">
                     <div className="dashboard-menu">
                         <Menu/>
                     </div>
-                    <Search />
+                    <div className="dashboard-search">
+                        <Search />
+                    </div>
                 </div>
             </div>
         </>

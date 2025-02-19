@@ -1,17 +1,31 @@
+import React, { useState } from "react";
 import LoginHeaderBar from "../components/Login/LoginHeaderBar";
 import EmailPasswordLogin from "../components/Login/EmailPasswordLogin";
+import FooterBar from "../components/FooterBar/FooterBar";
+import Aboutcomp from "../components/About";
+import Helpcomp from "../components/Help";
 import "./Login.css"
 
 const LoginPage: React.FC = () => {
+
+    const [activeComponent, setActiveComponent] = useState<"login" | "about" | "help">("login");
+
     return(
         <>
         <div className="loginPage-container">
-            <div>
+            <header className="loginPage-headerbar">
                 <LoginHeaderBar />
-            </div>
-            <div className="loginPage-contents">
-                <EmailPasswordLogin />
-            </div>
+            </header>
+
+            <main className="loginPage-contents">
+                {activeComponent === "login" && <EmailPasswordLogin />}
+                {activeComponent === "about" && <Aboutcomp />}
+                {activeComponent === "help" && <Helpcomp />}
+            </main>
+
+            <footer className="loginPage-footerbar">
+                <FooterBar setActiveComponent={setActiveComponent} />
+            </footer>
         </div>
         </>
     );

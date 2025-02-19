@@ -132,11 +132,11 @@ const EmailPasswordLogin: React.FC = () => {
             />
             <div style={{display:"flex", marginTop:"36px"}}>
                 {isRegister ? (
-                    <button onClick={handleRegister} style={{ marginLeft:"41%", marginRight:"10px", padding: "10px 20px", fontSize: "14px" }}>
+                    <button onClick={handleRegister} style={{ marginLeft:"41%", marginRight:"10px", padding: "10px 20px", fontSize: "14px", backgroundColor: "#FF9292" }}>
                         登録
                     </button>
                 ) : (
-                    <button onClick={handleLogin} style={{ marginLeft:"39%", marginRight:"16px", padding: "8px 15px", fontSize: "14px" }}>
+                    <button onClick={handleLogin} style={{ marginLeft:"39%", marginRight:"16px", padding: "8px 15px", fontSize: "14px", backgroundColor: "#FF9292" }}>
                         ログイン
                     </button>
                 )}
@@ -146,7 +146,7 @@ const EmailPasswordLogin: React.FC = () => {
                         padding: "10px 20px 5px",
                         fontSize: "16px",
                         backgroundColor: "white",
-                        color: "#007bff",
+                        color: "#FF9292",
                         cursor: "pointer",
                         marginRight:"37%"
                     }}
@@ -161,7 +161,7 @@ const EmailPasswordLogin: React.FC = () => {
                     style={{
                         backgroundColor: "transparent",
                         border: "none",
-                        color: "#007BFF",
+                        color: "black",
                         cursor: "pointer",
                         fontSize: "14px",
                     }}
