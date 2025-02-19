@@ -10,19 +10,17 @@ const links = [
 
 export default function Menu() {
   return (
-    <div>
-      <div className="menu-content">
-      {links.map((link) => {
-          return (
-            <a
-              key={link.name}
-              href={link.href}
-            >
-              <p>{link.name}</p>
-            </a>
-          );
-        })}
-      </div>
+    <div className="menu-content">
+    {links.map((link) => {
+        return (
+          <a
+            key={link.name}
+            href={link.href}
+          >
+            <p>{link.name}</p>
+          </a>
+        );
+      })}
     </div>
   );
 }

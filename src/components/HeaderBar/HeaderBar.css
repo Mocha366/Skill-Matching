@@ -32,25 +32,25 @@ logo-link:hover {
 .site-name {
     font-size: 40px;
     font-weight: bold;
-    color: #333;
+    color: white;
     font-family: Arial,sans-serif;
     margin: 0;
 }
 
-.header-bar nav {
+.headerbar-nav {
     display: flex;
     gap: 15px;
 }
 
-.header-bar nav a {
-    color: black;
+.headerbar-nav a {
+    color: white;
     text-decoration: none;
     margin: 0 10px;
     font-size: 16px;
     font-weight: bold;
 }
 
-.header-bar a:hover {
+.headerbar-nav a:hover {
     text-decoration: underline;
 }
 
@@ -58,7 +58,7 @@ logo-link:hover {
     margin-right: 10px; 
 }
 
-.header-bar nav {
+.headerbar-nav {
     display: flex;
     gap: 15px; 
 }

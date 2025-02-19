@@ -54,74 +54,78 @@ const Activitie: React.FC = () => {
 
   return (
     <div className="activitie-page">
-      <HeaderBar/>
-      <div className="activitie-menu">
-        <Menu/>
-      </div>
-      <div style={{ fontFamily: "Arial, sans-serif", margin: "20px" }}>
-        <h1>お知らせ</h1>
-        <div style={{ padding: "10px", backgroundColor: "#f9f9f9", borderRadius: "5px" }}>
-          {notifications.length === 0 ? (
-            <p>現在お知らせはありません。</p>
-          ) : (
-            <ul>
-              {notifications.map((notification) => (
-                <li
-                  key={notification.id}
-                  style={{
-                    padding: "10px",
-                    marginBottom: "10px",
-                    backgroundColor: notification.read ? "#fff" : "#e6f7ff",
-                    border: "1px solid #ccc",
-                    borderRadius: "5px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <div>
-                    <p style={{ margin: 0, fontWeight: "bold" }}>{notification.message}</p>
-                    <small style={{ color: "#666" }}>
-                      送信者: {notification.senderId} | {notification.time.toDate().toLocaleString()}
-                    </small>
-                  </div>
-                  <div>
-                    {!notification.read && (
+      <footer className="activitie-headerbar">
+        <HeaderBar/>
+      </footer>
+      <div className="activitie-contents">
+        <div className="activitie-menu">
+          <Menu/>
+        </div>
+        <div style={{ fontFamily: "Arial, sans-serif", margin: "20px" }}>
+          <h1>お知らせ</h1>
+          <div style={{ padding: "10px", backgroundColor: "#f9f9f9", borderRadius: "5px" }}>
+            {notifications.length === 0 ? (
+              <p>現在お知らせはありません。</p>
+            ) : (
+              <ul>
+                {notifications.map((notification) => (
+                  <li
+                    key={notification.id}
+                    style={{
+                      padding: "10px",
+                      marginBottom: "10px",
+                      backgroundColor: notification.read ? "#fff" : "#e6f7ff",
+                      border: "1px solid #ccc",
+                      borderRadius: "5px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <div>
+                      <p style={{ margin: 0, fontWeight: "bold" }}>{notification.message}</p>
+                      <small style={{ color: "#666" }}>
+                        送信者: {notification.senderId} | {notification.time.toDate().toLocaleString()}
+                      </small>
+                    </div>
+                    <div>
+                      {!notification.read && (
+                        <button
+                          onClick={() => markAsRead(notification.id)}
+                          style={{
+                            padding: "5px 10px",
+                            fontSize: "12px",
+                            backgroundColor: "#007BFF",
+                            color: "#fff",
+                            border: "none",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                            marginRight: "5px",
+                          }}
+                        >
+                          既読にする
+                        </button>
+                      )}
                       <button
-                        onClick={() => markAsRead(notification.id)}
+                        onClick={() => markAsDeleted(notification.id)}
                         style={{
                           padding: "5px 10px",
                           fontSize: "12px",
-                          backgroundColor: "#007BFF",
+                          backgroundColor: "#FF0000",
                           color: "#fff",
                           border: "none",
                           borderRadius: "5px",
                           cursor: "pointer",
-                          marginRight: "5px",
                         }}
                       >
-                        既読にする
+                        削除
                       </button>
-                    )}
-                    <button
-                      onClick={() => markAsDeleted(notification.id)}
-                      style={{
-                        padding: "5px 10px",
-                        fontSize: "12px",
-                        backgroundColor: "#FF0000",
-                        color: "#fff",
-                        border: "none",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                      }}
-                    >
-                      削除
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
     </div>
