@@ -6,42 +6,48 @@ import "./ProfilePreview.css";
 
 interface Profile {
   id: string;
+  uid: string;
   realName: string;
   interests: string[];
   location: string;
 }
 
 const ProfilePreview: React.FC = (): JSX.Element | null => {
-  const [userEmail, setUserEmail] = useState<string | null>(null);
-  const [Interests, setInterests] = useState<string[]>([]);
-  const [matchingProfiles, setMatchingProfiles] = useState<Profile[]>([]);
+  const [myUserId, setMyUserId] = useState<string | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(false);
-  const [myUserId, setMyUserId] = useState<string | null>(null); // 自分の Firestore 上のユーザー ID
-
+  const [matchingProfiles, setMatchingProfiles] = useState<Profile[]>([]);
+//ユーザーのログイン情報を取得する関数
   useEffect(() => {
+    // ユーザーのログイン情報を取得
     const auth = getAuth();
+    // ユーザーのログイン情報が変更されたら実行されるコールバック関数
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUserEmail(user.email);
         setMyUserId(user.uid);
-        fetchUserProfile(user.uid);
       }
     });
     return () => unsubscribe();
   }, []);
-
-  const fetchUserProfile = async (uid: string) => {
+//ユーザープロフィールを取得する関数
+useEffect(() => {
+  const fetchProfile = async () => {
+    if (!myUserId) return;
     setLoading(true);
     try {
-      const profileDoc = doc(db, "profiles", uid);
+      const profilesQuery = query(collection(db, "profiles"), where("uid", "==", myUserId));
+      const profilesSnap = await getDocs(profilesQuery);
+      const profilesList: Profile[] = profilesSnap.docs.map(doc => ({ id: doc.id, ...doc.data() } as Profile));
+      setMatchingProfiles(profilesList);
+      const profileDoc = doc(db, "profiles", myUserId); // Firestore の UID と一致するドキュメントを取得
       const profileSnap = await getDoc(profileDoc);
 
       if (profileSnap.exists()) {
-        const data = profileSnap.data();
-        setInterests(data.interests || []);
-        fetchMatchingProfiles(data.interests || []);
+        console.log("Profile Data:", profileSnap.data());
+        setProfile({ id: profileSnap.id, ...profileSnap.data() } as Profile);
       } else {
-        console.error("Profile not found");
+        console.log("No profile found for UID:", myUserId);
+        setProfile(null);
       }
     } catch (error) {
       console.error("Error fetching profile:", error);
@@ -50,31 +56,11 @@ const ProfilePreview: React.FC = (): JSX.Element | null => {
     }
   };
 
-  const fetchMatchingProfiles = async (interests: string[]) => {
-    if (interests.length === 0) return;
-    setLoading(true);
-    try {
-      const profilesRef = collection(db, "profiles");
-      const q = query(profilesRef, where("interests", "array-contains-any", interests));
-      const querySnapshot = await getDocs(q);
-
-      const profiles: Profile[] = querySnapshot.docs
-        .filter((doc) => doc.id !== myUserId) // 自分自身を除外
-        .map((doc) => ({
-          id: doc.id,
-          realName: doc.data().realName,
-          interests: doc.data().interests,
-          location: doc.data().location,
-        }));
-
-      setMatchingProfiles(profiles);
-    } catch (error) {
-      console.error("Error fetching matching profiles:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  if (myUserId) {
+    fetchProfile();
+  }
+}, [myUserId]);
+//表示の部分
   return (
     <div className="profile-preview">
       <h2>Matching Profiles</h2>
