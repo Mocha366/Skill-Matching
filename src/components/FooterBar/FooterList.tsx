@@ -10,13 +10,13 @@ const FooterList: React.FC<FooterListProps> = ({setActiveComponent}) => {
         <div>
             <nav className="footerbar-nav">
                 <a href="#" onClick={(e) => { e.preventDefault(); setActiveComponent("about"); }}>
-                    Skill Matchingについて
+                    ・Skill Matchingについて
                 </a>
                 <a href="#" onClick={(e) => { e.preventDefault(); setActiveComponent("help"); }}>
-                    ヘルプ
+                    ・ヘルプ
                 </a>
                 <a href="#" onClick={(e) => { e.preventDefault(); setActiveComponent("login"); }}>
-                    ログインに戻る
+                    ・ログインに戻る
                 </a>
             </nav>
         </div>

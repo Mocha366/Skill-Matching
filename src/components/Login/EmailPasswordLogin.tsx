@@ -136,7 +136,7 @@ const EmailPasswordLogin: React.FC = () => {
                         登録
                     </button>
                 ) : (
-                    <button onClick={handleLogin} style={{ marginLeft:"39%", marginRight:"16px", padding: "8px 15px", fontSize: "14px", backgroundColor: "#FF9292" }}>
+                    <button onClick={handleLogin} style={{ marginLeft:"38%", marginRight:"16px", padding: "8px 16px", fontSize: "14px", backgroundColor: "#FF9292" }}>
                         ログイン
                     </button>
                 )}

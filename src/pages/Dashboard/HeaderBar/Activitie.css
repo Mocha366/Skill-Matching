@@ -1,13 +1,21 @@
-.activitie-page {
-    background: var(--background-color, linear-gradient(113deg, #BEC9F8 0%, #D16CFF 20.1%, #FF5151 84.64%, #FF8E72 100%));
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh;
-    position: relative;
-    color: black;
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
     overflow: auto;
+    background: var(--background-color, linear-gradient(113deg, #BEC9F8 0%, #D16CFF 20.1%, #FF5151 84.64%, #FF8E72 100%));
+    background-size: cover;
+    background-position: center;
+}
+
+.activitie-container {
+    min-height: 100vh;
+    width: 100%;
+    color: black;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .activitie-headerbar{

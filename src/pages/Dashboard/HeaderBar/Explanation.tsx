@@ -21,7 +21,6 @@ const Explanation: React.FC = () => {
                     SkillMatchingが最高の無料アプリだと断言する前に、実際にSkillMatchingについて知ってもらいたい、
                     皆さん自身に判断してもらいたいと思っています。
                 </p>
-                <button className="start-button">始める</button>
             </div>
         </div>
     );
