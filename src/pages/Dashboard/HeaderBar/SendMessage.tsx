@@ -19,9 +19,7 @@ const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
     const [messages, setMessages] = useState<Message[]>([]);;
     const [message, setMessage] = useState<string>("");
     const chatuser = (uid: string) => {
-        console.log(uid);
-        chatWith = uid;
-        console.log(chatWith);
+        console.log({uid});
     };
 
     useEffect(() => {
@@ -39,7 +37,7 @@ const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
                 const data = doc.data();
                 console.log(data);
                 console.log(user.uid);
-                console.log(chatWith);
+                console.log({chatWith});
                 if (
                     (data.sender === user.uid && data.receiver === chatWith) ||
                     (data.sender === chatWith && data.receiver === user.uid)
