@@ -1,14 +1,25 @@
-.dashboard-container {
-    background: var(--background-color, linear-gradient(113deg, #BEC9F8 0%, #D16CFF 20.1%, #FF5151 84.64%, #FF8E72 100%));
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh;
-    max-height: 2400vh;
-    position: relative;
-    color: black;
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
     overflow: auto;
+    background: var(--background-color, linear-gradient(113deg, #BEC9F8 0%, #D16CFF 20.1%, #FF5151 84.64%, #FF8E72 100%));
+    background-size: cover;
+    background-position: center;
+}
+
+.dashboard-container {
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
 }
 
 .dashboard-headerbar{
