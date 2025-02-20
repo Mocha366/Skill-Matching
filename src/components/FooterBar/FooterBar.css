@@ -14,7 +14,7 @@
 
 .footerbar-list{
     display: flex;
-    padding: 0px 45% 0px 0px;
+    padding: 0px 43% 0px 0px;
     flex-direction: column;
     justify-content: center;
 }
