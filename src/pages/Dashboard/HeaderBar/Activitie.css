@@ -10,6 +10,7 @@ html, body {
 
 .activitie-container {
     min-height: 100vh;
+    position: relative;
     width: 100%;
     color: black;
     margin: 0;
@@ -29,5 +30,5 @@ html, body {
 .activitie-contents{
     display: flex;
     flex: 1;
-    margin-top: 60px;
+    margin-top: 5.5%;
 }
