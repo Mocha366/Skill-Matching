@@ -16,7 +16,7 @@ interface ConversationProps {
     chatuser: (uid: string) => void;
 }
 
-const Conversation: React.FC<ConversationProps> = ({ chatuser }) => {
+const Conversations: React.FC<ConversationProps> = ({ chatuser }) => {
     const [profiles, setProfiles] = useState<Profile[]>([]);
     const [error, setError] = useState<string | null>(null);
 
@@ -48,7 +48,6 @@ const Conversation: React.FC<ConversationProps> = ({ chatuser }) => {
                 console.error("プロファイルデータ取得エラー:", error);
                 setError("データの取得中にエラーが発生しました。");
             }
-            
         };
         fetchProfiles();
     }, []);
@@ -56,11 +55,13 @@ const Conversation: React.FC<ConversationProps> = ({ chatuser }) => {
     const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         const uid = e.currentTarget.dataset.uid;
         if (uid) {
+            console.log("handleButtonClick called with uid:", {uid});
             chatuser(uid);
         }
     };
-    
-    
+
+    console.log("Rendering Conversations with chatuser:", chatuser);
+
     return (
         <div className="conversation">
             <div className="conversation-wrapper">
@@ -71,21 +72,18 @@ const Conversation: React.FC<ConversationProps> = ({ chatuser }) => {
                     profiles.map((profile) => (
                         <button
                             data-uid={profile.uid}
-                            key={profile.uid} 
+                            key={profile.uid}
                             className="profile-button"
-                            onClick = {handleButtonClick}
+                            onClick={handleButtonClick}
                         >
                             <img src={profile.iconPhoto} alt="icon" className="profile-icon" />
                             <p className="profile-nickname">{profile.nickname}</p>
-                            
                         </button>
                     ))
                 )}
             </div>
         </div>
     );
-    
 };
 
-
-export default Conversation;
+export default Conversations;
