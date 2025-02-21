@@ -1,111 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { useAuth } from "../../../context/AuthProvider";
-import { db } from "../../../firebase";
-import { collection, addDoc, query, orderBy, onSnapshot, limit, Timestamp} from "firebase/firestore";
-import "./SendMessage.css";
-import Conversation from "../../../components/conversations/conversations";
+import React, { useState } from "react";
+import SendMessage from "../../../components/messages/sendmessages";
+import Conversations from "../../../components/messages/conversations";
 
+const ParentComponent: React.FC = () => {
+    const [chatWith, setChatWith] = useState<string>("");
 
-interface Message {
-    id: string;
-    sender: string;
-    receiver: string;
-    text: string;
-    timestamp: Timestamp;
-}
-
-const SendMessage: React.FC<{ chatWith?: string }> = ({ chatWith }) => {
-    const { user } = useAuth();
-    const [messages, setMessages] = useState<Message[]>([]);;
-    const [message, setMessage] = useState<string>("");
     const chatuser = (uid: string) => {
-        console.log({uid});
+        console.log("chatuser function called with uid:", {uid});
+        setChatWith(uid);
+        console.log("chatWith state updated to:", {chatWith});
     };
 
-    useEffect(() => {
-        if (!user) return;
-
-        const q = query(
-            collection(db, "messages"),
-            orderBy("timestamp", "asc"),
-            limit(50)
-        );
-
-        const unsubscribe = onSnapshot(q, (snapshot) => {
-            const msgs: Message[] = [];
-            snapshot.forEach((doc) => {
-                const data = doc.data();
-                console.log(data);
-                console.log(user.uid);
-                console.log({chatWith});
-                if (
-                    (data.sender === user.uid && data.receiver === chatWith) ||
-                    (data.sender === chatWith && data.receiver === user.uid)
-                ) {
-                    msgs.push({
-                        id:doc.id,
-                        sender: data.sender,
-                        receiver: data.receiver,
-                        text: data.text,
-                        timestamp: data.timestamp,
-                    });
-                }
-            });
-            setMessages(msgs);
-        });
-
-        return () => unsubscribe();
-    }, [user, chatWith]);
-
-    const sendMessage = async () => {
-        if (!message.trim() || !user) return;
-
-        try {
-            await addDoc(collection(db, "messages"),{
-                sender: user.uid,
-                receiver: chatWith,
-                text: message.trim(),
-                timestamp: new Date(),
-            });
-            setMessage("");
-        } catch (error) {
-            console.error("メッセージ送信エラー:", error);
-        }
-    };
+    console.log("Rendering ParentComponent with chatuser:", chatuser);
 
     return (
         <div>
-        
-            <div><Conversation chatuser={chatuser}/></div>
-            <div className="chat-container">
-                <div className="messages-container">
-                    <p>receiver{chatWith}</p>
-                    {messages.map((msg) => (
-                        <div
-                            key={msg.id}
-                            className={`message ${
-                                msg.sender === user?.uid ? "sent" : "received"
-                            }`}
-                        >
-                            {msg.text}
-                            {msg.timestamp.toDate().toLocaleString()}
-                        </div>
-                    ))}
-                </div>
-                <div className="input-container">
-                    <input
-                        type="text"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        placeholder="メッセージを入力..."
-                    />
-                    <button onClick={sendMessage}>送信</button>
-                </div>
-            </div>
-
+            <Conversations chatuser={chatuser} />
+            <SendMessage chatWith={chatWith} chatuser={chatuser} />
         </div>
-        
     );
 };
 
-export default SendMessage;
+export default ParentComponent;
