@@ -18,7 +18,7 @@ const HeaderBar: React.FC = () => {
                 </Link>
             </div>
             <nav className="headerbar-nav">
-                <a href="/Service">サービス</a>
+                <a href="/dashboard/Service">サービス</a>
                 <a href="/dashboard/skill-matching">Skill Matchingについて</a>
                 <a href="/dashboard/profile-edit">プロフィール編集</a>
                 <a href="/dashboard/Activitie">お知らせ</a>
