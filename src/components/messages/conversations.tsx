@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
-import { collection, getDocs, doc, getDoc, Timestamp } from "firebase/firestore";
+import { collection, getDocs, getDoc, Timestamp } from "firebase/firestore";
 import "./conversation.css";
 
 // プロファイルデータの型を定義
@@ -11,7 +11,12 @@ interface Profile {
     timestamp: Timestamp;
 }
 
-const Conversation: React.FC = () => {
+// Conversation コンポーネントのプロパティの型を定義
+interface ConversationProps {
+    chatuser: (uid: string) => void;
+}
+
+const Conversations: React.FC<ConversationProps> = ({ chatuser }) => {
     const [profiles, setProfiles] = useState<Profile[]>([]);
     const [error, setError] = useState<string | null>(null);
 
@@ -44,9 +49,18 @@ const Conversation: React.FC = () => {
                 setError("データの取得中にエラーが発生しました。");
             }
         };
-
         fetchProfiles();
     }, []);
+
+    const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        const uid = e.currentTarget.dataset.uid;
+        if (uid) {
+            console.log("handleButtonClick called with uid:", {uid});
+            chatuser(uid);
+        }
+    };
+
+    console.log("Rendering Conversations with chatuser:", chatuser);
 
     return (
         <div className="conversation">
@@ -56,7 +70,12 @@ const Conversation: React.FC = () => {
                     <p>データがありません</p>
                 ) : (
                     profiles.map((profile) => (
-                        <button key={profile.uid} className="profile-button">
+                        <button
+                            data-uid={profile.uid}
+                            key={profile.uid}
+                            className="profile-button"
+                            onClick={handleButtonClick}
+                        >
                             <img src={profile.iconPhoto} alt="icon" className="profile-icon" />
                             <p className="profile-nickname">{profile.nickname}</p>
                         </button>
@@ -67,4 +86,4 @@ const Conversation: React.FC = () => {
     );
 };
 
-export default Conversation;
+export default Conversations;
