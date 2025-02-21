@@ -1,11 +1,17 @@
 import React from "react";
 import "./Explanation.css";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
+import Menu from "../../../components/Menu";
 
 const Explanation: React.FC = () => {
     return (
         <div className="explanation-page">
-            <HeaderBar/>
+            <div className="explanation-headerbar">
+                <HeaderBar/>
+            </div>
+            <div className="explanation-menu">
+                <Menu />
+            </div>
             <div className="explanation-container">
                 <h1>SkillMatchingのようなマッチングアプリを使う理由</h1>
                 <p>

@@ -9,8 +9,6 @@ html, body {
 }
 
 .dashboard-container {
-    background-size: cover;
-    background-position: center;
     min-height: 100vh;
     position: relative;
     display: flex;
@@ -32,7 +30,8 @@ html, body {
 
 .dashboard-contents{
     display: flex;
-    padding-top: 5.5%;
+    flex: 1;
+    margin-top: 5.5%;
 }
 
 body {
