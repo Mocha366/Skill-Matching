@@ -29,7 +29,6 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
         const q = query(
             collection(db, "messages"),
             orderBy("timestamp", "asc"),
-            limit(50)
         );
 
         const unsubscribe = onSnapshot(q, (snapshot) => {
