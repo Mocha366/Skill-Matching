@@ -68,7 +68,6 @@ const ProfileSetup: React.FC = () => {
 
             const notificationId = `${user.uid}_${new Date().getTime()}`;
             const notificationData = {
-                id: notificationId,
                 userId: user.uid,
                 message: "ようこそ！初めての方向けの通知です。",
                 time: new Date(),
