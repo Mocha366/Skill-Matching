@@ -4,8 +4,8 @@ import { useAuth } from "./context/AuthProvider";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfileSetup from "./pages/ProfileSetup";
 import ProfileEdit from "./pages/Dashboard/HeaderBar/ProfileEdit";
-import Explanation from "./pages/Dashboard/HeaderBar/Explanation";
-import Activitie from "./pages/Dashboard/HeaderBar/Activitie";
+import About from "./pages/Dashboard/HeaderBar/About";
+import News from "./pages/Dashboard/HeaderBar/News";
 import Service from "./pages/Dashboard/HeaderBar/Service";
 import Profilechange from "./pages/Dashboard/HeaderBar/Profilechange";
 import LoginPage from "./pages/Login";
@@ -34,9 +34,8 @@ const App: React.FC = () => {
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/profile-setup" element={<PrivateRoute><ProfileSetup /></PrivateRoute>} />
         <Route path="/dashboard/profile-edit" element={<PrivateRoute><ProfileEdit /></PrivateRoute>} />
-        <Route path="/dashboard/skill-matching" element={<PrivateRoute><Explanation /></PrivateRoute>} />
-        <Route path="/skill-matching" element={<Explanation /> } />
-        <Route path="/dashboard/Activitie" element={<PrivateRoute><Activitie /></PrivateRoute>} />
+        <Route path="/dashboard/About" element={<PrivateRoute><About /></PrivateRoute>} />
+        <Route path="/dashboard/News" element={<PrivateRoute><News /></PrivateRoute>} />
         <Route path="/dashboard/Service" element={<PrivateRoute><Service/></PrivateRoute>} />
         <Route path="/profileEdit" element={<PrivateRoute><ProfileEdit/></PrivateRoute>} />
         <Route path="/profilechange" element={<PrivateRoute><Profilechange/></PrivateRoute>} />

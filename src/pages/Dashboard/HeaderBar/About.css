@@ -8,7 +8,7 @@ html, body {
     background-position: center;
 }
 
-.explanation-page {
+.About-page {
     background-size: cover;
     background-position: center;
     min-height: 100vh;
@@ -22,7 +22,7 @@ html, body {
     overflow: hidden;
 }
 
-.explanation-container {
+.About-container {
     max-width: 800px;
     margin: 100px auto;
     padding: 20px;
@@ -33,14 +33,14 @@ html, body {
     font-family: Arial, sans-serif;
 }
 
-.explanation-container h1 {
+.About-container h1 {
     font-size: 24px;
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
 }
 
-.explanation-container p {
+.About-container p {
     font-size: 16px;
     line-height: 1.6;
     color: black;

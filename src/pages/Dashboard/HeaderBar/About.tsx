@@ -1,18 +1,18 @@
 import React from "react";
-import "./Explanation.css";
+import "./About.css";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import Menu from "../../../components/Menu";
 
-const Explanation: React.FC = () => {
+const About: React.FC = () => {
     return (
-        <div className="explanation-page">
-            <div className="explanation-headerbar">
+        <div className="About-page">
+            <div className="About-headerbar">
                 <HeaderBar/>
             </div>
-            <div className="explanation-menu">
+            <div className="About-menu">
                 <Menu />
             </div>
-            <div className="explanation-container">
+            <div className="About-container">
                 <h1>SkillMatchingのようなマッチングアプリを使う理由</h1>
                 <p>
                     みなさんの想像するマッチングアプリはおそらく、異性との出会いやきっかけを作るものだと思います。
@@ -32,4 +32,4 @@ const Explanation: React.FC = () => {
     );
 };
 
-export default Explanation;
+export default About;
