@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LoginHeaderBar from "../components/Login/LoginHeaderBar";
 import EmailPasswordLogin from "../components/Login/EmailPasswordLogin";
-import FooterBar from "../components/LoginFooterBar/LoginFooterBar";
+import LoginFooterBar from "../components/LoginFooterBar/LoginFooterBar";
 import Aboutcomp from "../components/About";
 import Helpcomp from "../components/Help";
 import "./Login.css"
@@ -24,7 +24,7 @@ const LoginPage: React.FC = () => {
             </main>
 
             <footer className="loginPage-footerbar">
-                <FooterBar setActiveComponent={setActiveComponent} />
+                <LoginFooterBar setActiveComponent={setActiveComponent} />
             </footer>
         </div>
         </>
