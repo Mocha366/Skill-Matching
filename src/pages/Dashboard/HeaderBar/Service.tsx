@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
-
+import Menu from "../../../components/Menu";
 //import LogoutButton from "../Login/LogoutButton";
 //import Logo from "../../assets/Logo.png";
 //import { Link } from "react-router-dom";
@@ -10,6 +10,9 @@ const Service: React.FC = () => {
     return (
         <div className="explanation-page">
             <HeaderBar />
+            <div className="explanation-Menu">
+                <Menu/>
+            </div>
             <div className="explanation-container">
                 <h1>さあああああああああああああああああああびす</h1>
                 <p>

@@ -5,6 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import "./ProfileEdit.css";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
+import Menu from "../../../components/Menu";
 
 const ProfileEdit: React.FC = () => {
     const { user } = useAuth();
@@ -18,7 +19,7 @@ const ProfileEdit: React.FC = () => {
     const [realname, setRealname] = useState<string>("");
     const [id, setId] = useState<string>("");
     const [comment, setComment] = useState<string>("");
-    const [qualification, setQualification] = useState<string>("");
+    const [qualifications, setQualifications] = useState<string[]>([]);
     const [occupation, setOccupation] = useState<string>("");
     const [workplace, setWorkplace] = useState<string>("");
 
@@ -38,7 +39,7 @@ const ProfileEdit: React.FC = () => {
                         setRealname(data?.realname || "");
                         setId(data?.id || "");
                         setComment(data?.comment || "");
-                        setQualification(data?.qualification || "");
+                        setQualifications(data?.qualifications || []);
                         setOccupation(data?.occupation || "");
                         setWorkplace(data?.workplace || "");
                     } else {
@@ -59,6 +60,9 @@ const ProfileEdit: React.FC = () => {
     return (
         <div className="profile-edit-page">
             <HeaderBar />
+             <div className="profile-edit-Menu">
+                        <Menu/>
+                    </div>
             <div className="profile-edit-container">
                 <div className="profile-edit-header">
                     <h1>プロフィール</h1>
@@ -88,7 +92,11 @@ const ProfileEdit: React.FC = () => {
                         <p><strong>出身</strong></p>
                         {location}
                         <p><strong>資格</strong></p>
-                        {qualification}
+                        <ul>
+                            {qualifications.map((qualification, index) => (
+                                <li key={index}>{qualification}</li>
+                            ))}
+                        </ul>
                         <p><strong>職場 / 学校名</strong></p>
                         {workplace}
                     </div>
