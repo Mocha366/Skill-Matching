@@ -19,7 +19,7 @@ const FooterBar: React.FC = () => {
             <nav className="footerbar-nav">
                 <a href="/dashboard/About">Skill Matchingについて</a>
                 <a href="/dashboard/News">お知らせ</a>
-
+                <a href="/dashboard/Help">ヘルプ</a>
             </nav>
         </div>
     );
