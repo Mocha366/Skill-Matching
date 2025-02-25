@@ -10,6 +10,7 @@ import Service from "./pages/Dashboard/HeaderBar/Service";
 import Profilechange from "./pages/Dashboard/HeaderBar/Profilechange";
 import LoginPage from "./pages/Login";
 import SendMessage from "./pages/Dashboard/HeaderBar/SendMessage";
+import Help from "./pages/Dashboard/Help";
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
@@ -39,6 +40,7 @@ const App: React.FC = () => {
         <Route path="/dashboard/Service" element={<PrivateRoute><Service/></PrivateRoute>} />
         <Route path="/dashboard/profilechange" element={<PrivateRoute><Profilechange/></PrivateRoute>} />
         <Route path="/dashboard/SendMessage" element={<PrivateRoute><SendMessage/></PrivateRoute>} />
+        <Route path="/dashboard/Help" element={<PrivateRoute><Help /></PrivateRoute>} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
