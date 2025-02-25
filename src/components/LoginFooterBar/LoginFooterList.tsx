@@ -1,11 +1,11 @@
 import React from "react";
-import "./FooterList.css";
+import "./LoginFooterList.css";
 
-interface FooterListProps {
+interface LoginFooterListProps {
     setActiveComponent: (component: "login" | "about" | "help") => void;
 }
 
-const FooterList: React.FC<FooterListProps> = ({setActiveComponent}) => {
+const LoginFooterList: React.FC<LoginFooterListProps> = ({setActiveComponent}) => {
     return (
         <div>
             <nav className="footerbar-nav">
@@ -23,4 +23,4 @@ const FooterList: React.FC<FooterListProps> = ({setActiveComponent}) => {
     )
 }
 
-export default FooterList;
+export default LoginFooterList;

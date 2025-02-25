@@ -1,14 +1,14 @@
 import React from "react";
 import Logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
-import "./FooterBar.css";
-import FooterList from "./LoginFooterList"
+import "./LoginFooterBar.css";
+import LoginFooterList from "./LoginFooterList"
 
-interface FooterBarProps {
+interface LoginFooterBarProps {
     setActiveComponent: (component: "login" | "about" | "help") => void;
 }
 
-const FooterBar: React.FC<FooterBarProps> = ({ setActiveComponent }) => {
+const LoginFooterBar: React.FC<LoginFooterBarProps> = ({ setActiveComponent }) => {
     return (
         <div className = "footer-bar">
             <div className="footerbar-logo">
@@ -22,10 +22,10 @@ const FooterBar: React.FC<FooterBarProps> = ({ setActiveComponent }) => {
                 </Link>
             </div>
             <div className="footerbar-list">
-                <FooterList setActiveComponent={setActiveComponent} />
+                <LoginFooterList setActiveComponent={setActiveComponent} />
             </div>
         </div>
     )
 }
 
-export default FooterBar;
+export default LoginFooterBar;
