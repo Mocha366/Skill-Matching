@@ -5,13 +5,10 @@ import "../../components/HeaderBar/HeaderBar";
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import Menu from "../../components/Menu";
 import Search from "../../components/Search";
-import FooterBar from "../../components/LoginFooterBar/LoginFooterBar";
 
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
     const navigate = useNavigate();
-        const [activeComponent, setActiveComponent] = useState<"login" | "about" | "help">("login");
-    
 
     if (loading) {
         return <p>読み込み中...</p>
@@ -34,9 +31,6 @@ const Dashboard: React.FC = () => {
                     </div>
                     <div className="dashboard-search">
                         <Search />
-                    </div>
-                    <div className="dashboard-footer">
-                        <FooterBar setActiveComponent={setActiveComponent}/>
                     </div>
                 </div>
             </div>
