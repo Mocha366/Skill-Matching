@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { collection, query, where, onSnapshot, updateDoc, doc } from "firebase/firestore";
 import { useAuth } from "../../../context/AuthProvider"
 import { db } from "../../../firebase";
-import "./Activitie.css" 
+import "./News.css" 
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import Menu from "../../../components/Menu";
 
@@ -17,7 +17,7 @@ interface Notification {
   deleted: false;
 }
 
-const Activitie: React.FC = () => {
+const News: React.FC = () => {
   const { user } = useAuth();
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
@@ -53,12 +53,12 @@ const Activitie: React.FC = () => {
   };
 
   return (
-    <div className="activitie-page">
-      <footer className="activitie-headerbar">
+    <div className="News-page">
+      <footer className="News-headerbar">
         <HeaderBar/>
       </footer>
-      <div className="activitie-contents">
-        <div className="activitie-menu">
+      <div className="News-contents">
+        <div className="News-menu">
           <Menu/>
         </div>
         <div style={{ fontFamily: "Arial, sans-serif", margin: "20px" }}>
@@ -132,4 +132,4 @@ const Activitie: React.FC = () => {
   );
 };
 
-export default Activitie;
+export default News;

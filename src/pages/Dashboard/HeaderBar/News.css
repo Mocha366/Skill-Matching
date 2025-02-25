@@ -8,7 +8,7 @@ html, body {
     background-position: center;
 }
 
-.activitie-container {
+.News-container {
     min-height: 100vh;
     position: relative;
     width: 100%;
@@ -19,7 +19,7 @@ html, body {
     flex-direction: column;
 }
 
-.activitie-headerbar{
+.News-headerbar{
     position: fixed;
     top: 0;
     left: 0;
@@ -27,7 +27,7 @@ html, body {
     z-index: 1000;
 }
 
-.activitie-contents{
+.News-contents{
     display: flex;
     flex: 1;
     margin-top: 5.5%;
