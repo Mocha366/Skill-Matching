@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const FooterBar: React.FC = () => {
     return (
         <div className="footer-bar">
-            <div className="logo-container">
+            <div className="footer-logo-container">
                 <Link to="/dashboard" className="logo-link">
                     <img
                         src={Logo}

@@ -8,11 +8,11 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.footerbar-logo{
+.footer-logo-container{
     padding-left: 5%;
 }
 
-.footerbar-list{
+.footerbar-nav{
     display: flex;
     padding: 0px 43% 0px 0px;
     flex-direction: column;
