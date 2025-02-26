@@ -1,0 +1,17 @@
+.message-headerber{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+} 
+.message-container{
+    display: flex;
+    flex: 1;
+    margin-top: 5.5%;
+}
+.message-menu{
+    width: 20%;
+    height: 100vh;
+    overflow-y: auto;
+}

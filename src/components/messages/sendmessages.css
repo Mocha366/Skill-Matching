@@ -8,6 +8,9 @@
   border-radius: 10px;
   background: #f9f9f9;
   overflow: hidden;
+  position: fixed; /* 要素を固定 */
+  left: 50%; /* 左端から50%の位置に配置 */
+  transform: translateX(-50%); /* 要素の幅の半分だけ左に移動して中央に配置 */
 }
 
 .messages-container {
@@ -17,6 +20,9 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+.messages-container::-webkit-scrollbar {
+  display: none; /* Webkitベースのブラウザ（Chrome, Safariなど）でスクロールバーを非表示にする */
 }
 
 .message {

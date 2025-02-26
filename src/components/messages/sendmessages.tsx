@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { db } from "../../firebase";
-import { collection, addDoc, query, orderBy, onSnapshot, limit, Timestamp } from "firebase/firestore";
+import { collection, addDoc, query, orderBy, onSnapshot, Timestamp } from "firebase/firestore";
 import "./sendMessages.css";
-import Conversation from "./conversations";
 
 interface Message {
     id: string;
@@ -77,10 +76,9 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
 
     return (
         <div>
-            <div><Conversation chatuser={chatuser} /></div>
             <div className="chat-container">
                 <div className="messages-container">
-                    <p>receiver  {chatWith}</p>
+                    <p>{chatWith}</p>
                     {messages.map((msg) => (
                         <div
                             key={msg.id}

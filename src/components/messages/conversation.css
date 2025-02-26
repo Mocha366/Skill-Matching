@@ -1,17 +1,20 @@
 .conversation-wrapper{
     position: fixed;
+    right: 1%;
     width: 20%;
-    height: 100vh; /* ビューポートの高さに合わせる */
+    height: 90vh; /* ビューポートの高さに合わせる */
     overflow-y: auto; /* 垂直方向にスクロール可能にする */
 }
-
+.conversation-wrapper::-webkit-scrollbar {
+    display: none; /* Webkitベースのブラウザ（Chrome, Safariなど）でスクロールバーを非表示にする */
+}
 
 .profile-button {
     display : flex; /* 要素を横並びに */
     margin-bottom: 5px;
-    width: 100%; /* 中央より左に収まるように幅を30%に設定 */
+    width: 100%; 
     background-color: #fff;
-    border: 1px solid #ccc;
+    border : 1px solid #f0f0f0;
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
@@ -43,4 +46,8 @@
 .error-message {
     color: red;
     font-weight: bold;
+}
+.talk{
+    text-align: center;
+    color:#ffffff;
 }
