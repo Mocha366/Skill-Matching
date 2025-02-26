@@ -76,9 +76,10 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
 
     return (
         <div>
+            
             <div className="chat-container">
                 <div className="messages-container">
-                    <p>{chatWith}</p>
+                <p className="chatWith-nickname">{chatWith}</p>
                     {messages.map((msg) => (
                         <div
                             key={msg.id}
