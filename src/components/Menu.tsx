@@ -6,6 +6,7 @@ const links = [
     { name: 'プロフィール編集', href: '/dashboard/profile-edit', },
     { name: 'お知らせ', href: '/dashboard/Activitie', },
     { name: 'メッセージ', href: '/dashboard/SendMessage', },
+    { name: 'Like', href: '/dashboard/Like', },
 ];
 
 export default function Menu() {

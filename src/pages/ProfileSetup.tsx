@@ -21,6 +21,7 @@ const ProfileSetup: React.FC = () => {
         occupation: string;
         workplace: string;
         socialLinks: string;
+        UserId: string;
     }>({
         email: user?.email || "",
         id: "",
@@ -35,6 +36,7 @@ const ProfileSetup: React.FC = () => {
         occupation: "",
         workplace: "",
         socialLinks: "",
+        UserId: "",
     });
 
     const [loading, setLoading] = useState(false);

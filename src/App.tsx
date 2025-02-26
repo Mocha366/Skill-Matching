@@ -11,6 +11,7 @@ import Profilechange from "./pages/Dashboard/HeaderBar/Profilechange";
 import LoginPage from "./pages/Login";
 import SendMessage from "./pages/Dashboard/HeaderBar/SendMessage";
 import Help from "./pages/Dashboard/Help";
+import Likepage from "./pages/Dashboard/HeaderBar/Like";
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
@@ -37,6 +38,9 @@ const App: React.FC = () => {
         <Route path="/dashboard/profile-edit" element={<PrivateRoute><ProfileEdit /></PrivateRoute>} />
         <Route path="/dashboard/About" element={<PrivateRoute><About /></PrivateRoute>} />
         <Route path="/dashboard/News" element={<PrivateRoute><News /></PrivateRoute>} />
+        <Route path="/dashboard/skill-matching" element={<PrivateRoute><Explanation /></PrivateRoute>} />
+        <Route path="/dashboard/like" element={<PrivateRoute><Likepage /></PrivateRoute> } />
+        <Route path="/dashboard/Activitie" element={<PrivateRoute><Activitie /></PrivateRoute>} />
         <Route path="/dashboard/Service" element={<PrivateRoute><Service/></PrivateRoute>} />
         <Route path="/profileEdit" element={<PrivateRoute><ProfileEdit/></PrivateRoute>} />
         <Route path="/profilechange" element={<PrivateRoute><Profilechange/></PrivateRoute>} />
