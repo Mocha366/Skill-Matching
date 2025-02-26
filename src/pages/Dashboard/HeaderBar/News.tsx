@@ -30,32 +30,8 @@ const News: React.FC = () => {
 
     const fetchNotifications = async (snapshot: QuerySnapshot<DocumentData>) => {
       const fetchedNotifications = snapshot.docs.map((doc: DocumentData) => ({
-    const fetchNotifications = async (snapshot: QuerySnapshot<DocumentData>) => {
-      const fetchedNotifications = snapshot.docs.map((doc: DocumentData) => ({
         ...doc.data(),
       })) as Notification[];
-
-      //senderId から nickname を取得する
-      const updatedNotifications = await Promise.all(
-        fetchedNotifications.map(async (notification) => {
-          const senderRef = doc(db, "profiles", notification.senderId);
-          const senderSnap = await getDoc(senderRef);
-
-          return {
-            ...notification,
-            senderNickname: senderSnap.exists() ? senderSnap.data().nickname : "運営より",
-          };
-        })
-      );
-
-      setNotifications(updatedNotifications);
-    };
-
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      fetchNotifications(snapshot);
-    });
-
-    return () => unsubscribe(); // ✅ これで型エラーが解消！
 
       //senderId から nickname を取得する
       const updatedNotifications = await Promise.all(
@@ -105,31 +81,6 @@ const News: React.FC = () => {
         const notificationRef = doc(db, "notifications", querySnapshot.docs[0].id);
         await updateDoc(notificationRef, { deleted: true });
       }
-  const markAsRead = async (userId: string, time: any) => {
-    const q = query(
-      collection(db, "notifications"),
-      where("userId", "==", userId),
-      where("time", "==", time)
-    );
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
-      const notificationRef = doc(db, "notifications", querySnapshot.docs[0].id);
-      await updateDoc(notificationRef, { read: true });
-    }
-  };
-
-  const markAsDeleted = async (userId: string, time: any) => {
-    if (window.confirm("この通知を削除しますか？")) {
-      const q = query(
-        collection(db, "notifications"),
-        where("userId", "==", userId),
-        where("time", "==", time)
-      );
-      const querySnapshot = await getDocs(q);
-      if (!querySnapshot.empty) {
-        const notificationRef = doc(db, "notifications", querySnapshot.docs[0].id);
-        await updateDoc(notificationRef, { deleted: true });
-      }
     }
   };
 
@@ -152,7 +103,6 @@ const News: React.FC = () => {
                 {notifications.map((notification) => (
                   <li
                     key={`${notification.userId}_${notification.time.seconds}`}
-                    key={`${notification.userId}_${notification.time.seconds}`}
                     style={{
                       padding: "10px",
                       marginBottom: "10px",
@@ -168,13 +118,11 @@ const News: React.FC = () => {
                       <p style={{ margin: 0, fontWeight: "bold" }}>{notification.message}</p>
                       <small style={{ color: "#666" }}>
                         送信者: {notification.senderNickname || "Unknown"} | {notification.time.toDate().toLocaleString()}
-                        送信者: {notification.senderNickname || "Unknown"} | {notification.time.toDate().toLocaleString()}
                       </small>
                     </div>
                     <div>
                       {!notification.read && (
                         <button
-                          onClick={() => markAsRead(notification.userId, notification.time)}
                           onClick={() => markAsRead(notification.userId, notification.time)}
                           style={{
                             padding: "5px 10px",
