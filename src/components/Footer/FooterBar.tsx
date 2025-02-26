@@ -2,7 +2,6 @@ import React from "react";
 import "./FooterBar.css";
 import Logo from "../../assets/Logo.png";
 import { Link } from "react-router-dom";
-// test
 
 const FooterBar: React.FC = () => {
     return (
