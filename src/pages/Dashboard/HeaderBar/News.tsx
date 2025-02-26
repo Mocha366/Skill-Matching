@@ -5,6 +5,7 @@ import { db } from "../../../firebase";
 import "./News.css" 
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import Menu from "../../../components/Menu";
+import FooterBar from "../../../components/Footer/FooterBar";
 
 interface Notification {
   id: string;
@@ -127,6 +128,9 @@ const News: React.FC = () => {
             )}
           </div>
         </div>
+      </div>
+      <div>
+        <FooterBar />
       </div>
     </div>
   );

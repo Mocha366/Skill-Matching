@@ -1,3 +1,4 @@
+import FooterBar from "../../components/Footer/FooterBar";
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import Helpcomp from "../../components/Help";
 import Menu from "../../components/Menu";
@@ -14,6 +15,9 @@ const Help: React.FC = () => {
             </div>
             <div className="Help-container">
                 <Helpcomp />
+            </div>
+            <div>
+                <FooterBar />
             </div>
         </div>
     )
