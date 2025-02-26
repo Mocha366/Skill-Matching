@@ -8,19 +8,18 @@ html, body {
     background-position: center;
 }
 
-.dashboard-container {
+.News-container {
     min-height: 100vh;
     position: relative;
-    display: flex;
-    flex-direction: column;
+    width: 100%;
     color: black;
     margin: 0;
     padding: 0;
-    width: 100%;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-.dashboard-headerbar{
+.News-headerbar{
     position: fixed;
     top: 0;
     left: 0;
@@ -28,14 +27,8 @@ html, body {
     z-index: 1000;
 }
 
-.dashboard-contents{
+.News-contents{
     display: flex;
     flex: 1;
     margin-top: 5.5%;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
 }
