@@ -1,0 +1,111 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    background: var(--background-color, linear-gradient(113deg, #BEC9F8 0%, #D16CFF 20.1%, #FF5151 84.64%, #FF8E72 100%));
+    background-size: cover;
+    background-position: center;
+}
+
+.profile-setup-page {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    color: black;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-setup {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-family: Arial, sans-serif;
+}
+
+.profile-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.profile-form input,
+.profile-form textarea,
+.profile-form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.tag-selector-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.selected-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #e0f7fa;
+    color: #00796b;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.tag.selected {
+    background-color: #b2dfdb;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.option {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: inherit;
+    cursor: pointer;
+}
+
+.option.selected {
+    background-color: #b3e5fc;
+    color: #01579b;
+    font-weight: bold;
+}
