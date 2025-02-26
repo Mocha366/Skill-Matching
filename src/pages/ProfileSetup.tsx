@@ -21,6 +21,7 @@ const ProfileSetup: React.FC = () => {
         occupation: string;
         workplace: string;
         socialLinks: string;
+        UserId: string;
     }>({
         email: user?.email || "",
         id: "",
@@ -35,6 +36,7 @@ const ProfileSetup: React.FC = () => {
         occupation: "",
         workplace: "",
         socialLinks: "",
+        UserId: "",
     });
 
     const [loading, setLoading] = useState(false);
@@ -68,7 +70,6 @@ const ProfileSetup: React.FC = () => {
 
             const notificationId = `${user.uid}_${new Date().getTime()}`;
             const notificationData = {
-                id: notificationId,
                 userId: user.uid,
                 message: "ようこそ！初めての方向けの通知です。",
                 time: new Date(),

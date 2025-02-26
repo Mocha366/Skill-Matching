@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { collection, query, where, onSnapshot, updateDoc, doc } from "firebase/firestore";
-import { useAuth } from "../../../context/AuthProvider"
+import { collection, query, where, onSnapshot, updateDoc, doc, getDocs, getDoc, DocumentData, QuerySnapshot } from "firebase/firestore";
+import { useAuth } from "../../../context/AuthProvider";
 import { db } from "../../../firebase";
-import "./News.css" 
+import "./News.css";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import Menu from "../../../components/Menu";
 import FooterBar from "../../../components/Footer/FooterBar";
 
 interface Notification {
-  id: string;
   userId: string;
   message: string;
   time: any;
@@ -16,6 +15,7 @@ interface Notification {
   type: string;
   senderId: string;
   deleted: false;
+  senderNickname?: string; //送信者のニックネーム
 }
 
 const News: React.FC = () => {
@@ -28,28 +28,59 @@ const News: React.FC = () => {
     const notificationsRef = collection(db, "notifications");
     const q = query(notificationsRef, where("userId", "==", user.uid), where("deleted", "==", false));
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const fetchedNotifications = snapshot.docs.map((doc) => ({
-        id: doc.id,
+    const fetchNotifications = async (snapshot: QuerySnapshot<DocumentData>) => {
+      const fetchedNotifications = snapshot.docs.map((doc: DocumentData) => ({
         ...doc.data(),
       })) as Notification[];
-      setNotifications(fetchedNotifications);
-    })
 
-    return () => unsubscribe();
+      //senderId から nickname を取得する
+      const updatedNotifications = await Promise.all(
+        fetchedNotifications.map(async (notification) => {
+          const senderRef = doc(db, "profiles", notification.senderId);
+          const senderSnap = await getDoc(senderRef);
+
+          return {
+            ...notification,
+            senderNickname: senderSnap.exists() ? senderSnap.data().nickname : "運営より",
+          };
+        })
+      );
+
+      setNotifications(updatedNotifications);
+    };
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      fetchNotifications(snapshot);
+    });
+
+    return () => unsubscribe(); // ✅ これで型エラーが解消！
   }, [user]);
 
-  // 通知を既読にする
-  const markAsRead = async (notificationId: string) => {
-    const notificationRef = doc(db, "notifications", notificationId);
-    await updateDoc(notificationRef, { read: true });
+  const markAsRead = async (userId: string, time: any) => {
+    const q = query(
+      collection(db, "notifications"),
+      where("userId", "==", userId),
+      where("time", "==", time)
+    );
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      const notificationRef = doc(db, "notifications", querySnapshot.docs[0].id);
+      await updateDoc(notificationRef, { read: true });
+    }
   };
 
-  // 通知を削除する
-  const markAsDeleted = async (notificationId: string) => {
-    if (window.confirm("この通知削除しますか？")) {
-      const notificationRef = doc(db, "notifications", notificationId);
-      await updateDoc(notificationRef, { deleted: true });
+  const markAsDeleted = async (userId: string, time: any) => {
+    if (window.confirm("この通知を削除しますか？")) {
+      const q = query(
+        collection(db, "notifications"),
+        where("userId", "==", userId),
+        where("time", "==", time)
+      );
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const notificationRef = doc(db, "notifications", querySnapshot.docs[0].id);
+        await updateDoc(notificationRef, { deleted: true });
+      }
     }
   };
 
@@ -71,7 +102,7 @@ const News: React.FC = () => {
               <ul>
                 {notifications.map((notification) => (
                   <li
-                    key={notification.id}
+                    key={`${notification.userId}_${notification.time.seconds}`}
                     style={{
                       padding: "10px",
                       marginBottom: "10px",
@@ -86,13 +117,13 @@ const News: React.FC = () => {
                     <div>
                       <p style={{ margin: 0, fontWeight: "bold" }}>{notification.message}</p>
                       <small style={{ color: "#666" }}>
-                        送信者: {notification.senderId} | {notification.time.toDate().toLocaleString()}
+                        送信者: {notification.senderNickname || "Unknown"} | {notification.time.toDate().toLocaleString()}
                       </small>
                     </div>
                     <div>
                       {!notification.read && (
                         <button
-                          onClick={() => markAsRead(notification.id)}
+                          onClick={() => markAsRead(notification.userId, notification.time)}
                           style={{
                             padding: "5px 10px",
                             fontSize: "12px",
@@ -108,7 +139,7 @@ const News: React.FC = () => {
                         </button>
                       )}
                       <button
-                        onClick={() => markAsDeleted(notification.id)}
+                        onClick={() => markAsDeleted(notification.userId, notification.time)}
                         style={{
                           padding: "5px 10px",
                           fontSize: "12px",

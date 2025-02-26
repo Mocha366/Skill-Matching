@@ -11,6 +11,7 @@ import Profilechange from "./pages/Dashboard/HeaderBar/Profilechange";
 import LoginPage from "./pages/Login";
 import SendMessage from "./pages/Dashboard/HeaderBar/SendMessage";
 import Help from "./pages/Dashboard/Help";
+import Likepage from "./pages/Dashboard/HeaderBar/Like";
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
