@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import EmailPasswordLogin from "./components/Login/EmailPasswordLogin";
 import { useAuth } from "./context/AuthProvider";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfileSetup from "./pages/ProfileSetup";
@@ -31,7 +32,7 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/login"/>} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<EmailPasswordLogin />} />
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/profile-setup" element={<PrivateRoute><ProfileSetup /></PrivateRoute>} />
         <Route path="/dashboard/profile-edit" element={<PrivateRoute><ProfileEdit /></PrivateRoute>} />
