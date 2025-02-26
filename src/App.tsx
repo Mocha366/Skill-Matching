@@ -10,6 +10,7 @@ import Service from "./pages/Dashboard/HeaderBar/Service";
 import Profilechange from "./pages/Dashboard/HeaderBar/Profilechange";
 import LoginPage from "./pages/Login";
 import SendMessage from "./pages/Dashboard/HeaderBar/SendMessage";
+import Likepage from "./pages/Dashboard/HeaderBar/Like";
 
 const App: React.FC = () => {
   const { user, loading } = useAuth();
@@ -35,7 +36,7 @@ const App: React.FC = () => {
         <Route path="/profile-setup" element={<PrivateRoute><ProfileSetup /></PrivateRoute>} />
         <Route path="/dashboard/profile-edit" element={<PrivateRoute><ProfileEdit /></PrivateRoute>} />
         <Route path="/dashboard/skill-matching" element={<PrivateRoute><Explanation /></PrivateRoute>} />
-        <Route path="/skill-matching" element={<Explanation /> } />
+        <Route path="/dashboard/like" element={<PrivateRoute><Likepage /></PrivateRoute> } />
         <Route path="/dashboard/Activitie" element={<PrivateRoute><Activitie /></PrivateRoute>} />
         <Route path="/dashboard/Service" element={<PrivateRoute><Service/></PrivateRoute>} />
         <Route path="/profileEdit" element={<PrivateRoute><ProfileEdit/></PrivateRoute>} />
