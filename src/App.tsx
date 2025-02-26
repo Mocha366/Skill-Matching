@@ -38,8 +38,8 @@ const App: React.FC = () => {
         <Route path="/dashboard/About" element={<PrivateRoute><About /></PrivateRoute>} />
         <Route path="/dashboard/News" element={<PrivateRoute><News /></PrivateRoute>} />
         <Route path="/dashboard/Service" element={<PrivateRoute><Service/></PrivateRoute>} />
-        <Route path="/profileEdit" element={<PrivateRoute><ProfileEdit/></PrivateRoute>} />
-        <Route path="/profilechange" element={<PrivateRoute><Profilechange/></PrivateRoute>} />
+        <Route path="/dashboard/profileEdit" element={<PrivateRoute><ProfileEdit/></PrivateRoute>} />
+        <Route path="/dashboard/profilechange" element={<PrivateRoute><Profilechange/></PrivateRoute>} />
         <Route path="/dashboard/SendMessage" element={<PrivateRoute><SendMessage/></PrivateRoute>} />
         <Route path="/dashboard/Help" element={<PrivateRoute><Help /></PrivateRoute>} />
         <Route path="*" element={<Navigate to="/login" />} />
