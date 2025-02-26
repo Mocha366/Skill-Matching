@@ -1,5 +1,6 @@
 import React from "react";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
+import FooterBar from "../../../components/Footer/FooterBar";
 import Menu from "../../../components/Menu";
 //import LogoutButton from "../Login/LogoutButton";
 //import Logo from "../../assets/Logo.png";
@@ -29,6 +30,9 @@ const Service: React.FC = () => {
                     あなたの理想のエンジニアと出会うためのアプリです。
                 </p>
                 <button className="start-button">始める</button>
+            </div>
+            <div>
+                <FooterBar />
             </div>
         </div>
     );

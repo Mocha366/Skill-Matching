@@ -2,6 +2,7 @@ import React from "react";
 import "./About.css";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import Menu from "../../../components/Menu";
+import FooterBar from "../../../components/Footer/FooterBar";
 
 const About: React.FC = () => {
     return (
@@ -27,6 +28,9 @@ const About: React.FC = () => {
                     SkillMatchingが最高の無料アプリだと断言する前に、実際にSkillMatchingについて知ってもらいたい、
                     皆さん自身に判断してもらいたいと思っています。
                 </p>
+            </div>
+            <div>
+                <FooterBar />
             </div>
         </div>
     );
