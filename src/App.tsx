@@ -43,6 +43,7 @@ const App: React.FC = () => {
         <Route path="/dashboard/profilechange" element={<PrivateRoute><Profilechange/></PrivateRoute>} />
         <Route path="/dashboard/SendMessage" element={<PrivateRoute><SendMessage/></PrivateRoute>} />
         <Route path="/dashboard/Help" element={<PrivateRoute><Help /></PrivateRoute>} />
+        <Route path="/dashboard/Like" element={<PrivateRoute><Likepage /></PrivateRoute>} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
