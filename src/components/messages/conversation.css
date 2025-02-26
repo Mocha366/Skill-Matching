@@ -51,3 +51,7 @@
     text-align: center;
     color:#ffffff;
 }
+.loadingmessage{
+    position: fixed;
+    margin: auto;
+}
