@@ -7,6 +7,7 @@ import "./ProfileEdit.css";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import Menu from "../../../components/Menu";
 
+
 const ProfileEdit: React.FC = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
