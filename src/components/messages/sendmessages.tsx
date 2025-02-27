@@ -88,7 +88,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith}) => {
     return (
         <div>
             <p className="chatWith-nickname">
-                {nickname}
+            {nickname ? nickname : "トーク相手を選択してください"}
             </p> 
             <div className="chat-container">
                 <div className="messages-container">
