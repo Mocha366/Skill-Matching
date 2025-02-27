@@ -6,6 +6,7 @@ import "./News.css";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import Menu from "../../../components/Menu";
 import FooterBar from "../../../components/Footer/FooterBar";
+import Background from "../../../components/Background";
 
 interface Notification {
   userId: string;
@@ -89,6 +90,7 @@ const News: React.FC = () => {
       <header className="News-headerbar">
         <HeaderBar/>
       </header>
+      <Background />
       <div className="News-contents">
         <div className="News-menu">
           <Menu/>
