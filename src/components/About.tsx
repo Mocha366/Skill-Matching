@@ -5,7 +5,7 @@ const Aboutcomp: React.FC = () => {
     return (
         <div className="aboutcomp-page">
             <div className="aboutcomp-container">
-                <h1>SkillMatchingのようなマッチングアプリを使う理由</h1>
+                <h2>SkillMatchingのようなマッチングアプリを使う理由</h2>
                 <p>
                     みなさんの想像するマッチングアプリはおそらく、異性との出会いやきっかけを作るものだと思います。
                     ですが我々が作った「SkillMatching」は、開発が仕事の技術者や趣味で開発をしている人、

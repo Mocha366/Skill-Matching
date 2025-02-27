@@ -2,19 +2,16 @@ import React from "react";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import FooterBar from "../../../components/Footer/FooterBar";
 import Menu from "../../../components/Menu";
-//import LogoutButton from "../Login/LogoutButton";
-//import Logo from "../../assets/Logo.png";
-//import { Link } from "react-router-dom";
 
 
 const Service: React.FC = () => {
     return (
-        <div className="explanation-page">
+        <div className="service-page">
             <HeaderBar />
-            <div className="explanation-Menu">
+            <div className="service-Menu">
                 <Menu/>
             </div>
-            <div className="explanation-container">
+            <div className="service-container">
                 <h1>さあああああああああああああああああああびす</h1>
                 <p>
                     わたしたちはエンジニア同士の恋を応援するアプリを作りました。
