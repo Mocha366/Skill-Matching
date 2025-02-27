@@ -9,9 +9,10 @@ const firebaseConfig = {
     storageBucket: import.meta.env.VITE_FB_STORAGE_BUCKET,
     messagingSenderId: import.meta.env.VITE_FB_MESSAGEING_SENDER_ID,
     appId: import.meta.env.VITE_FB_APP_ID,
-}
+};
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const githubProvider = new GithubAuthProvider();
+
