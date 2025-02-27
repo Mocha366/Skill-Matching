@@ -10,12 +10,8 @@ const ParentComponent: React.FC = () => {
     const [chatWith, setChatWith] = useState<string>("");
 
     const chatuser = (uid: string) => {
-        console.log("chatuser function called with uid:", {uid});
         setChatWith(uid);
-        console.log("chatWith state updated to:", {chatWith});
     };
-
-    console.log("Rendering ParentComponent with chatuser:", chatuser);
 
     return (
         <div className="message-page">

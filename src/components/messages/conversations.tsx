@@ -55,12 +55,10 @@ const Conversations: React.FC<ConversationProps> = ({ chatuser }) => {
     const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         const uid = e.currentTarget.dataset.uid;
         if (uid) {
-            console.log("handleButtonClick called with uid:", {uid});
             chatuser(uid);
         }
     };
 
-    console.log("Rendering Conversations with chatuser:", chatuser);
 
 
     

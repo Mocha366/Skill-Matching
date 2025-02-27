@@ -3,7 +3,6 @@ import { useAuth } from "../../context/AuthProvider";
 import { db } from "../../firebase";
 import { collection, addDoc, query, orderBy, onSnapshot, getDoc, doc, Timestamp } from "firebase/firestore";
 import "./sendMessages.css";
-
 interface Message {
     id: string;
     sender: string;
@@ -11,13 +10,12 @@ interface Message {
     text: string;
     timestamp: Timestamp;
 }
-
 interface SendMessageProps {
     chatWith?: string;
     chatuser: (uid: string) => void;
 }
 
-const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
+const SendMessage: React.FC<SendMessageProps> = ({ chatWith}) => {
     const { user } = useAuth();
     const [messages, setMessages] = useState<Message[]>([]);
     const [message, setMessage] = useState<string>("");
@@ -25,12 +23,10 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
 
     useEffect(() => {
         if (!user) return;
-
         const q = query(
             collection(db, "messages"),
             orderBy("timestamp", "asc"),
         );
-
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const msgs: Message[] = [];
             snapshot.forEach((doc) => {
@@ -76,7 +72,6 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
 
     const sendMessage = async () => {
         if (!message.trim() || !user || !chatWith) return;
-
         try {
             await addDoc(collection(db, "messages"), {
                 sender: user.uid,
@@ -90,8 +85,6 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
         }
     };
 
-    console.log("Rendering SendMessage with chatWith:", chatWith, "and chatuser:", chatuser);
-
     return (
         <div>
             <p className="chatWith-nickname">
@@ -99,7 +92,6 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
             </p> 
             <div className="chat-container">
                 <div className="messages-container">
-                    
                     {messages.map((msg) => (
                         <div
                             key={msg.id}
