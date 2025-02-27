@@ -14,7 +14,9 @@
 }
 
 .card {
-    background: #fff; /* カードの背景色を白に設定 */
+    background-color: #f9f9f9;
+    background-size: cover; /* 背景画像をカバーに設定 */
+    background-position: center; /* 背景画像を中央に設定 */
     padding: 20px; /* Adjust padding to fit the new size */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -30,8 +32,28 @@
     color: #000; /* デフォルトのフォント色を黒に設定 */
 }
 
-.card p {
+.card.null-icon {
+    background-size: contain; /* 背景画像を縮小して表示 */
+    background-repeat: no-repeat; /* 背景画像を繰り返さない */
+}
+
+.card .nickname,
+.card .interests {
     margin: 5px 0; /* 各段落の間隔を設定 */
-    align-self: flex-end; /* 右下に配置 */
-    margin-top: 5px; /* 上部のマージンを自動設定 */
+    align-self: flex-start; /* 左側に配置 */
+    background-color: rgba(255, 255, 255, 0.7); /* 半透明の白っぽい背景色を設定 */
+    padding: 5px; /* パディングを追加 */
+    border-radius: 5px; /* 角を丸くする */
+    width: auto; /* テキストの幅を自動調整 */
+    position: absolute; /* 絶対位置を設定 */
+}
+
+.card .nickname {
+    bottom: 60px; /* 下から60pxの位置に配置 */
+    left: 10px; /* 左から10pxの位置に配置 */
+}
+
+.card .interests {
+    bottom: 10px; /* 下から10pxの位置に配置 */
+    left: 10px; /* 左から10pxの位置に配置 */
 }

@@ -109,3 +109,20 @@ button:disabled {
     color: #01579b;
     font-weight: bold;
 }
+
+.icon-selection {
+    display: flex;
+    gap: 10px; /* アイコン間の間隔を設定 */
+}
+
+.icon {
+    width: 50px; /* アイコンの幅を設定 */
+    height: 50px; /* アイコンの高さを設定 */
+    cursor: pointer;
+    border: 2px solid transparent; /* デフォルトのボーダーを透明に設定 */
+    border-radius: 50%; /* アイコンを丸くする */
+}
+
+.icon.selected {
+    border-color: #1e90ff; /* 選択されたアイコンのボーダー色を設定 */
+}

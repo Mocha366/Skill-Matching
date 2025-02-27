@@ -4,10 +4,22 @@ import { db, auth } from "../../firebase";
 import "./ProfilePreview.css";
 import LikeButton from "../Like/LikeButton";
 
+// アセットフォルダ内の画像をインポート
+import icon1 from "../../assets/icon1.png";
+import icon2 from "../../assets/icon2.png";
+import icon3 from "../../assets/icon3.png";
+import icon4 from "../../assets/icon4.png";
+import icon5 from "../../assets/icon5.png";
+import icon6 from "../../assets/icon6.png";
+import icon7 from "../../assets/icon7.png";
+import icon8 from "../../assets/icon8.png";
+import nullicon from "../../assets/Nullicon.png";
+
 interface Profile {
   id: string;
   nickname: string;
   interests: string[];
+  iconPhoto: string; // 背景画像の名前を追加
 }
 
 const ProfilePreview: React.FC = () => {
@@ -66,6 +78,7 @@ const ProfilePreview: React.FC = () => {
           id: doc.id,
           nickname: doc.data().nickname,
           interests: doc.data().interests,
+          iconPhoto: doc.data().iconPhoto, // 背景画像の名前を取得
         })) as Profile[];
       setMatchingProfiles(profiles);
     } catch (error) {
@@ -92,7 +105,7 @@ const ProfilePreview: React.FC = () => {
         const brightness = Math.round(((parseInt(rgb[0]) * 299) +
                                       (parseInt(rgb[1]) * 587) +
                                       (parseInt(rgb[2]) * 114)) / 1000);
-        if (brightness > 125) {
+        if (brightness > 250) {
           (card as HTMLElement).style.color = "#000"; // 背景が明るい場合は黒
         } else {
           (card as HTMLElement).style.color = "#fff"; // 背景が暗い場合は白
@@ -100,6 +113,29 @@ const ProfilePreview: React.FC = () => {
       }
     });
   }, [matchingProfiles]);
+
+  const getBackgroundImage = (iconPhoto: string) => {
+    switch (iconPhoto) {
+      case "/src/assets/icon1.png":
+        return icon1;
+      case "/src/assets/icon2.png":
+        return icon2;
+      case "/src/assets/icon3.png":
+        return icon3;
+      case "/src/assets/icon4.png":
+        return icon4;
+      case "/src/assets/icon5.png":
+        return icon5;
+      case "/src/assets/icon6.png":
+        return icon6;
+      case "/src/assets/icon7.png":
+        return icon7;
+      case "/src/assets/icon8.png":
+        return icon8;
+      default:
+        return nullicon; // デフォルトの背景画像を設定
+    }
+  };
 
   if (loading) {
     return <p>読み込み中...</p>;
@@ -113,12 +149,13 @@ const ProfilePreview: React.FC = () => {
       ) : (
         <div className="grid">
           {matchingProfiles.map(user => (
-            <div key={user.id} className="card">
-              <div className="profileview-like">
-                <LikeButton targetUserId={user.id} />
-              </div>
-              <p><strong>ニックネーム:</strong> {user.nickname}</p>
-              <p><strong>興味:</strong> {user.interests.join(", ")}</p>
+            <div
+              key={user.id}
+              className={`card ${user.iconPhoto === "null" ? "null-icon" : ""}`}
+              style={{ backgroundImage: `url(${getBackgroundImage(user.iconPhoto)})` }}
+            >
+              <p className="nickname"><strong>ニックネーム:</strong> {user.nickname}</p>
+              <p className="interests"><strong>興味:</strong> {user.interests.join(", ")}</p>
             </div>
           ))}
         </div>
