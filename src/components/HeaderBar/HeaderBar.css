@@ -6,6 +6,10 @@
     justify-content: space-between;
     padding: 10px 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 55px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
 }
 
 .logo-link {
@@ -61,4 +65,8 @@ logo-link:hover {
 .headerbar-nav {
     display: flex;
     gap: 15px; 
+}
+
+.logout{
+    margin-right: 50px;
 }

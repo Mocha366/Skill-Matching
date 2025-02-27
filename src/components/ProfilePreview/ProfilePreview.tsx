@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import "./ProfilePreview.css";
+import LikeButton from "../Like/LikeButton";
 
 // アセットフォルダ内の画像をインポート
 import icon1 from "../../assets/icon1.png";

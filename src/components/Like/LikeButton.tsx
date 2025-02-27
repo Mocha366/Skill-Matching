@@ -43,7 +43,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ targetUserId }) => {
     <button
       onClick={handleLike}
       style={{
-        backgroundColor: liked ? "red" : "white", // 既に Like 済みなら赤
+        backgroundColor: liked ? "pink" : "white", // 既に Like 済みならピンク
         color: liked ? "white" : "black",
         border: "1px solid black",
         borderRadius: "50%",

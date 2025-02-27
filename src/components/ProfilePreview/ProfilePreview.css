@@ -21,8 +21,8 @@
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border: 1px solid #ddd;
-    width: 300px; /* カードの幅を300pxに設定 */
-    height: 300px; /* カードの高さを300pxに設定 */
+    width: 250px; /* カードの幅を300pxに設定 */
+    height: 250px; /* カードの高さを300pxに設定 */
     display: flex;
     flex-direction: column; /* Flexboxの方向を縦に設定 */
     align-items: flex-start; /* 左揃えに設定 */
