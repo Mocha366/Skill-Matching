@@ -35,9 +35,6 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
             const msgs: Message[] = [];
             snapshot.forEach((doc) => {
                 const data = doc.data();
-                console.log(data);
-                console.log(user.uid);
-                console.log({chatWith});
                 if (
                     (data.sender === user.uid && data.receiver === chatWith) ||
                     (data.sender === chatWith && data.receiver === user.uid)
@@ -97,9 +94,12 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
 
     return (
         <div>
+            <p className="chatWith-nickname">
+                {nickname}
+            </p> 
             <div className="chat-container">
                 <div className="messages-container">
-                    <p className="chatWith-nickname">{nickname}</p> {/* 取得したニックネームを表示 */}
+                    
                     {messages.map((msg) => (
                         <div
                             key={msg.id}

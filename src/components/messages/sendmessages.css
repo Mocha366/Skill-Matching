@@ -1,16 +1,17 @@
 .chat-container {
   display: flex;
   flex-direction: column;
-  height: 90vh;
+  height: 93vh;
   width: 400px; /* 固定幅を設定 */
   margin: auto;
   border: 1px solid #ccc;
-  border-radius: 10px;
   background: #f9f9f9;
   overflow: hidden;
   position: fixed; /* 要素を固定 */
   left: 50%; /* 左端から50%の位置に配置 */
   transform: translateX(-50%); /* 要素の幅の半分だけ左に移動して中央に配置 */
+  border-bottom-left-radius: 5px; 
+  border-bottom-right-radius: 5px; 
 }
 
 .messages-container {
@@ -50,8 +51,9 @@
   border-top: 1px solid #ccc;
   padding: 10px;
   background: #fff;
+  border-bottom-left-radius: 5px; 
+  border-bottom-right-radius: 5px; 
 }
-
 .input-container input {
   flex: 1;
   padding: 10px;
@@ -84,19 +86,21 @@
   align-self: flex-end;
 }
 
-/*.chatWith-nickname{
+.chatWith-nickname{
+  border-bottom: 1px solid #ccc;
   text-align: center;
   font-size: 20px;
   font-weight: bold;
   padding: 10px;
-  background: #007bff;
-  color: white;
+  background: #f9f9f9;
+  color: #000;
   margin: auto;
   position: fixed; 
   left: 50%;
-  width: 400px; 
-  top:auto;
+  width: 27%; 
+  top:0;
   z-index:1;
   transform: translateX(-50%); 
+  border-top-left-radius: 5px; /* 左上の角を丸くする */
+  border-top-right-radius: 5px; /* 右上の角を丸くする */
 }
-*/
