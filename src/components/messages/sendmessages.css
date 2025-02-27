@@ -27,23 +27,43 @@
 }
 
 .message {
-  width: 60%; /* 固定幅を設定 */
+  max-width: 60%; /* 最大幅を設定 */
   padding: 10px;
   border-radius: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   word-wrap: break-word;
+  position: relative; /* タイムスタンプの位置を絶対位置で指定するために必要 */
 }
 
 .message.sent {
   align-self: flex-end;
   background: #007bff;
   color: white;
+  margin-left: 50px; /* タイムスタンプのスペースを確保 */
 }
 
 .message.received {
   align-self: flex-start;
   background: #e0e0e0;
   color: black;
+  margin-right: 50px; /* タイムスタンプのスペースを確保 */
+}
+
+.timestamp {
+  font-size: 0.75em;
+  color: #999999;
+  position: absolute;
+  bottom: 0px;
+}
+
+.sent-timestamp {
+  right: 100%; /* タイムスタンプをメッセージボックスの左側に配置 */
+  margin-right: 5px; /* タイムスタンプとメッセージの間にスペースを追加 */
+}
+
+.received-timestamp {
+  left: 100%; /* タイムスタンプをメッセージボックスの右側に配置 */
+  margin-left: 5px; /* タイムスタンプとメッセージの間にスペースを追加 */
 }
 
 .input-container {
@@ -75,18 +95,7 @@
   background: #0056b3;
 }
 
-.testmsg {
-  width: 60%; /* 固定幅を設定 */
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 5px;
-  word-wrap: break-word;
-  background: #007bff;
-  color: white;
-  align-self: flex-end;
-}
-
-.chatWith-nickname{
+.chatWith-nickname {
   border-bottom: 1px solid #ccc;
   text-align: center;
   font-size: 20px;
@@ -98,9 +107,9 @@
   position: fixed; 
   left: 50%;
   width: 27%; 
-  top:0;
-  z-index:1;
-  transform: translateX(-50%); 
+  top: 0;
+  z-index: 1;
+  transform: translateX(-50%);
   border-top-left-radius: 5px; /* 左上の角を丸くする */
   border-top-right-radius: 5px; /* 右上の角を丸くする */
 }

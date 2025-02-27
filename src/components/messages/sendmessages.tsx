@@ -85,6 +85,24 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith}) => {
         }
     };
 
+    const formatTimestamp = (timestamp: Timestamp) => {
+        const date = timestamp.toDate();
+        const now = new Date();
+        const isToday = date.toDateString() === now.toDateString();
+        if (isToday) {
+            return date.toLocaleString("ja-JP", {
+                hour: "2-digit",
+                minute: "2-digit",
+            });
+        } else {
+            return date.toLocaleString("ja-JP", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+            });
+        }
+    };
+
     return (
         <div>
             <p className="chatWith-nickname">
@@ -100,7 +118,11 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith}) => {
                             }`}
                         >
                             {msg.text}
-                            {msg.timestamp.toDate().toLocaleString()}
+                            <div className={`timestamp ${
+                                msg.sender === user?.uid ? "sent-timestamp" : "received-timestamp"
+                            }`}>
+                                {formatTimestamp(msg.timestamp)}    
+                            </div>
                         </div>
                     ))}
                 </div>
