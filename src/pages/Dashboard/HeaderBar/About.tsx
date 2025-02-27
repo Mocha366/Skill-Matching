@@ -4,6 +4,7 @@ import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import Menu from "../../../components/Menu";
 import FooterBar from "../../../components/Footer/FooterBar";
 import Aboutcomp from "../../../components/About";
+import Background from "../../../components/Background";
 
 const About: React.FC = () => {
     return (
@@ -11,6 +12,7 @@ const About: React.FC = () => {
             <div className="About-headerbar">
                 <HeaderBar/>
             </div>
+            <Background />
             <div className="About-contents">
                 <div className="About-menu">
                     <Menu />
