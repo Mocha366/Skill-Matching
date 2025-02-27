@@ -68,7 +68,7 @@ const Conversations: React.FC<ConversationProps> = ({ chatuser }) => {
                 <div className="talk">トーク</div>
                 {error && <p className="error-message">{error}</p>}
                 {profiles.length === 0 ? (
-                    <p className="loadingmessage">NowLoading</p>
+                    <p className="loadingmessage">NowLoading...</p>
                 ) : (
                     profiles.map((profile) => (
                         <button
