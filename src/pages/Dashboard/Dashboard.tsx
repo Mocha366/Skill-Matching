@@ -6,6 +6,7 @@ import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import Menu from "../../components/Menu";
 import Search from "../../components/Search";
 import FooterBar from "../../components/Footer/FooterBar";
+import ProfilePreview from "../../components/ProfilePreview/ProfilePreview";
 
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
@@ -32,6 +33,9 @@ const Dashboard: React.FC = () => {
                     </div>
                     <div className="dashboard-search">
                         <Search />
+                    </div>
+                    <div className="dashboard-profile-preview">
+                        <ProfilePreview />
                     </div>
                 </div>
                 <footer>

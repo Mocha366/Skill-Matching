@@ -86,9 +86,9 @@ const News: React.FC = () => {
 
   return (
     <div className="News-page">
-      <footer className="News-headerbar">
+      <Header className="News-headerbar">
         <HeaderBar/>
-      </footer>
+      </Header>
       <div className="News-contents">
         <div className="News-menu">
           <Menu/>
