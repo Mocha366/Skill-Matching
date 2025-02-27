@@ -9,7 +9,6 @@ import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import Menu from "../../components/Menu";
 import Search from "../../components/Search";
 import FooterBar from "../../components/Footer/FooterBar";
-import ProfilePreview from "../../components/ProfilePreview/ProfilePreview";
 
 
 const Dashboard: React.FC = () => {
