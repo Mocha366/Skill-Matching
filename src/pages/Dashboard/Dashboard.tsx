@@ -7,6 +7,8 @@ import "./Dashboard.css";
 import "../../components/HeaderBar/HeaderBar";
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import Menu from "../../components/Menu";
+import Search from "../../components/Search";
+import FooterBar from "../../components/Footer/FooterBar";
 import ProfilePreview from "../../components/ProfilePreview/ProfilePreview";
 
 
@@ -43,19 +45,24 @@ const Dashboard: React.FC = () => {
     }
 
     return (
-        <div className="dashboard-container">
-            <div>
-                <HeaderBar/>
+        <>
+            <div className="dashboard-container">
+                <header className="dashboard-headerbar">
+                    <HeaderBar/>
+                </header>
+                <div className="dashboard-contents">
+                    <div className="dashboard-menu">
+                        <Menu/>
+                    </div>
+                    <div className="dashboard-search">
+                        <Search />
+                    </div>
+                </div>
+                <footer>
+                    <FooterBar />
+                </footer>
             </div>
-            <div className="dashboard-contents">
-                <div className="dashboard-menu">
-                    <Menu/>
-                </div>
-                <div>
-                    <ProfilePreview/>
-                </div>
-            </div>:
-        </div>
+        </>
     );
 };
 
