@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { db } from "../../firebase";
-import { collection, addDoc, query, orderBy, onSnapshot, Timestamp } from "firebase/firestore";
+import { collection, addDoc, query, orderBy, onSnapshot, getDoc, doc, Timestamp } from "firebase/firestore";
 import "./sendMessages.css";
 
 interface Message {
@@ -21,6 +21,7 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
     const { user } = useAuth();
     const [messages, setMessages] = useState<Message[]>([]);
     const [message, setMessage] = useState<string>("");
+    const [nickname, setNickname] = useState<string>("");
 
     useEffect(() => {
         if (!user) return;
@@ -56,6 +57,26 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
         return () => unsubscribe();
     }, [user, chatWith]);
 
+    useEffect(() => {
+        const fetchNickname = async () => {
+            if (chatWith) {
+                try {
+                    const docRef = doc(db, "profiles", chatWith);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        setNickname(data.nickname); // 取得したフィールドを状態に設定
+                    } else {
+                        console.error("ドキュメントが存在しません");
+                    }
+                } catch (error) {
+                    console.error("ドキュメント取得エラー:", error);
+                }
+            }
+        };
+        fetchNickname();
+    }, [chatWith]);
+
     const sendMessage = async () => {
         if (!message.trim() || !user || !chatWith) return;
 
@@ -76,10 +97,9 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
 
     return (
         <div>
-            
             <div className="chat-container">
                 <div className="messages-container">
-                <p className="chatWith-nickname">{chatWith}</p>
+                    <p className="chatWith-nickname">{nickname}</p> {/* 取得したニックネームを表示 */}
                     {messages.map((msg) => (
                         <div
                             key={msg.id}
