@@ -5,16 +5,28 @@ import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import "./ProfileSetup.css";
 
+// アセットフォルダ内の画像をインポート
+import icon1 from "../assets/icon1.png";
+import icon2 from "../assets/icon2.png";
+import icon3 from "../assets/icon3.png";
+import icon4 from "../assets/icon4.png";
+import icon5 from "../assets/icon5.png";
+import icon6 from "../assets/icon6.png";
+import icon7 from "../assets/icon7.png";
+import icon8 from "../assets/icon8.png";
+
+
+
 const ProfileSetup: React.FC = () => {
-    const { user } =useAuth();
+    const { user } = useAuth();
     const [profile, setProfile] = useState<{
-        email:string;
+        email: string;
         id: string;
         nickname: string;
         comment: string;
         realName: string;
         age: string;
-        iconPhoto: File | string | null; // 修正
+        iconPhoto: string | null;
         location: string;
         interests: string[];
         qualifications: string[];
@@ -44,17 +56,17 @@ const ProfileSetup: React.FC = () => {
 
     const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         if (!user) {
             alert("ログインが必要です");
             return;
-        }   
+        }
 
         if (!profile.id || profile.id.length > 15 || !profile.nickname) {
             alert("必須項目を正しく入力してください(IDは15文字以内)");
             return;
         }
-        
+
         setLoading(true);
 
         try {
@@ -66,7 +78,7 @@ const ProfileSetup: React.FC = () => {
             await setDoc(doc(db, "profiles", user.uid), {
                 ...profile,
                 createdAt: new Date(),
-            })
+            });
 
             const notificationId = `${user.uid}_${new Date().getTime()}`;
             const notificationData = {
@@ -80,7 +92,7 @@ const ProfileSetup: React.FC = () => {
             };
 
             await setDoc(doc(db, "notifications", notificationId), notificationData);
-            
+
             alert("プロフィールを保存しました！");
             navigate("/dashboard");
         } catch (error: any) {
@@ -150,13 +162,17 @@ const ProfileSetup: React.FC = () => {
                     </label>
                     <label>
                         アイコン写真
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) =>
-                                setProfile({ ...profile, iconPhoto: e.target.files?.[0] || null })
-                            }
-                        />
+                        <div className="icon-selection">
+                            {[icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8].map((icon, index) => (
+                                <img
+                                    key={index}
+                                    src={icon}
+                                    alt={`icon-${index}`}
+                                    className={`icon ${profile.iconPhoto === icon ? "selected" : ""}`}
+                                    onClick={() => setProfile({ ...profile, iconPhoto: icon })}
+                                />
+                            ))}
+                        </div>
                     </label>
                     <label>
                         出身
@@ -370,4 +386,4 @@ const ProfileSetup: React.FC = () => {
     );
 };
 
-export default ProfileSetup; 
+export default ProfileSetup;
