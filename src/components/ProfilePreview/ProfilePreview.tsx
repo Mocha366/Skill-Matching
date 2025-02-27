@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import "./ProfilePreview.css";
+import LikeButton from "../Like/LikeButton";
 
 interface Profile {
   id: string;
@@ -113,6 +114,9 @@ const ProfilePreview: React.FC = () => {
         <div className="grid">
           {matchingProfiles.map(user => (
             <div key={user.id} className="card">
+              <div className="profileview-like">
+                <LikeButton targetUserId={user.id} />
+              </div>
               <p><strong>ニックネーム:</strong> {user.nickname}</p>
               <p><strong>興味:</strong> {user.interests.join(", ")}</p>
             </div>
