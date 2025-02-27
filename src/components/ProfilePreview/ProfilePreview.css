@@ -1,0 +1,37 @@
+.container {
+    text-align: center;
+    padding: 80px 20px; /* 上下80px、左右20pxのパディングを追加 */
+    max-width: 100%; /* コンテナの最大幅を100%に設定 */
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3列に設定 */
+    gap: 40px; /* カード間の間隔を40pxに設定 */
+    max-width: 1000px; /* コンテナの最大幅を1000pxに設定 */
+    width: 100%; /* グリッドの幅を100%に設定 */
+    margin: auto;
+}
+
+.card {
+    background: #fff; /* カードの背景色を白に設定 */
+    padding: 20px; /* Adjust padding to fit the new size */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    width: 300px; /* カードの幅を300pxに設定 */
+    height: 300px; /* カードの高さを300pxに設定 */
+    display: flex;
+    flex-direction: column; /* Flexboxの方向を縦に設定 */
+    align-items: flex-start; /* 左揃えに設定 */
+    justify-content: flex-end; /* 下揃えに設定 */
+    text-align: left; /* テキストを左揃えに設定 */
+    position: relative; /* 相対位置を設定 */
+    color: #000; /* デフォルトのフォント色を黒に設定 */
+}
+
+.card p {
+    margin: 5px 0; /* 各段落の間隔を設定 */
+    align-self: flex-end; /* 右下に配置 */
+    margin-top: 5px; /* 上部のマージンを自動設定 */
+}
