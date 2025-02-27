@@ -10,7 +10,7 @@ import FooterBar from "../../components/Footer/FooterBar";
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
     const navigate = useNavigate();
-    
+
     if (loading) {
         return <p>読み込み中...</p>
     }
