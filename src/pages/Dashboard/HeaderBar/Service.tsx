@@ -3,6 +3,7 @@ import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import FooterBar from "../../../components/Footer/FooterBar";
 import Menu from "../../../components/Menu";
 import Background from "../../../components/Background";
+import "./Service.css"
 
 
 const Service: React.FC = () => {

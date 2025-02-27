@@ -20,13 +20,12 @@ html, body {
     overflow: hidden;
 }
 
-.service-header{
+.service-headerbar{
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    margin-top: 0;
 }
 
 .service-contents{
