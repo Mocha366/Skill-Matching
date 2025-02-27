@@ -23,7 +23,7 @@ const HeaderBar: React.FC = () => {
                 <a href="/dashboard/profile-edit">プロフィール編集</a>
                 <a href="/dashboard/News">お知らせ</a>
             </nav>
-            <div>
+            <div className="logout">
                 <LogoutButton/>
             </div>
         </div>
