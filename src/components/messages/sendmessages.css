@@ -6,7 +6,6 @@
   margin: auto;
   border: 1px solid #ccc;
   background: #f9f9f9;
-  overflow: hidden;
   position: fixed; /* 要素を固定 */
   left: 50%; /* 左端から50%の位置に配置 */
   transform: translateX(-50%); /* 要素の幅の半分だけ左に移動して中央に配置 */
