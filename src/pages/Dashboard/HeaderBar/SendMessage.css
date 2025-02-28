@@ -19,6 +19,7 @@
     align-items: center;
     text-decoration: none;
     color: inherit;
+    z-index: 500;
 }
 
 logo-link:hover {
