@@ -7,6 +7,8 @@ import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import Menu from "../../../components/Menu";
 import FooterBar from "../../../components/Footer/FooterBar";
 import Background from "../../../components/Background";
+import useUnreadNotifications from "../../../components/HeaderBar/Unread";
+import LikeButton from "../../../components/Like/LikeButton";
 
 interface Notification {
   userId: string;
@@ -22,6 +24,7 @@ interface Notification {
 const News: React.FC = () => {
   const { user } = useAuth();
   const [notifications, setNotifications] = useState<Notification[]>([]);
+  const unreadCount = useUnreadNotifications();
 
   useEffect(() => {
     if (!user) return;
@@ -88,7 +91,7 @@ const News: React.FC = () => {
   return (
     <div className="News-page">
       <header className="News-headerbar">
-        <HeaderBar/>
+      <HeaderBar unreadCount={unreadCount}/>
       </header>
       <Background />
       <div className="News-contents">
@@ -122,6 +125,11 @@ const News: React.FC = () => {
                         送信者: {notification.senderNickname || "Unknown"} | {notification.time.toDate().toLocaleString()}
                       </small>
                     </div>
+                    {notification.type === "like" && (
+                        <div>
+                          <LikeButton targetUserId={notification.senderId} />
+                        </div>
+                      )}
                     <div>
                       {!notification.read && (
                         <button
