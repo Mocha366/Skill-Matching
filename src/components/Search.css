@@ -49,3 +49,31 @@
     margin-right: 365px;
     margin-bottom: 20px;
 }
+
+.card .nickname,
+.card .interests {
+    margin: 5px 0; /* 各段落の間隔を設定 */
+    align-self: flex-start; /* 左側に配置 */
+    background-color: rgba(255, 255, 255, 0.7); /* 半透明の白っぽい背景色を設定 */
+    padding: 5px; /* パディングを追加 */
+    border-radius: 5px; /* 角を丸くする */
+    width: auto; /* テキストの幅を自動調整 */
+    position: absolute; /* 絶対位置を設定 */
+}
+
+.card .nickname {
+    bottom: 60px; /* 下から60pxの位置に配置 */
+    left: 10px; /* 左から10pxの位置に配置 */
+}
+
+.card .interests {
+    bottom: 10px; /* 下から10pxの位置に配置 */
+    left: 10px; /* 左から10pxの位置に配置 */
+}
+
+.profileview-like {
+    position: absolute; 
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}

@@ -5,12 +5,26 @@ import LikeButton from "./Like/LikeButton";
 import { TextField, InputAdornment, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search"
 import "./Search.css"
-import "./Search.css"
+import ProfileModal from "./ProfilePreview/ProfileModal";
+
+import icon1 from "../assets/icon1.png";
+import icon2 from "../assets/icon2.png";
+import icon3 from "../assets/icon3.png";
+import icon4 from "../assets/icon4.png";
+import icon5 from "../assets/icon5.png";
+import icon6 from "../assets/icon6.png";
+import icon7 from "../assets/icon7.png";
+import icon8 from "../assets/icon8.png";
+import nullicon from "../assets/Nullicon.png";
 
 interface Profile {
     id: string;
     nickname: string;
     interests: string[];
+    iconPhoto: string;
+    comment: string;
+    age: string;
+    occupation: string;
 }
 
 interface SearchProps {
@@ -20,6 +34,30 @@ interface SearchProps {
 const Search: React.FC<SearchProps> = ({ setShowProfilePreview }) => {
     const [input, setInput] = useState<string>("");
     const [results, setResults] = useState<Profile[] | null>(null);
+    const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
+
+    const getBackgroundImage = (iconPhoto: string) => {
+        switch (iconPhoto) {
+            case "/src/assets/icon1.png":
+                return icon1;
+            case "/src/assets/icon2.png":
+                return icon2;
+            case "/src/assets/icon3.png":
+                return icon3;
+            case "/src/assets/icon4.png":
+                return icon4;
+            case "/src/assets/icon5.png":
+                return icon5;
+            case "/src/assets/icon6.png":
+                return icon6;
+            case "/src/assets/icon7.png":
+                return icon7;
+            case "/src/assets/icon8.png":
+                return icon8;
+            default:
+                return nullicon;
+        }
+    };
 
     const handleSearch = async () => {
         if (!input.trim()) return;
@@ -45,6 +83,10 @@ const Search: React.FC<SearchProps> = ({ setShowProfilePreview }) => {
                 id: doc.id,
                 nickname: doc.data().nickname,
                 interests: doc.data().interests || [],
+                iconPhoto: doc.data().iconPhoto,
+                comment: doc.data().comment,
+                age: doc.data().age,
+                occupation: doc.data().occupation,
             })) as Profile[];
 
             setResults(users);
@@ -127,14 +169,26 @@ const Search: React.FC<SearchProps> = ({ setShowProfilePreview }) => {
                     results.length > 0 ? (
                         <div className="grid">
                             {results.map((user) => (
-                                <div key={user.id} className="card">
+                                <div
+                                    key={user.id}
+                                    className={`card ${user.iconPhoto === "null" ? "null-icon" : ""}`}
+                                    style={{ backgroundImage: `url(${getBackgroundImage(user.iconPhoto)})` }}
+                                    onClick={() => setSelectedProfile(user)}
+                                >
                                     <div className="profileview-like">
                                         <LikeButton targetUserId={user.id} />
                                     </div>
-                                    <p><strong>ニックネーム:</strong> {user.nickname}</p>
-                                    <p><strong>興味:</strong> {user.interests.join(", ")}</p>
+                                    <p className="nickname"><strong>ニックネーム:</strong> {user.nickname}</p>
+                                    <p className="interests"><strong>興味:</strong> {user.interests.join(", ")}</p>
                                 </div>
                             ))}
+                            {selectedProfile && (
+                                <ProfileModal
+                                    isOpen={!!selectedProfile}
+                                    onClose={() => setSelectedProfile(null)}
+                                    profile={selectedProfile}
+                                />
+                            )}
                         </div>
                     ) : (
                         <p>該当するユーザーがいません。</p>
