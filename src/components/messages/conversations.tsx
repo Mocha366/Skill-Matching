@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,  } from "react";
 import { db } from "../../firebase";
-import { collection, getDocs, getDoc, Timestamp } from "firebase/firestore";
+import { collection, getDocs, getDoc, query, where, Timestamp,doc } from "firebase/firestore";
 import "./conversation.css";
+import { useAuth } from "../../context/AuthProvider";
 
 // プロファイルデータの型を定義
 interface Profile {
@@ -17,17 +18,26 @@ interface ConversationProps {
 }
 
 const Conversations: React.FC<ConversationProps> = ({ chatuser }) => {
+    const { user } = useAuth();
     const [profiles, setProfiles] = useState<Profile[]>([]);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchProfiles = async () => {
             try {
-                const querySnapshot = await getDocs(collection(db, "profiles"));
+                // likesコレクションからmutualフィールドがtrueのドキュメントを取得
+                const likesQuery = query(
+                    collection(db, "likes"),
+                    where("mutual", "==", true),
+                    where("fromUserId", "==", user?.uid)
+                );
+                const likesSnapshot = await getDocs(likesQuery);
                 const profilesData: Profile[] = [];
-                for (const doc of querySnapshot.docs) {
+
+                for (const likeDoc of likesSnapshot.docs) {
+                    const toUserId = likeDoc.data().toUserId;
                     try {
-                        const profileDoc = await getDoc(doc.ref);
+                        const profileDoc = await getDoc(doc(db, "profiles", toUserId));
                         if (profileDoc.exists()) {
                             const data = profileDoc.data();
                             profilesData.push({
@@ -37,10 +47,10 @@ const Conversations: React.FC<ConversationProps> = ({ chatuser }) => {
                                 timestamp: data.timestamp,
                             });
                         } else {
-                            console.error(`ドキュメントが存在しません: ${doc.id}`);
+                            console.error(`ドキュメントが存在しません: ${toUserId}`);
                         }
                     } catch (docError) {
-                        console.error(`ドキュメント取得エラー (${doc.id}):`, docError);
+                        console.error(`ドキュメント取得エラー (${toUserId}):`, docError);
                     }
                 }
                 setProfiles(profilesData);
@@ -50,7 +60,7 @@ const Conversations: React.FC<ConversationProps> = ({ chatuser }) => {
             }
         };
         fetchProfiles();
-    }, []);
+    }, [user]);
 
     const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         const uid = e.currentTarget.dataset.uid;
@@ -59,9 +69,6 @@ const Conversations: React.FC<ConversationProps> = ({ chatuser }) => {
         }
     };
 
-
-
-    
     return (
         <div className="conversation">
             <div className="conversation-wrapper">
