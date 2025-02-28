@@ -57,3 +57,10 @@
     bottom: 10px; /* 下から10pxの位置に配置 */
     left: 10px; /* 左から10pxの位置に配置 */
 }
+
+.profilepreview-likebutton {
+    position: absolute; 
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}

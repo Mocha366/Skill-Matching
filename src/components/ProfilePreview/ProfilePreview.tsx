@@ -154,6 +154,9 @@ const ProfilePreview: React.FC = () => {
               className={`card ${user.iconPhoto === "null" ? "null-icon" : ""}`}
               style={{ backgroundImage: `url(${getBackgroundImage(user.iconPhoto)})` }}
             >
+              <div className="profilepreview-likebutton">
+                <LikeButton targetUserId={user.id} />
+              </div>
               <p className="nickname"><strong>ニックネーム:</strong> {user.nickname}</p>
               <p className="interests"><strong>興味:</strong> {user.interests.join(", ")}</p>
             </div>
