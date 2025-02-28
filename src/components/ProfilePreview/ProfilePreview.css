@@ -14,7 +14,7 @@
 }
 
 .card {
-    background-color: #f9f9f9;
+    background-color: #373131;
     background-size: cover; /* 背景画像をカバーに設定 */
     background-position: center; /* 背景画像を中央に設定 */
     padding: 20px; /* Adjust padding to fit the new size */
@@ -30,6 +30,7 @@
     text-align: left; /* テキストを左揃えに設定 */
     position: relative; /* 相対位置を設定 */
     color: #000; /* デフォルトのフォント色を黒に設定 */
+    cursor: pointer; /* カーソルをポインターに変更 */
 }
 
 .card.null-icon {
