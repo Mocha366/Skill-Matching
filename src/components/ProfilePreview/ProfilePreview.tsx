@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase";
+import ProfileModal from "./ProfileModal";
 import "./ProfilePreview.css";
-import LikeButton from "../Like/LikeButton";
 
 // アセットフォルダ内の画像をインポート
 import icon1 from "../../assets/icon1.png";
@@ -19,13 +19,17 @@ interface Profile {
   id: string;
   nickname: string;
   interests: string[];
-  iconPhoto: string; // 背景画像の名前を追加
+  iconPhoto: string;
+  comment: string;
+  age: string;
+  occupation: string;
 }
 
 const ProfilePreview: React.FC = () => {
   const [myInterests, setMyInterests] = useState<string[]>([]);
   const [matchingProfiles, setMatchingProfiles] = useState<Profile[]>([]);
   const [loading, setLoading] = useState(false);
+  const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
 
   // 自分のプロフィールを取得する
   const getUID = (): string | null => {
@@ -78,7 +82,10 @@ const ProfilePreview: React.FC = () => {
           id: doc.id,
           nickname: doc.data().nickname,
           interests: doc.data().interests,
-          iconPhoto: doc.data().iconPhoto, // 背景画像の名前を取得
+          iconPhoto: doc.data().iconPhoto,
+          comment: doc.data().comment,
+          age: doc.data().age,
+          occupation: doc.data().occupation,
         })) as Profile[];
       setMatchingProfiles(profiles);
     } catch (error) {
@@ -153,6 +160,7 @@ const ProfilePreview: React.FC = () => {
               key={user.id}
               className={`card ${user.iconPhoto === "null" ? "null-icon" : ""}`}
               style={{ backgroundImage: `url(${getBackgroundImage(user.iconPhoto)})` }}
+              onClick={() => setSelectedProfile(user)}
             >
               <div className="profilepreview-likebutton">
                 <LikeButton targetUserId={user.id} />
@@ -162,6 +170,13 @@ const ProfilePreview: React.FC = () => {
             </div>
           ))}
         </div>
+      )}
+      {selectedProfile && (
+        <ProfileModal
+          isOpen={!!selectedProfile}
+          onClose={() => setSelectedProfile(null)}
+          profile={selectedProfile}
+        />
       )}
     </div>
   );

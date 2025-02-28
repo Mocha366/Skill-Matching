@@ -1,0 +1,58 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #373131;
+    width: 500px;
+    height: 600px; /* モーダルの高さを調整 */
+    background-size: cover; /* 背景画像をカバーに設定 */
+    background-position: center; /* 背景画像を中央に設定 */
+    background-repeat: no-repeat; /* 背景画像を繰り返さない */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    color: #fff;
+}
+
+.close-button {
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.5); /* 背景色を薄い白色に設定 */
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%; /* ボタンを丸くする */
+    width: 30px; /* ボタンの幅を設定 */
+    height: 30px; /* ボタンの高さを設定 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-icon {
+    width: 300px; /* 画像の幅を300pxに設定 */
+    height: 300px; /* 画像の高さを300pxに設定 */
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    background-color: rgba(255, 255, 255, 0.5); /* テキストの背景色を薄い白色に設定 */
+    padding: 10px;
+    border-radius: 5px;
+    color: #000; /* テキストの色を黒に設定 */
+    margin: 10px 0;
+}
