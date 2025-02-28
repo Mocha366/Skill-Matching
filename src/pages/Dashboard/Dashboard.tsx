@@ -8,10 +8,12 @@ import Search from "../../components/Search";
 import FooterBar from "../../components/Footer/FooterBar";
 import ProfilePreview from "../../components/ProfilePreview/ProfilePreview";
 import Background from "../../components/Background";
+import { useState } from "react";
 
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
     const navigate = useNavigate();
+    const [showProfilePreview,setShowProfilePreview] = useState(true);
 
     if (loading) {
         return <p>読み込み中...</p>
@@ -33,11 +35,15 @@ const Dashboard: React.FC = () => {
                     <div className="dashboard-menu">
                         <Menu/>
                     </div>
-                    <div className="dashboard-search">
-                        <Search />
-                    </div>
-                    <div className="dashboard-profile-preview">
-                        <ProfilePreview />
+                    <div className="dashboard-main">
+                        <div className="dashboard-search">
+                            <Search setShowProfilePreview={setShowProfilePreview} />
+                        </div>
+                        {showProfilePreview &&(
+                            <div className="dashboard-profile-preview">
+                                <ProfilePreview />
+                            </div>
+                        )}
                     </div>
                 </div>
                 <footer>

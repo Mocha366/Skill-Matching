@@ -1,6 +1,6 @@
 .container {
     text-align: center;
-    padding: 80px 20px; /* 上下80px、左右20pxのパディングを追加 */
+    padding: 15px 50px 20px 20px; /* 上下80px、左右20pxのパディングを追加 */
     max-width: 100%; /* コンテナの最大幅を100%に設定 */
 }
 
