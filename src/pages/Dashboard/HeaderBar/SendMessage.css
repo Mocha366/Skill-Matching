@@ -1,17 +1,37 @@
-.message-headerber{
+/*.message-headerber{
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-} 
+} */
 .message-container{
     display: flex;
     flex: 1;
-    margin-top: 5.5%;
 }
 .message-menu{
     width: 20%;
     height: 100vh;
-    overflow-y: auto;
 }
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+logo-link:hover {
+    opacity: 0.8;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    height: 50px;
+    margin-right: 10px;
+}
+

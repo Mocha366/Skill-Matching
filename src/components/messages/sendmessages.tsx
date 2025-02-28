@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { db } from "../../firebase";
-import { collection, addDoc, query, orderBy, onSnapshot, Timestamp } from "firebase/firestore";
+import { collection, addDoc, query, orderBy, onSnapshot, getDoc, doc, Timestamp } from "firebase/firestore";
 import "./sendMessages.css";
-
 interface Message {
     id: string;
     sender: string;
@@ -11,32 +10,27 @@ interface Message {
     text: string;
     timestamp: Timestamp;
 }
-
 interface SendMessageProps {
     chatWith?: string;
     chatuser: (uid: string) => void;
 }
 
-const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
+const SendMessage: React.FC<SendMessageProps> = ({ chatWith}) => {
     const { user } = useAuth();
     const [messages, setMessages] = useState<Message[]>([]);
     const [message, setMessage] = useState<string>("");
+    const [nickname, setNickname] = useState<string>("");
 
     useEffect(() => {
         if (!user) return;
-
         const q = query(
             collection(db, "messages"),
             orderBy("timestamp", "asc"),
         );
-
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const msgs: Message[] = [];
             snapshot.forEach((doc) => {
                 const data = doc.data();
-                console.log(data);
-                console.log(user.uid);
-                console.log({chatWith});
                 if (
                     (data.sender === user.uid && data.receiver === chatWith) ||
                     (data.sender === chatWith && data.receiver === user.uid)
@@ -56,9 +50,28 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
         return () => unsubscribe();
     }, [user, chatWith]);
 
+    useEffect(() => {
+        const fetchNickname = async () => {
+            if (chatWith) {
+                try {
+                    const docRef = doc(db, "profiles", chatWith);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        setNickname(data.nickname); // 取得したフィールドを状態に設定
+                    } else {
+                        console.error("ドキュメントが存在しません");
+                    }
+                } catch (error) {
+                    console.error("ドキュメント取得エラー:", error);
+                }
+            }
+        };
+        fetchNickname();
+    }, [chatWith]);
+
     const sendMessage = async () => {
         if (!message.trim() || !user || !chatWith) return;
-
         try {
             await addDoc(collection(db, "messages"), {
                 sender: user.uid,
@@ -72,14 +85,31 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
         }
     };
 
-    console.log("Rendering SendMessage with chatWith:", chatWith, "and chatuser:", chatuser);
+    const formatTimestamp = (timestamp: Timestamp) => {
+        const date = timestamp.toDate();
+        const now = new Date();
+        const isToday = date.toDateString() === now.toDateString();
+        if (isToday) {
+            return date.toLocaleString("ja-JP", {
+                hour: "2-digit",
+                minute: "2-digit",
+            });
+        } else {
+            return date.toLocaleString("ja-JP", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+            });
+        }
+    };
 
     return (
         <div>
-            
+            <p className="chatWith-nickname">
+            {nickname ? nickname : "トーク相手を選択してください"}
+            </p> 
             <div className="chat-container">
                 <div className="messages-container">
-                <p className="chatWith-nickname">{chatWith}</p>
                     {messages.map((msg) => (
                         <div
                             key={msg.id}
@@ -88,7 +118,11 @@ const SendMessage: React.FC<SendMessageProps> = ({ chatWith, chatuser }) => {
                             }`}
                         >
                             {msg.text}
-                            {msg.timestamp.toDate().toLocaleString()}
+                            <div className={`timestamp ${
+                                msg.sender === user?.uid ? "sent-timestamp" : "received-timestamp"
+                            }`}>
+                                {formatTimestamp(msg.timestamp)}    
+                            </div>
                         </div>
                     ))}
                 </div>
