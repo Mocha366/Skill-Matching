@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import LikeButton from "./Like/LikeButton";
+import { TextField, InputAdornment, IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search"
+import "./Search.css"
 import "./Search.css"
 
 interface Profile {
@@ -71,14 +74,52 @@ const Search: React.FC<SearchProps> = ({ setShowProfilePreview }) => {
     return (
         <div className="search-container">
             <div className="search-bar">
-                <input
-                    type="text"
+                <TextField
+                    label="検索"
+                    variant="outlined"
+                    fullWidth
                     placeholder="@ID または #タグを入力"
                     value={input}
-                    onChange={handleInputChange}
-                    onKeyDown={handleKeyDown}
+                    onChange={ handleInputChange }
+                    onKeyDown={ handleKeyDown }
+                    sx={{
+                        width: "350px",
+                        marginBottom: 2,
+                        backgroundColor: "rgba(255, 255, 255, 0.7)", // 透明度70%の白色
+                        borderRadius: "16px", // 角丸
+                        "& .MuiOutlinedInput-root": {
+                            "& fieldset": {
+                                borderColor: "rgba(255, 255, 255, 0.7)", // 枠線の透明度を調整
+                                borderRadius: "16px"
+                            },
+                            "&:hover fieldset": {
+                                borderColor: "rgba(255, 255, 255, 0.9)", // ホバー時の枠線
+                            },
+                            "&.Mui-focused fieldset": {
+                                borderColor: "#ffffff", // フォーカス時の枠線を白に
+                            },
+                            
+                        },
+                        "& .MuiInputBase-input": {
+                            color: "#000", // 入力文字を黒に
+                        },
+                        "& .MuiInputLabel-root": {
+                            color: "rgba(0, 0, 0, 0.6)", // ラベルの透明度を調整
+                        },
+                        "& .MuiInputLabel-root.Mui-focused": {
+                            color: "#000", // フォーカス時のラベル色
+                        },
+                    }}
+                    InputProps={{
+                        endAdornment:(
+                            <InputAdornment position="end">
+                                <IconButton onClick={handleSearch}>
+                                    <SearchIcon />
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
                 />
-                <button onClick={handleSearch}>検索</button>
             </div>
 
             <div className="search-result">
