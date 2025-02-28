@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import LikeButton from "./Like/LikeButton";
+import "./Search.css"
 
 interface Profile {
     id: string;
@@ -69,16 +70,18 @@ const Search: React.FC<SearchProps> = ({ setShowProfilePreview }) => {
 
     return (
         <div className="search-container">
-            <input
-                type="text"
-                placeholder="@ID または #タグを入力"
-                value={input}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyDown}
-            />
-            <button onClick={handleSearch}>検索</button>
+            <div className="search-bar">
+                <input
+                    type="text"
+                    placeholder="@ID または #タグを入力"
+                    value={input}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                />
+                <button onClick={handleSearch}>検索</button>
+            </div>
 
-            <div>
+            <div className="search-result">
                 {results !== null && (
                     results.length > 0 ? (
                         <div className="grid">

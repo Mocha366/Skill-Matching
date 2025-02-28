@@ -35,14 +35,16 @@ const Dashboard: React.FC = () => {
                     <div className="dashboard-menu">
                         <Menu/>
                     </div>
-                    <div className="dashboard-search">
-                        <Search setShowProfilePreview={setShowProfilePreview} />
-                    </div>
-                    {showProfilePreview &&(
-                        <div className="dashboard-profile-preview">
-                            <ProfilePreview />
+                    <div className="dashboard-main">
+                        <div className="dashboard-search">
+                            <Search setShowProfilePreview={setShowProfilePreview} />
                         </div>
-                    )}
+                        {showProfilePreview &&(
+                            <div className="dashboard-profile-preview">
+                                <ProfilePreview />
+                            </div>
+                        )}
+                    </div>
                 </div>
                 <footer>
                     <FooterBar />

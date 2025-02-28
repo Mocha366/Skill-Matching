@@ -44,3 +44,11 @@ body {
     padding: 0;
     overflow: hidden;
 }
+
+.dashboard-search {
+    display: flex;
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center; /* 垂直方向の中央揃え（不要なら削除可） */
+    width: 100%;
+    margin-top: 20px; /* 上部の余白を調整 */
+}
