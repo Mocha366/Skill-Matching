@@ -2,7 +2,8 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     background: var(--background-color, linear-gradient(113deg, #BEC9F8 0%, #D16CFF 20.1%, #FF5151 84.64%, #FF8E72 100%));
     background-size: cover;
     background-position: center;
@@ -11,6 +12,7 @@ html, body {
 .loginPage-container {
     min-height: 100vh;
     width: 100%;
+    max-width: 100%;
     color: black;
     margin: 0;
     padding: 0;
@@ -24,7 +26,7 @@ body::-webkit-scrollbar {
 
 .loginPage-contents{
     padding-top: 4%;
-    padding-bottom: 2%;
+    padding-bottom: 1%;
 }
 
 .loginPage-headerbar{

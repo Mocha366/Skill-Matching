@@ -4,7 +4,11 @@ import LogoutButton from "../Login/LogoutButton";
 import Logo from "../../assets/Logo.png";
 import { Link } from "react-router-dom";
 
-const HeaderBar: React.FC = () => {
+interface HeaderBarProps {
+    unreadCount?: number;
+}
+
+const HeaderBar: React.FC<HeaderBarProps> = ({ unreadCount = 0 }) => {
     return (
         <div className="header-bar">
             <div className="logo-container">
@@ -21,7 +25,7 @@ const HeaderBar: React.FC = () => {
                 <a href="/dashboard/Service">サービス</a>
                 <a href="/dashboard/About">Skill Matchingについて</a>
                 <a href="/dashboard/profile-edit">プロフィール編集</a>
-                <a href="/dashboard/News">お知らせ</a>
+                <a href="/dashboard/News">お知らせ{unreadCount > 0 && <span className="notification-badge">{unreadCount}</span>}</a>
             </nav>
             <div className="logout">
                 <LogoutButton/>

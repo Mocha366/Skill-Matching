@@ -1,4 +1,5 @@
 .header-bar {
+    width: 100%;
     display: flex;
     background-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(10px);
@@ -39,4 +40,8 @@ logo-link:hover {
 
 .header-bar img {
     margin-right: 10px; 
+}
+
+.headerbar-logout {
+    margin-right: 50px;
 }

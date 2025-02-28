@@ -1,5 +1,5 @@
 import { db } from "../../firebase";
-import { collection, addDoc, query, where, getDocs, doc, getDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs, doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 
 
 const getUserNickname = async (userId: string) => {
@@ -28,20 +28,33 @@ export const likeUser = async (fromUserId: string, toUserId: string, ) => {
             return;
         }
 
+        const mutualLikeQuery = query(collection(db, "likes"), where("fromUserId", "==", toUserId), where("toUserId", "==", fromUserId));
+        const mutualLikeSnapshot = await getDocs(mutualLikeQuery);
+
+        const isMutual = !mutualLikeSnapshot.empty;
+
         const fromUserName = await getUserNickname(fromUserId);
 
         await addDoc(collection(db, "likes"), {
             fromUserId,
             toUserId,
             createdAt: serverTimestamp(),
+            mutual: isMutual,
         });
 
         console.log("ライクしました！");
 
+        if (isMutual) {
+            const mutualLikeDocRef = mutualLikeSnapshot.docs[0].ref;
+            await updateDoc(mutualLikeDocRef, { mutual: true });
+        }
+
         await addDoc(collection(db, "notifications"), {
             userId: toUserId,
             senderId: fromUserId,
-            message: `あなたは${fromUserName}からライクされました！`,
+            message: isMutual
+                ? `🎊 ${fromUserName}とマッチングしました！`
+                : `あなたは${fromUserName}からライクされました！`,
             type: "like",
             time: serverTimestamp(),
             read: false,

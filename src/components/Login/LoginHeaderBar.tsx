@@ -2,6 +2,7 @@ import React from "react";
 import LogoutButton from "./LogoutButton";
 import Logo from "../../assets/Logo.png";
 import { Link } from "react-router-dom";
+import "./LoginHeaderBar.css"
 
 const LoginHeaderBar: React.FC = () => {
     return (
@@ -16,7 +17,7 @@ const LoginHeaderBar: React.FC = () => {
                     <span className="site-name">SM</span>
                 </Link>
             </div>
-            <div>
+            <div className="headerbar-logout">
                 <LogoutButton/>
             </div>
         </div>
