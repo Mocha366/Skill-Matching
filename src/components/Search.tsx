@@ -74,8 +74,8 @@ const Search: React.FC<SearchProps> = ({ setShowProfilePreview }) => {
                 const tag = searchTerm.slice(1); // "#"を除去
                 q = query(profilesRef, where("interests", "array-contains", tag));
             } else {
-                alert("@ または # で始めてください。");
-                return;
+                q = query(profilesRef, where("nickname", "==", searchTerm));
+
             }
 
             const querySnapshot = await getDocs(q);
@@ -120,7 +120,7 @@ const Search: React.FC<SearchProps> = ({ setShowProfilePreview }) => {
                     label="検索"
                     variant="outlined"
                     fullWidth
-                    placeholder="@ID または #タグを入力"
+                    placeholder="ニックネーム または #タグを入力"
                     value={input}
                     onChange={ handleInputChange }
                     onKeyDown={ handleKeyDown }
