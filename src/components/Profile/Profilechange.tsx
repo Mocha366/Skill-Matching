@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../../../context/AuthProvider";
-import { db } from "../../../firebase";
+import { useAuth } from "../../context/AuthProvider";
+import { db } from "../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
-import HeaderBar from "../../../components/HeaderBar/HeaderBar";
-import "./Profilechange.css";
+import HeaderBar from "../HeaderBar/HeaderBar";
+import "./ProfileChange.css";
 
-const ProfileChange: React.FC = () => {
+interface ProfileChangeProps {
+  setFlg: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const ProfileChange: React.FC<ProfileChangeProps> = ({ setFlg }) => {
   const { user } = useAuth();
   const [nickname, setNickname] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
   const [age, setAge] = useState<string>("");
   const [location, setLocation] = useState<string>("");
-  const [interests, setInterests] = useState<string>("");
   const [realname, setRealname] = useState<string>("");
   const [id, setId] = useState<string>("");
   const [comment, setComment] = useState<string>("");
   const [workplace, setWorkplace] = useState<string>("");
-  const [profile, setProfile] = useState<any>({ interests: "", qualifications: [] });
+  const [profile, setProfile] = useState<any>({ interests: [], qualifications: [], occupation: "", socialLinks: "" });
+  const [interests, setInterests] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -32,12 +34,13 @@ const ProfileChange: React.FC = () => {
             setEmail(data?.email || "");
             setAge(data?.age || "");
             setLocation(data?.location || "");
-            setInterests(data?.interests || "");
+            setInterests(data?.interests || []);
             setRealname(data?.realname || "");
             setId(data?.id || "");
             setComment(data?.comment || "");
             setWorkplace(data?.workplace || "");
             setProfile({
+              interests: data?.interests || [],
               qualifications: data?.qualifications || [],
               occupation: data?.occupation || "",
               socialLinks: data?.socialLinks || "",
@@ -71,8 +74,8 @@ const ProfileChange: React.FC = () => {
         occupation: profile.occupation,
         workplace,
       });
-      navigate("/dashboard/profile-edit");
       alert("プロフィールを更新しました");
+      setFlg(true); // 更新後にProfileEditへ戻る
     } catch (error) {
       console.error("プロフィールの更新に失敗しました:", error);
     } finally {
@@ -81,9 +84,11 @@ const ProfileChange: React.FC = () => {
   };
 
   return (
-    <div className="profile-edit-page">
-      <HeaderBar />
-      <div className="profile-edit-container">
+    <div className="profile-change-container">
+      <header className="profile-change-footer">
+        <HeaderBar />
+      </header>
+      <div className="profile-change-contents">
         <h1>プロフィールの再設定</h1>
         <div className="form-group">
           <label htmlFor="nickname">ニックネーム</label>
@@ -116,66 +121,54 @@ const ProfileChange: React.FC = () => {
           />
         </div>
         <div className="form-group">
-          <label>
-            興味分野(最大5つ)
-            <div className="tag-selector-container">
-              <div className="selected-tags">
-                {interests
-                  .split(",")
-                  .filter((tag: string) => tag.trim())
-                  .map((tag: string) => (
-                    <span
-                      key={tag}
-                      className="tag selected"
-                      onClick={() => {
-                        const updatedTags = interests
-                          .split(",")
-                          .filter((t: string) => t !== tag)
-                          .join(",");
-                        setInterests(updatedTags);
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-              </div>
-              <div className="options">
-                {[
-                  "HTML", "CSS", "JavaScript", "TypeScript", "Python", "Ruby", "PHP", "Java",
-                  "Kotlin", "C#", "Go", "Scala", "Swift", "Objective-C", "Dart", "C", "C++",
-                  "Rust", "Assembly", "R", "Julia", "MATLAB", "SQL", "Bash", "PowerShell",
-                  "Perl", "Solidity", "Lua", "Elixir", "Erlang", "Haskell", "F#", "Groovy",
-                ].map((option) => (
-                  <button
-                    key={option}
-                    type="button"
-                    className={`option ${interests.split(",").includes(option) ? "selected" : ""}`}
-                    onClick={() => {
-                      const selectedTags = interests
-                        .split(",")
-                        .filter((tag: string) => tag.trim());
-                      if (selectedTags.includes(option)) {
-                        const updatedTags = selectedTags.filter((tag: string) => tag !== option).join(",");
-                        setInterests(updatedTags);
-                      } else {
-                        if (selectedTags.length >= 5) {
-                          alert("最大5つまで選択できます");
-                          return;
-                        }
-                        setInterests([...selectedTags, option].join(","));
-                      }
-                    }}
+          <label htmlFor="interests">興味分野(最大5つ)</label>
+          <div className="tag-selector-container">
+            <div className="selected-tags">
+              {interests.length > 0 ? (
+                interests.map((tag) => (
+                  <span
+                    key={tag}
+                    className="tag selected"
+                    onClick={() => setInterests(interests.filter((t) => t !== tag))}
                   >
-                    {option}
-                  </button>
-                ))}
-              </div>
+                    {tag}
+                  </span>
+                ))
+              ) : null}
             </div>
-          </label>
+            <div className="options">
+              {[
+                "HTML", "CSS", "JavaScript", "TypeScript", "Python", "Ruby", "PHP", "Java",
+                "Kotlin", "C#", "Go", "Scala", "Swift", "Objective-C", "Dart", "C", "C++",
+                "Rust", "Assembly", "R", "Julia", "MATLAB", "SQL", "Bash", "PowerShell",
+                "Perl", "Solidity", "Lua", "Elixir", "Erlang", "Haskell", "F#", "Groovy",
+              ].map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  className={`option ${interests.includes(option) ? "selected" : ""}`}
+                  onClick={() => {
+                    if (interests.includes(option)) {
+                      setInterests(interests.filter((tag) => tag !== option));
+                    } else {
+                      if (interests.length >= 5) {
+                        alert("最大5つまで選択できます");
+                        return;
+                      }
+                      setInterests([...interests, option]);
+                    }
+                  }}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
         <div className="form-group">
           <label htmlFor="location">出身</label>
           <select
+            id="location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           >
@@ -219,6 +212,7 @@ const ProfileChange: React.FC = () => {
         <div className="form-group">
           <label htmlFor="comment">コメント</label>
           <textarea
+            id="comment"
             value={comment}
             onChange={(e) => {
               const value = e.target.value;
@@ -235,6 +229,7 @@ const ProfileChange: React.FC = () => {
           {profile.qualifications.map((qualification: string, index: number) => (
             <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
               <input
+                id={`qualification-${index}`}
                 type="text"
                 value={qualification}
                 onChange={(e) => {
@@ -298,6 +293,7 @@ const ProfileChange: React.FC = () => {
         <div className="form-group">
           <label htmlFor="occupation">職業</label>
           <select
+            id="occupation"
             value={profile.occupation}
             onChange={(e) => setProfile({ ...profile, occupation: e.target.value })}
           >
@@ -346,6 +342,7 @@ const ProfileChange: React.FC = () => {
           <label>
             Twitter, GitHub等のURL
             <input
+              id="socialLinks"
               type="text"
               value={profile.socialLinks}
               onChange={(e) =>
@@ -357,7 +354,6 @@ const ProfileChange: React.FC = () => {
         </div>
         <button
           onClick={handleUpdate}
-          disabled={loading}
           className="update-button"
         >
           {loading ? "更新中..." : "更新する"}

@@ -1,0 +1,105 @@
+.profile-edit-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 40px auto;
+    max-width: 800px;
+    position: relative;
+}
+.profile-edit-header {
+    font-size: 28px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    color: #222;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 10px;
+}
+.profile-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.profile-info-left, .profile-info-right {
+    flex: 1;
+    margin: 10px;
+    padding: 15px;
+    background: #F9F9F9;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+.profile-info p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+.profile-info strong {
+    font-size: 18px;
+    color: #007BFF;
+}
+.value {
+    font-size: 15px;
+    color: #444;
+    background: #E3F2FD;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+.comment-box {
+    padding: 12px;
+    background: #F0F8FF;
+    border-radius: 8px;
+    font-style: italic;
+    font-size: 15px;
+    text-align: center;
+}
+.interests-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.tag {
+    background: #FFEB3B;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #222;
+}
+.update-button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    transition: background 0.3s ease;
+}
+.update-button:hover {
+    background-color: #0056B3;
+}
+.update-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+.profile-edit-page {
+    background: var(--background-color, linear-gradient(113deg, #BEC9F8 0%, #D16CFF 20.1%, #FF5151 84.64%, #FF8E72 100%));
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    position: relative;
+    color: black;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}

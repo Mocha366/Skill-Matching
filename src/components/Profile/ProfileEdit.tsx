@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../../../context/AuthProvider";
-import { db } from "../../../firebase";
+import { useAuth } from "../../context/AuthProvider";
+import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
 import "./ProfileEdit.css";
-import HeaderBar from "../../../components/HeaderBar/HeaderBar";
-import Menu from "../../../components/Menu";
+import HeaderBar from "../HeaderBar/HeaderBar";
+import Menu from "../Menu";
 
+interface ProfileEditProps {
+    setFlg: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const ProfileEdit: React.FC = () => {
+const ProfileEdit: React.FC<ProfileEditProps> = ({ setFlg }) => {
     const { user } = useAuth();
-    const navigate = useNavigate();
     const [nickname, setNickname] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [age, setAge] = useState<string>("");
     const [location, setLocation] = useState<string>("");
-    const [interests, setInterests] = useState<string>("");
+    const [interests, setInterests] = useState<string[]>([]);
     const [socialLinks, setSocialLinks] = useState<string>("");
     const [realname, setRealname] = useState<string>("");
     const [id, setId] = useState<string>("");
@@ -35,7 +36,7 @@ const ProfileEdit: React.FC = () => {
                         setEmail(data?.email || "");
                         setAge(data?.age || "");
                         setLocation(data?.location || "");
-                        setInterests(data?.interests || "");
+                        setInterests(data?.interests || []);
                         setSocialLinks(data?.socialLinks || "");
                         setRealname(data?.realname || "");
                         setId(data?.id || "");
@@ -54,16 +55,12 @@ const ProfileEdit: React.FC = () => {
         fetchProfile();
     }, [user]);
 
-    const onclickButton = (url: string) => {
-        navigate(url);
-    };
-
     return (
         <div className="profile-edit-page">
             <HeaderBar />
-             <div className="profile-edit-Menu">
-                        <Menu/>
-                    </div>
+            <div className="profile-edit-Menu">
+                <Menu/>
+            </div>
             <div className="profile-edit-container">
                 <div className="profile-edit-header">
                     <h1>プロフィール</h1>
@@ -77,9 +74,13 @@ const ProfileEdit: React.FC = () => {
                         <p><strong>年齢</strong></p>
                         {age}
                         <p><strong>興味分野</strong></p>
-                        {interests}
+                        <div className="interests-tags">
+                            {interests.map((tag, index) => (
+                                <span key={index} className="tag">{tag}</span>
+                            ))}
+                        </div>
                         <p><strong>URL</strong></p>
-                        {socialLinks}
+                        <a href={socialLinks} target="_blank" rel="noopener noreferrer">{socialLinks}</a>
                         <p><strong>職業</strong></p>
                         {occupation}
                     </div>
@@ -89,11 +90,11 @@ const ProfileEdit: React.FC = () => {
                         <p><strong>ID</strong></p>
                         {id}
                         <p><strong>一言</strong></p>
-                        {comment}
+                        <p className="comment-box">{comment}</p>
                         <p><strong>出身</strong></p>
                         {location}
                         <p><strong>資格</strong></p>
-                        <ul>
+                        <ul className="qualifications-list">
                             {qualifications.map((qualification, index) => (
                                 <li key={index}>{qualification}</li>
                             ))}
@@ -102,7 +103,10 @@ const ProfileEdit: React.FC = () => {
                         {workplace}
                     </div>
                 </div>
-                <button onClick={() => onclickButton("/dashboard/profilechange")} className="update-button">
+                <button 
+                    className="update-button"
+                    onClick={() => setFlg(false)}
+                >
                     更新
                 </button>
             </div>

@@ -24,7 +24,7 @@ const HeaderBar: React.FC<HeaderBarProps> = ({ unreadCount = 0 }) => {
             <nav className="headerbar-nav">
                 <a href="/dashboard/Service">サービス</a>
                 <a href="/dashboard/About">Skill Matchingについて</a>
-                <a href="/dashboard/profile-edit">プロフィール編集</a>
+                <a href="/dashboard/profile">プロフィール編集</a>
                 <a href="/dashboard/News">お知らせ{unreadCount > 0 && <span className="notification-badge">{unreadCount}</span>}</a>
             </nav>
             <div className="logout">
