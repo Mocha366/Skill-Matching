@@ -31,7 +31,8 @@ const LikeButton: React.FC<LikeButtonProps> = ({ targetUserId }) => {
   }, [user, targetUserId]);
 
   // ✅ Like ボタンをクリックしたときの処理
-  const handleLike = async () => {
+  const handleLike = async (event: React.MouseEvent) => {
+    event.stopPropagation()
     if (!user?.uid) return;
     if (!liked) {
       await likeUser(user.uid, targetUserId); // Firestore に Like を保存 & 通知を送信
@@ -43,15 +44,15 @@ const LikeButton: React.FC<LikeButtonProps> = ({ targetUserId }) => {
     <button
       onClick={handleLike}
       style={{
-        backgroundColor: liked ? "pink" : "white", // 既に Like 済みならピンク
+        backgroundColor: "rgba(255, 255, 255, 0.55)",
         color: liked ? "white" : "black",
-        border: "1px solid black",
+        //border: "1px solid black",
         borderRadius: "50%",
         padding: "10px",
         cursor: "pointer",
       }}
     >
-      ❤️
+      { liked ? "❤️" : "🤍" }
     </button>
   );
 };
