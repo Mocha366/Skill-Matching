@@ -1,17 +1,18 @@
 .profile-edit-container {
     display: flex;
     flex-direction: column;
-    background-color: #fff;
+    background-color: rgba( 255, 255, 255, 0.6);
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 40px auto;
+    margin: 7% auto;
     max-width: 800px;
     position: relative;
 }
+
 .profile-edit-header {
     font-size: 28px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     width: 100%;
     text-align: center;
     font-weight: bold;
@@ -91,15 +92,4 @@
 .update-button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
-}
-.profile-edit-page {
-    background: var(--background-color, linear-gradient(113deg, #BEC9F8 0%, #D16CFF 20.1%, #FF5151 84.64%, #FF8E72 100%));
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    position: relative;
-    color: black;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
 }

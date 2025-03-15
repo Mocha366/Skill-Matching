@@ -3,7 +3,6 @@ import { useAuth } from "../../context/AuthProvider";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import "./ProfileEdit.css";
-import HeaderBar from "../HeaderBar/HeaderBar";
 import Menu from "../Menu";
 
 interface ProfileEditProps {
@@ -56,12 +55,8 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({ setFlg }) => {
     }, [user]);
 
     return (
-        <div className="profile-edit-page">
-            <HeaderBar />
-            <div className="profile-edit-Menu">
-                <Menu/>
-            </div>
-            <div className="profile-edit-container">
+        <div className="profile-edit-container">
+            <div className="profile-edit-contents">
                 <div className="profile-edit-header">
                     <h1>プロフィール</h1>
                 </div>
@@ -103,13 +98,13 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({ setFlg }) => {
                         {workplace}
                     </div>
                 </div>
-                <button 
-                    className="update-button"
-                    onClick={() => setFlg(false)}
-                >
-                    更新
-                </button>
             </div>
+            <button 
+                className="update-button"
+                onClick={() => setFlg(false)}
+            >
+                更新
+            </button>
         </div>
     );
 };

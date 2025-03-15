@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { db } from "../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import HeaderBar from "../HeaderBar/HeaderBar";
-import "./ProfileChange.css";
+import "./Profilechange.css";
 
 interface ProfileChangeProps {
   setFlg: React.Dispatch<React.SetStateAction<boolean>>;
@@ -85,9 +84,6 @@ const ProfileChange: React.FC<ProfileChangeProps> = ({ setFlg }) => {
 
   return (
     <div className="profile-change-container">
-      <header className="profile-change-footer">
-        <HeaderBar />
-      </header>
       <div className="profile-change-contents">
         <h1>プロフィールの再設定</h1>
         <div className="form-group">
