@@ -8,7 +8,7 @@ html, body {
     background-position: center;
 }
 
-.dashboard-container {
+.service-container {
     min-height: 100vh;
     position: relative;
     display: flex;
@@ -20,7 +20,7 @@ html, body {
     overflow: hidden;
 }
 
-.dashboard-headerbar{
+.service-headerbar{
     position: fixed;
     top: 0;
     left: 0;
@@ -28,13 +28,13 @@ html, body {
     z-index: 1000;
 }
 
-.dashboard-contents{
+.service-contents{
     display: flex;
     flex: 1;
     margin-top: 5.5%;
 }
 
-.dashboard-menu{
+.service-menu{
     width: 300px;
     margin-right: 5px;
 }
@@ -43,12 +43,4 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-}
-
-.dashboard-search {
-    display: flex;
-    justify-content: center; /* 水平方向の中央揃え */
-    align-items: center; /* 垂直方向の中央揃え（不要なら削除可） */
-    width: 100%;
-    margin-top: 20px; /* 上部の余白を調整 */
 }

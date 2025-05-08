@@ -1,32 +1,19 @@
-import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthProvider"
 import { useNavigate } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase";
 import "./Dashboard.css";
-import "../../components/Dashboard/HeaderBar";
-import HeaderBar from "../../components/Dashboard/HeaderBar";
+import "../../components/HeaderBar/HeaderBar";
+import HeaderBar from "../../components/HeaderBar/HeaderBar";
+import Menu from "../../components/Menu";
+import Search from "../../components/Search";
+import FooterBar from "../../components/Footer/FooterBar";
+import ProfilePreview from "../../components/ProfilePreview/ProfilePreview";
+import Background from "../../components/Background";
+import { useState } from "react";
 
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
     const navigate = useNavigate();
-    const [nickname, setNickname] = useState<string>("");
-
-    useEffect(() => {
-        const fetchNickname = async () => {
-            if (user) {
-                try {
-                    const userDoc = await getDoc(doc(db, "users", user.uid));
-                    if(userDoc.exists()) {
-                        setNickname(userDoc.data()?.nickname || "ゲスト");
-                    }
-                } catch (error: any) {
-                    console.error("ニックネーム取得エラー:", error.message);
-                }
-            }
-        };
-        fetchNickname();
-    }, [user]);
+    const [showProfilePreview,setShowProfilePreview] = useState(true);
 
     if (loading) {
         return <p>読み込み中...</p>
@@ -38,14 +25,32 @@ const Dashboard: React.FC = () => {
     }
 
     return (
-        <div className="dashboard-container">
-            <div>
-                <HeaderBar/>
+        <>
+            <div className="dashboard-container">
+                <header className="dashboard-headerbar">
+                    <HeaderBar/>
+                </header>
+                <Background />
+                <div className="dashboard-contents">
+                    <div className="dashboard-menu">
+                        <Menu/>
+                    </div>
+                    <div className="dashboard-main">
+                        <div className="dashboard-search">
+                            <Search setShowProfilePreview={setShowProfilePreview} />
+                        </div>
+                        {showProfilePreview &&(
+                            <div className="dashboard-profile-preview">
+                                <ProfilePreview />
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <footer>
+                    <FooterBar />
+                </footer>
             </div>
-            <div className="dashboard-text">
-                <p>ようこそ {nickname} さん、SKILL MATCHINGへようこそ！</p>
-            </div>
-        </div>
+        </>
     );
 };
 

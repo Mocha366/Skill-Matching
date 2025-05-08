@@ -1,0 +1,59 @@
+.conversation-wrapper{
+    position: fixed;
+    right: 1%;
+    width: 20%;
+    height: 90vh; /* ビューポートの高さに合わせる */
+    overflow-y: auto; /* 垂直方向にスクロール可能にする */
+}
+.conversation-wrapper::-webkit-scrollbar {
+    display: none; /* Webkitベースのブラウザ（Chrome, Safariなど）でスクロールバーを非表示にする */
+}
+
+.profile-button {
+    display : flex; /* 要素を横並びに */
+    margin-bottom: 5px;
+    width: 100%; 
+    background-color: #fff;
+    border : 1px solid #f0f0f0;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+    overflow: hidden;  /*はみ出た部分を非表示に */
+}
+
+.profile-button:hover {
+    background-color: #f0f0f0;
+}
+
+.profile-icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-nickname {
+    font-size: 10px; /* 文字を現在の半分のサイズに設定 */
+    font-weight: bold;
+    color: #333;
+    text-align: left; /* 左寄せ */
+    white-space: nowrap; /* テキストを一列に表示 */
+    overflow: hidden; /* はみ出た部分を非表示に */
+    text-overflow: ellipsis; /* はみ出た部分を省略記号で表示 */
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+.talk{
+    text-align: center;
+    color:#ffffff;
+    font-size:150%;
+    overflow: hidden;
+}
+.loadingmessage{
+    text-align: center;
+    color:#ffffff;
+}

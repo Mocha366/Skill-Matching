@@ -1,0 +1,67 @@
+.container {
+    text-align: center;
+    padding: 15px 50px 20px 20px; /* 上下80px、左右20pxのパディングを追加 */
+    max-width: 100%; /* コンテナの最大幅を100%に設定 */
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3列に設定 */
+    gap: 40px; /* カード間の間隔を40pxに設定 */
+    max-width: 1000px; /* コンテナの最大幅を1000pxに設定 */
+    width: 100%; /* グリッドの幅を100%に設定 */
+    margin: auto;
+}
+
+.card {
+    background-color: #373131;
+    background-size: cover; /* 背景画像をカバーに設定 */
+    background-position: center; /* 背景画像を中央に設定 */
+    padding: 20px; /* Adjust padding to fit the new size */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    width: 250px; /* カードの幅を300pxに設定 */
+    height: 250px; /* カードの高さを300pxに設定 */
+    display: flex;
+    flex-direction: column; /* Flexboxの方向を縦に設定 */
+    align-items: flex-start; /* 左揃えに設定 */
+    justify-content: flex-end; /* 下揃えに設定 */
+    text-align: left; /* テキストを左揃えに設定 */
+    position: relative; /* 相対位置を設定 */
+    color: #000; /* デフォルトのフォント色を黒に設定 */
+    cursor: pointer; /* カーソルをポインターに変更 */
+}
+
+.card.null-icon {
+    background-size: contain; /* 背景画像を縮小して表示 */
+    background-repeat: no-repeat; /* 背景画像を繰り返さない */
+}
+
+.card .nickname,
+.card .interests {
+    margin: 5px 0; /* 各段落の間隔を設定 */
+    align-self: flex-start; /* 左側に配置 */
+    background-color: rgba(255, 255, 255, 0.7); /* 半透明の白っぽい背景色を設定 */
+    padding: 5px; /* パディングを追加 */
+    border-radius: 5px; /* 角を丸くする */
+    width: auto; /* テキストの幅を自動調整 */
+    position: absolute; /* 絶対位置を設定 */
+}
+
+.card .nickname {
+    bottom: 60px; /* 下から60pxの位置に配置 */
+    left: 10px; /* 左から10pxの位置に配置 */
+}
+
+.card .interests {
+    bottom: 10px; /* 下から10pxの位置に配置 */
+    left: 10px; /* 左から10pxの位置に配置 */
+}
+
+.profilepreview-likebutton {
+    position: absolute; 
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}

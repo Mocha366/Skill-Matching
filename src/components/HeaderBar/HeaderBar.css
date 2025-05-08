@@ -1,0 +1,85 @@
+.header-bar {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 55px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+logo-link:hover {
+    opacity: 0.8;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.site-name {
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    font-family: Arial,sans-serif;
+    margin: 0;
+}
+
+.headerbar-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.headerbar-nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.headerbar-nav a:hover {
+    text-decoration: underline;
+}
+
+.header-bar img {
+    margin-right: 10px; 
+}
+
+.headerbar-nav {
+    display: flex;
+    gap: 15px; 
+}
+
+.logout{
+    margin-right: 50px;
+}
+
+.notification-badge {
+    background-color: red;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 1.3px 7px;
+    margin-left:3px;
+    display: inline-block;
+    width: 10px;
+    text-align: center;
+}
